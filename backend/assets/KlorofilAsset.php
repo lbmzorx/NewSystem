@@ -22,10 +22,15 @@ class KlorofilAsset extends AssetBundle
     ];
 
     public $depends=[
-        ''
+        'boostrap'=>'yii\bootstrap\BootstrapAsset',
+        'boostrapPlugs'=>'yii\bootstrap\BootstrapPluginAsset',
+        'linearicons'=>'common\assets\LineariconsAsset',
+
     ];
 
     public $publishOptions=[
-        'only'=>['css','scripts'],
+        'only'=>[
+            'css/*','scripts/*'
+        ],
     ];
 }

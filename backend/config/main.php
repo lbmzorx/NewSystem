@@ -16,6 +16,15 @@ return [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+        'dbadmin' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=127.0.0.1;dbname=start_admin',
+            'username' => 'root',
+            'password' => '1234569',
+            'charset' => 'utf8',
+            'tablePrefix'=>'sadmin_',
+            'enableSchemaCache'=>false,
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -24,6 +33,19 @@ return [
         'session' => [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
+        ],
+        'i18n' => [
+            'translations' => [//多语言包设置
+                'amodel' => [
+                    'class' => yii\i18n\PhpMessageSource::className(),
+                    'basePath' => '@common/messages',
+//                    'sourceLanguage' => 'zh-CN',
+                ],
+                'menu'=>[
+                    'class' => yii\i18n\PhpMessageSource::className(),
+                    'basePath' => '@backend/messages',
+                ]
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -44,5 +66,6 @@ return [
             ],
         ],
     ],
+    'on beforeRequest'=>['backend\init\AppInit','sets'],
     'params' => $params,
 ];
