@@ -7,8 +7,15 @@
 
 namespace backend\widget;
 
-
+use common\models\admindata\Menu;
+use lbmzorx\components\helper\TreeHelper;
+use Yii;
+use yii\base\Exception;
 use yii\base\Widget;
+use yii\helpers\FileHelper;
+use yii\helpers\Html;
+use yii\helpers\StringHelper;
+use yii\helpers\VarDumper;
 
 class MenuKlorofil extends Widget
 {
@@ -68,14 +75,28 @@ class MenuKlorofil extends Widget
         $cache = $this->getCache();
         $key = ['top', 'top' => $this->top, __METHOD__];
         $menu = $cache->get($key);
+        $file=yii::getAlias(static::$depency_filename);
+        if(!file_exists($file)){
+            $path=StringHelper::dirname(yii::getAlias($file));
+            if(!is_dir($path)){
+                FileHelper::createDirectory($path);
+            }
+            try{
+                $depanceFile=fopen($file,'w');
+                fwrite($depanceFile, date("Y-m-d H:i:s").'-'.microtime(true));
+                fclose($depanceFile);
+            }catch (Exception $e){
+            }
+        }
         if (empty($menu)) {
             $menu = $this->getMenuSide();
-            $dependency = new \yii\caching\FileDependency(['fileName' => static::$depency_filename]);
+            $dependency = new \yii\caching\FileDependency(['fileName' => $file]);
             $cache->set($key, $menu, $this->duration, $dependency);
         }
 
         $string = '';
         if ($menu) {
+//            throw new \yii\db\Exception(VarDumper::dumpAsString($menu));
             foreach ($menu as $k => $v) {
                 if (!empty($v['sub'])) {
                     $string .= '<li data-id=""><a href="#' . md5($v['url'] . $v['module']) . '" data-toggle="collapse"' .
@@ -108,11 +129,10 @@ class MenuKlorofil extends Widget
     public function getMenuSide()
     {
         $menu = Menu::find()->where([
-            'app_type' => Menu::MENU_APP_TYPE_BACKEND,
-            'is_display' => Menu::MENU_IS_DISPLAY_YES,
-            'position' => Menu::MENU_POSITION_LEFT,
+            'is_display' => Menu::IS_DISPLAY_YES,
+            'position' => Menu::POSITION_LEFT,
         ])->andFilterWhere(['top_id' => $this->top])->orderBy(['sort' => SORT_ASC, 'id' => SORT_ASC])->asArray()->all();
 
-        return Cate::array_cate_as_subarray($menu, 0, 'parent_id');
+        return TreeHelper::array_cate_as_subarray($menu, 0, 'parent_id');
     }
 }

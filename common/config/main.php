@@ -20,6 +20,14 @@ return [
                     'class' => yii\i18n\PhpMessageSource::className(),
                     'basePath' => '@common/messages',
                 ],
+                'amodel'=>[
+                    'class' => yii\i18n\PhpMessageSource::className(),
+                    'basePath' => '@common/messages',
+                ],
+                'astatuscode'=>[
+                    'class' => yii\i18n\PhpMessageSource::className(),
+                    'basePath' => '@common/messages',
+                ],
             ],
         ],
         'authManager' => [
@@ -37,5 +45,5 @@ return [
         ],
     ],
     'timeZone' => 'Asia/Shanghai',
-//    'language'=>'zh-CN',
+    'language'=>'zh-CN',
 ];

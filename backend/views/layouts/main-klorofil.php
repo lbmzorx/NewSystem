@@ -44,9 +44,6 @@ use common\widgets\Alert;
                     <span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
                 </div>
             </form>
-            <div class="navbar-btn navbar-btn-right">
-                <a class="btn btn-success update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
-            </div>
             <div id="navbar-menu">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -81,9 +78,6 @@ use common\widgets\Alert;
                             <li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                         </ul>
                     </li>
-                    <!-- <li>
-                        <a class="update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
-                    </li> -->
                 </ul>
             </div>
         </div>
@@ -94,7 +88,7 @@ use common\widgets\Alert;
         <div class="sidebar-scroll">
             <nav>
                 <ul class="nav">
-                    <?=\backend\components\widget\Leftmenu::widget([
+                    <?=\backend\widget\MenuKlorofil::widget([
                         'top'=>isset($this->params['top'])?$this->params['top']:'0',
                         'left'=>isset($this->params['left'])?$this->params['left']:\Yii::$app->controller->module->id,
                         'leftsub'=>isset($this->params['leftsub'])?$this->params['leftsub']:\Yii::$app->controller->id,
@@ -110,10 +104,6 @@ use common\widgets\Alert;
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-
-                <?= Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]) ?>
                 <?= Alert::widget() ?>
                 <?= $content ?>
             </div>

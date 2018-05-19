@@ -25,7 +25,7 @@ class KlorofilAsset extends AssetBundle
         'boostrap'=>'yii\bootstrap\BootstrapAsset',
         'boostrapPlugs'=>'yii\bootstrap\BootstrapPluginAsset',
         'linearicons'=>'common\assets\LineariconsAsset',
-
+        'fontawesome' =>'common\assets\FontAwesomeAsset',
     ];
 
     public $publishOptions=[

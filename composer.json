@@ -18,14 +18,15 @@
         "yiisoft/yii2": "~2.0.6",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
-        "lbmzorx/yii2-giitool": "^0.0.5"
+        "lbmzorx/yii2-giitool": "0.0.7"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
         "yiisoft/yii2-gii": "~2.0.0",
         "yiisoft/yii2-faker": "~2.0.0",
         "codeception/base": "^2.2.3",
-        "codeception/verify": "~0.3.1"
+        "codeception/verify": "~0.3.1",
+        "lbmzorx/yii2-components": "0.0.5"
     },
     "config": {
         "process-timeout": 1800,

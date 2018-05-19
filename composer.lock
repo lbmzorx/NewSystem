@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f32d8578c4cd9ae8a1985b738b0cc8e4",
+    "content-hash": "1e1449318094ba9500965fa4ec05855d",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -326,69 +326,25 @@
             "time": "2018-02-23T01:58:20+00:00"
         },
         {
-            "name": "lbmzorx/yii2-components",
-            "version": "0.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lbmzorx/yii2-components.git",
-                "reference": "28d26198db56a60df896516ed8646c96dbf5d415"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/lbmzorx/yii2-components/28d26198db56a60df896516ed8646c96dbf5d415.zip",
-                "reference": "28d26198db56a60df896516ed8646c96dbf5d415",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "lbmzorx\\components\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "lbmzorx",
-                    "email": "lbmzorx@163.com",
-                    "homepage": "http://www.roshure.com/"
-                }
-            ],
-            "description": "Yii PHP Framework Version 2 Extention Tools",
-            "homepage": "http://www.roshure.com/",
-            "keywords": [
-                "components",
-                "extension",
-                "yii2"
-            ],
-            "time": "2018-04-30T06:09:59+00:00"
-        },
-        {
             "name": "lbmzorx/yii2-giitool",
-            "version": "0.0.5",
+            "version": "0.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lbmzorx/yii2-giitool.git",
-                "reference": "8959cfd61993ed156e409e9a5c1b77881977b133"
+                "reference": "344d45875a120353b7103f3df3417bc63719d142"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/lbmzorx/yii2-giitool/8959cfd61993ed156e409e9a5c1b77881977b133.zip",
-                "reference": "8959cfd61993ed156e409e9a5c1b77881977b133",
+                "url": "https://files.phpcomposer.com/files/lbmzorx/yii2-giitool/344d45875a120353b7103f3df3417bc63719d142.zip",
+                "reference": "344d45875a120353b7103f3df3417bc63719d142",
                 "shasum": ""
             },
             "require": {
-                "lbmzorx/yii2-components": "*",
                 "php": ">=5.4.0",
                 "yiisoft/yii2": "*"
             },
             "require-dev": {
+                "lbmzorx/yii2-components": "~0.0.3",
                 "yiisoft/yii2-gii": "~2.0.0"
             },
             "type": "yii2-extension",
@@ -418,7 +374,7 @@
                 "tool",
                 "yii2"
             ],
-            "time": "2018-05-15T17:18:49+00:00"
+            "time": "2018-05-19T07:16:03+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1191,6 +1147,50 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
+        },
+        {
+            "name": "lbmzorx/yii2-components",
+            "version": "0.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lbmzorx/yii2-components.git",
+                "reference": "08ef5818770b151383907185f93b73e76160fbb1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/lbmzorx/yii2-components/08ef5818770b151383907185f93b73e76160fbb1.zip",
+                "reference": "08ef5818770b151383907185f93b73e76160fbb1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "lbmzorx\\components\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "lbmzorx",
+                    "email": "lbmzorx@163.com",
+                    "homepage": "http://www.roshure.com/"
+                }
+            ],
+            "description": "Yii PHP Framework Version 2 Extention Tools",
+            "homepage": "http://www.roshure.com/",
+            "keywords": [
+                "components",
+                "extension",
+                "yii2"
+            ],
+            "time": "2018-05-19T09:08:34+00:00"
         },
         {
             "name": "myclabs/deep-copy",

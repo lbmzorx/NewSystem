@@ -11,7 +11,11 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'admin' => [
+            'class' => 'backend\modules\admin\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -36,14 +40,18 @@ return [
         ],
         'i18n' => [
             'translations' => [//多语言包设置
-                'amodel' => [
+                'app*' => [
                     'class' => yii\i18n\PhpMessageSource::className(),
-                    'basePath' => '@common/messages',
-//                    'sourceLanguage' => 'zh-CN',
+                    'basePath' => '@backend/message',
+                    'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'error' => 'error.php',
+                    ],
                 ],
                 'menu'=>[
                     'class' => yii\i18n\PhpMessageSource::className(),
-                    'basePath' => '@backend/messages',
+                    'basePath' => '@backend/message',
                 ]
             ],
         ],
