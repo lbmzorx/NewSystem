@@ -1,48 +1,20 @@
 <?php
 namespace backend\controllers;
 
+use lbmzorx\components\event\LoginEvent;
 use Yii;
 use yii\base\Exception;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use common\models\admin\LoginForm;
 
 /**
  * Site controller
  */
 class SiteController extends Base
 {
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function behaviors()
-//    {
-//        return [
-//            'access' => [
-//                'class' => AccessControl::className(),
-//                'rules' => [
-//                    [
-//                        'actions' => ['login', 'error'],
-//                        'allow' => true,
-//                    ],
-//                    [
-//                        'actions' => ['logout', 'index'],
-//                        'allow' => true,
-//                        'roles' => ['@'],
-//                    ],
-//                ],
-//            ],
-//            'verbs' => [
-//                'class' => VerbFilter::className(),
-//                'actions' => [
-//                    'logout' => ['post'],
-//                ],
-//            ],
-//        ];
-//    }
-
     /**
      * {@inheritdoc}
      */
@@ -74,21 +46,25 @@ class SiteController extends Base
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+        if(\yii::$app->params['login_layout']){
+            $this->layout=\yii::$app->params['login_layout'];
         }
 
+        if(!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        $this->trigger(LoginEvent::EVENT_BEFORE_LOGIN,new LoginEvent());
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            \yii::$app->getSession()->setFlash('Success',Yii::t('app','Login Success!'));
             return $this->goBack();
         } else {
-            $model->password = '';
-
             return $this->render('login', [
                 'model' => $model,
             ]);
         }
     }
+
 
     /**
      * Logout action.

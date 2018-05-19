@@ -8,6 +8,8 @@ return [
 	'Username'=>'用户名',
 	'Auth Key'=>'授权码',
 	'Password Hash'=>'密码',
+    'Password'=>'密码',
+    'Remember Me'=>'记住我',
 	'Password Reset Token'=>'重置密码口令',
 	'Email'=>'邮箱',
 	/*end*Admin*/

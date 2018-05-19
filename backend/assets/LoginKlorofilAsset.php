@@ -7,9 +7,8 @@
 
 namespace backend\assets;
 
-
 use yii\web\AssetBundle;
-class KlorofilAsset extends AssetBundle
+class LoginKlorofilAsset extends AssetBundle
 {
     public $sourcePath='@resource/tid_5_klorofil/assets';
 
@@ -23,10 +22,11 @@ class KlorofilAsset extends AssetBundle
 
     public $depends=[
         'boostrap'=>'yii\bootstrap\BootstrapAsset',
-        'boostrapPlugs'=>'yii\bootstrap\BootstrapPluginAsset',
-        'linearicons'=>'common\assets\LineariconsAsset',
         'fontawesome' =>'common\assets\FontAwesomeAsset',
+        'linearicons'=>'common\assets\LineariconsAsset',
+        'jsencrypt'=>'lbmzorx\components\assets\JsencryptAsset',
         'toastr'=>'lbmzorx\components\assets\ToastrAsset',
+        'lbmzorx'=>'lbmzorx\components\assets\LbmzorxAsset',
     ];
 
     public $publishOptions=[

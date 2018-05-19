@@ -22,6 +22,7 @@ class AppInit extends \yii\base\Component
 
     public static function setLayoutKlorofil(){
         \yii::$app->params['layout']='main-klorofil';
+        \yii::$app->params['login_layout']='login-klorofil';
         \Yii::Configure(\yii::$app->assetManager, [
             'bundles'=>[
                 'yii\bootstrap\BootstrapAsset'=>[
