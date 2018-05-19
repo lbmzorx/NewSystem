@@ -22,6 +22,8 @@ class KlorofilAsset extends AssetBundle
     ];
 
     public $depends=[
+        'jquery'=>'yii\web\JqueryAsset',
+        'slimscroll'=>'common\assets\JquerySlimscrollAsset',
         'boostrap'=>'yii\bootstrap\BootstrapAsset',
         'boostrapPlugs'=>'yii\bootstrap\BootstrapPluginAsset',
         'linearicons'=>'common\assets\LineariconsAsset',

@@ -54,22 +54,22 @@ str
 
     <p>
         <?= Html::a('<i class="fa fa-plus-square"></i> '.Yii::t('app', 'Create Menu'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= BatchDelete::widget(['name'=>Yii::t('app', 'Batch Deletes')]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Position'),'attribute'=>'position','btnIcon'=>'position', ]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Target'),'attribute'=>'target','btnIcon'=>'target', ]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Is Absolute Url'),'attribute'=>'is_absolute_url','btnIcon'=>'is_absolute_url', ]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Is Display'),'attribute'=>'is_display','btnIcon'=>'is_display', ]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Recycle'),'attribute'=>'recycle','btnIcon'=>'recycle', ]) ?>
+        <?= BatchDelete::widget(['name'=>Yii::t('app', 'Batch Deletes'),'griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Position'),'attribute'=>'position','btnIcon'=>'position','griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Target'),'attribute'=>'target','btnIcon'=>'target','griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Is Absolute Url'),'attribute'=>'is_absolute_url','btnIcon'=>'is_absolute_url','griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Is Display'),'attribute'=>'is_display','btnIcon'=>'is_display','griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Recycle'),'attribute'=>'recycle','btnIcon'=>'recycle','griViewKey'=>GridView::$counter]) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'pager' =>[
             'class'=>\lbmzorx\components\widget\JumpPager::className(),
-            'firstPageLabel'=>Yii::t('app','First'),
-            'nextPageLabel'=>Yii::t('app','Next'),
-            'prevPageLabel'=>Yii::t('app','Prev'),
-            'lastPageLabel'=>Yii::t('app','Last'),
+            'firstPageLabel'=>Yii::t('app','first'),
+            'nextPageLabel'=>Yii::t('app','next'),
+            'prevPageLabel'=>Yii::t('app','prev'),
+            'lastPageLabel'=>Yii::t('app','last'),
             'jButtonLabel' =>Yii::t('app','Jump'),
             'sButtonLabel' =>Yii::t('app','PageSize'),
         ],

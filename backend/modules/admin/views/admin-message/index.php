@@ -54,11 +54,11 @@ str
 
     <p>
         <?= Html::a('<i class="fa fa-plus-square"></i> '.Yii::t('app', 'Create Admin Message'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= BatchDelete::widget(['name'=>Yii::t('app', 'Batch Deletes')]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Spread Type'),'attribute'=>'spread_type','btnIcon'=>'spread_type', ]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Level'),'attribute'=>'level','btnIcon'=>'level', ]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Read'),'attribute'=>'read','btnIcon'=>'read', ]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','From Type'),'attribute'=>'from_type','btnIcon'=>'from_type', ]) ?>
+        <?= BatchDelete::widget(['name'=>Yii::t('app', 'Batch Deletes'),'griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Spread Type'),'attribute'=>'spread_type','btnIcon'=>'spread_type','griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Level'),'attribute'=>'level','btnIcon'=>'level','griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Read'),'attribute'=>'read','btnIcon'=>'read','griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','From Type'),'attribute'=>'from_type','btnIcon'=>'from_type','griViewKey'=>GridView::$counter]) ?>
     </p>
 
     <?= GridView::widget([

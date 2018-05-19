@@ -38,6 +38,9 @@ use lbmzorx\components\behavior\StatusCode;
 	<div class="col-lg-3 col-sm-3">
 	    <?= $form->field($model, 'status')->dropDownList(StatusCode::tranStatusCode(Admin::$status_code,'app'),['prompt'=>\Yii::t('app','Please Select')]) ?>
 	</div>
+	<div class="col-lg-3 col-sm-3">
+	    <?= $form->field($model, 'head')->textInput(['maxlength' => true]) ?>
+	</div>
     </div>
     <div class="row">
         <div class="col-lg-12 col-sm-12">

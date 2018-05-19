@@ -4,7 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-\backend\assets\LoginKlorofilAsset::register($this);
+\backend\assets\KlorofilLoginAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

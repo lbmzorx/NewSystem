@@ -112,6 +112,14 @@ STYLE
         ])->textInput(['maxlength' => true])
         ->label('');?>
 	</div>
+	<div class="col-lg-2 col-sm-2">
+		<?=$form->field($model, 'head',[
+            'class'=>\lbmzorx\components\widget\InputAddField::className(),
+            'firstContent'=>$model->getAttributeLabel('head'),
+            'firstOption'=>['id'=>'icon-show-'.\yii\helpers\StringHelper::basename(get_class($model)).'-head'],
+        ])->textInput(['maxlength' => true])
+        ->label('');?>
+	</div>
 </div>    <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>

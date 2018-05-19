@@ -54,8 +54,8 @@ str
 
     <p>
         <?= Html::a('<i class="fa fa-plus-square"></i> '.Yii::t('app', 'Create Log'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= BatchDelete::widget(['name'=>Yii::t('app', 'Batch Deletes')]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Level'),'attribute'=>'level','btnIcon'=>'level', ]) ?>
+        <?= BatchDelete::widget(['name'=>Yii::t('app', 'Batch Deletes'),'griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Level'),'attribute'=>'level','btnIcon'=>'level','griViewKey'=>GridView::$counter]) ?>
     </p>
 
     <?= GridView::widget([

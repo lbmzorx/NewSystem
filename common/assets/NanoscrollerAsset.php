@@ -19,6 +19,6 @@ class NanoscrollerAsset extends AssetBundle
     ];
 
     public $depends=[
-        'common\assets\JqueryAsset',
+        'jquery'=>'yii\web\JqueryAsset',
     ];
 }

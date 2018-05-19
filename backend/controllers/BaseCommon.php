@@ -22,7 +22,7 @@ class BaseCommon extends Controller
     public function init(){
         parent::init();
         if(isset(\yii::$app->params['layout'])){
-            $this->layout='/'.\yii::$app->params['layout'];
+            $this->layout=\yii::$app->params['layout'];
         }
     }
 
@@ -73,24 +73,24 @@ class BaseCommon extends Controller
     /**
      * @inheritdoc
      */
-//    public function behaviors()
-//    {
-//        return [
-//        'access' => [
-//            'class' => AccessControl::className(),
-//                'rules' => [
-//                    [
-//                        'allow' => false,
-//                        'roles' => ['?'],
-//                    ],
-//                    [
-//                        'allow'=>true,
-//                        'roles'=>['@'],
-//                    ],
-//                ],
-//            ],
-//        ];
-//    }
+    public function behaviors()
+    {
+        return [
+        'access' => [
+            'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow'=>true,
+                        'roles'=>['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc
