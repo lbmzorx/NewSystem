@@ -39,6 +39,9 @@ return [
         'temp' => [
             'class' => 'backend\modules\temp\Module',
         ],
+        'tempadmin' => [
+            'class' => 'backend\modules\tempadmin\Module',
+        ],
     ],
     'defaultRoute'=>'home',
     'components' => [

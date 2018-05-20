@@ -4,16 +4,16 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\startdata\Options */
+/* @var $model common\models\admindata\AuthItemChild */
 
 $this->title = Yii::t('app', 'Create {modelname}', [
-    'modelname' => Yii::t('app', 'Options'),
+    'modelname' => Yii::t('app', 'Auth Item Children'),
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Options'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Auth Item Children'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="options-create">
+<div class="auth-item-child-create">
     <?= \yii\widgets\Breadcrumbs::widget([
     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>    <?= $this->render('_form', [

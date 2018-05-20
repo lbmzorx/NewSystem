@@ -1,10 +1,10 @@
 <?php
 /**
-* This is the translation array
+* This is the translation array tt
 *
 */
 return [
-	'backend'=>'后台',
+    'backend'=>'后台',
 	'frontend'=>'前台',//0左，1上',
     'yes'=>'是',
     'no'=>'否',
@@ -328,4 +328,26 @@ return [
     /*end*Menu*/
 
     'Unfolding Search Condition'=>'展开搜索条件',
+
+	/*start*ModelName*/
+	'Article'=>'',
+	'Article Cate'=>'',
+	'Article Collection'=>'',
+	'Article Commit'=>'',
+	'Article Content'=>'',
+	'Article Thumbup'=>'',
+	'Menu'=>'',
+	'Migration'=>'',
+	
+	'Admin Info'=>'',
+	'Admin Log'=>'',
+	'Admin Message'=>'',
+	'Admin Message Log'=>'',
+	'Auth Assignment'=>'',
+	'Auth Item'=>'',
+	'Auth Item Child'=>'',
+	'Auth Rule'=>'',
+	'Log'=>'',
+	'Maintain'=>'',
+	/*end*ModelName*/
 ];

@@ -4,16 +4,16 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\startdata\Options */
+/* @var $model common\models\admindata\AdminMessage */
 
 $this->title = Yii::t('app', 'Create {modelname}', [
-    'modelname' => Yii::t('app', 'Options'),
+    'modelname' => Yii::t('app', 'Admin Messages'),
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Options'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Admin Messages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="options-create">
+<div class="admin-message-create">
     <?= \yii\widgets\Breadcrumbs::widget([
     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>    <?= $this->render('_form', [

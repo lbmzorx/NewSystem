@@ -3,17 +3,17 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\startdata\Options */
+/* @var $model common\models\admindata\AuthItem */
 
 $this->title = Yii::t('app', 'Update {modelname}: {nameAttribute}', [
-    'modelname' => Yii::t('app', 'Options'),
+    'modelname' => Yii::t('app', 'Auth Items'),
     'nameAttribute' => $model->name,
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Options'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Auth Items'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->name]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-<div class="options-update">
+<div class="auth-item-update">
     <?= \yii\widgets\Breadcrumbs::widget([
     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>

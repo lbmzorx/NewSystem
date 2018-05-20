@@ -4,22 +4,22 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use lbmzorx\components\widget\BatchUpdate;
-use common\models\startsearch\Options;
+use common\models\startsearch\ArticleCommit;
 use lbmzorx\components\behavior\StatusCode;
 use lbmzorx\components\widget\BatchDelete;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\startsearch\Options */
+/* @var $searchModel common\models\startsearch\ArticleCommit */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Options');
+$this->title = Yii::t('app', 'Article Commits');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCss(<<<STYLE
         p .btn{margin-top:5px;}
 STYLE
 );
 ?>
-<div class="options-index">
+<div class="article-commit-index">
     <?= \yii\widgets\Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>    <div class="panel">
@@ -54,12 +54,11 @@ str
 
     <p>
         <?= Html::a('<i class="fa fa-plus-square"></i> '. Yii::t('app', 'Create {modelname}', [
-    'modelname' => Yii::t('app', 'Options'),
+    'modelname' => Yii::t('app', 'Article Commits'),
 ]), ['create'], ['class' => 'btn btn-success']) ?>
         <?= BatchDelete::widget(['name'=>Yii::t('app', 'Batch Deletes'),'griViewKey'=>GridView::$counter]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Type'),'attribute'=>'type','btnIcon'=>'type','griViewKey'=>GridView::$counter]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Input Type'),'attribute'=>'input_type','btnIcon'=>'input_type','griViewKey'=>GridView::$counter]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Autoload'),'attribute'=>'autoload','btnIcon'=>'autoload','griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Status'),'attribute'=>'status','btnIcon'=>'status','griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Recycle'),'attribute'=>'recycle','btnIcon'=>'recycle','griViewKey'=>GridView::$counter]) ?>
     </p>
 
     <?= GridView::widget([
@@ -78,55 +77,42 @@ str
             ['class' => 'yii\grid\CheckboxColumn'],
 
             'id',
+            'article_id',
+            'user_id',
+            'parent_id',
+            'content',
             [
                'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
-               'attribute'=>'type',
-               'filter'=>StatusCode::tranStatusCode(Options::$type_code,'app'),
+               'attribute'=>'status',
+               'filter'=>StatusCode::tranStatusCode(ArticleCommit::$status_code,'app'),
                'value'=> function ($model) {
-                   return Html::button($model->getStatusCode('type','type_code'),
+                   return Html::button($model->getStatusCode('status','status_code'),
                        [
                            'data-id'=>$model->id,
-                           'data-value'=>$model->type,
-                           'class'=>'type-change btn btn-xs btn-'.$model->getStatusCss('type','type_css',$model->type)
+                           'data-value'=>$model->status,
+                           'class'=>'status-change btn btn-xs btn-'.$model->getStatusCss('status','status_css',$model->status)
                        ]);
                },
                'format'=>'raw',
             ],
-            'name',
-            'value:ntext',
+            //'add_time',
             [
                'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
-               'attribute'=>'input_type',
-               'filter'=>StatusCode::tranStatusCode(Options::$input_type_code,'app'),
+               'attribute'=>'recycle',
+               'filter'=>StatusCode::tranStatusCode(ArticleCommit::$recycle_code,'app'),
                'value'=> function ($model) {
-                   return Html::button($model->getStatusCode('input_type','input_type_code'),
+                   return Html::button($model->getStatusCode('recycle','recycle_code'),
                        [
                            'data-id'=>$model->id,
-                           'data-value'=>$model->input_type,
-                           'class'=>'input_type-change btn btn-xs btn-'.$model->getStatusCss('input_type','input_type_css',$model->input_type)
+                           'data-value'=>$model->recycle,
+                           'class'=>'recycle-change btn btn-xs btn-'.$model->getStatusCss('recycle','recycle_css',$model->recycle)
                        ]);
                },
                'format'=>'raw',
             ],
-            [
-               'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
-               'attribute'=>'autoload',
-               'filter'=>StatusCode::tranStatusCode(Options::$autoload_code,'app'),
-               'value'=> function ($model) {
-                   return Html::button($model->getStatusCode('autoload','autoload_code'),
-                       [
-                           'data-id'=>$model->id,
-                           'data-value'=>$model->autoload,
-                           'class'=>'autoload-change btn btn-xs btn-'.$model->getStatusCss('autoload','autoload_css',$model->autoload)
-                       ]);
-               },
-               'format'=>'raw',
-            ],
-            'tips',
-            [
-            	'attribute'=>'sort',
-            	'class'=>'lbmzorx\components\grid\SortColumn',
-            ],
+            //'level',
+            //'path',
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
@@ -134,17 +120,17 @@ str
         </div>
     </div>
 </div>
-<div id="type-change-dom" style="display: none;">
+<div id="status-change-dom" style="display: none;">
     <div style="padding: 10px;">
         <?=Html::beginForm(['change-status'],'post')?>
-        <input type="hidden" name="key" value="type">
+        <input type="hidden" name="key" value="status">
         <input type="hidden" name="id" value="">
-        <?php foreach ( Options::$type_code as $k=>$v):?>           
+        <?php foreach ( ArticleCommit::$status_code as $k=>$v):?>           
             <label class="checkbox-inline" style="margin: 5px 10px;">
                 <?php
                     $css='warning';
-                    if( isset(Options::$type_css) && isset(Options::$type_css[$k])){
-                        $css = Options::$type_css [$k];
+                    if( isset(ArticleCommit::$status_css) && isset(ArticleCommit::$status_css[$k])){
+                        $css = ArticleCommit::$status_css [$k];
                     }else{
                         $css=isset(StatusCode::$cssCode[$k])?StatusCode::$cssCode[$k]:$css;
                     }
@@ -156,39 +142,17 @@ str
         <?=Html::endForm()?>
     </div>
 </div>
-<div id="input_type-change-dom" style="display: none;">
+<div id="recycle-change-dom" style="display: none;">
     <div style="padding: 10px;">
         <?=Html::beginForm(['change-status'],'post')?>
-        <input type="hidden" name="key" value="input_type">
+        <input type="hidden" name="key" value="recycle">
         <input type="hidden" name="id" value="">
-        <?php foreach ( Options::$input_type_code as $k=>$v):?>           
+        <?php foreach ( ArticleCommit::$recycle_code as $k=>$v):?>           
             <label class="checkbox-inline" style="margin: 5px 10px;">
                 <?php
                     $css='warning';
-                    if( isset(Options::$input_type_css) && isset(Options::$input_type_css[$k])){
-                        $css = Options::$input_type_css [$k];
-                    }else{
-                        $css=isset(StatusCode::$cssCode[$k])?StatusCode::$cssCode[$k]:$css;
-                    }
-                ?>               
-                <?=Html::input('radio','value',$k)?>
-                <?=Html::tag('span',\Yii::t('app',$v),['class'=>'btn btn-'.$css])?>
-            </label>          
-        <?php endforeach;?>
-        <?=Html::endForm()?>
-    </div>
-</div>
-<div id="autoload-change-dom" style="display: none;">
-    <div style="padding: 10px;">
-        <?=Html::beginForm(['change-status'],'post')?>
-        <input type="hidden" name="key" value="autoload">
-        <input type="hidden" name="id" value="">
-        <?php foreach ( Options::$autoload_code as $k=>$v):?>           
-            <label class="checkbox-inline" style="margin: 5px 10px;">
-                <?php
-                    $css='warning';
-                    if( isset(Options::$autoload_css) && isset(Options::$autoload_css[$k])){
-                        $css = Options::$autoload_css [$k];
+                    if( isset(ArticleCommit::$recycle_css) && isset(ArticleCommit::$recycle_css[$k])){
+                        $css = ArticleCommit::$recycle_css [$k];
                     }else{
                         $css=isset(StatusCode::$cssCode[$k])?StatusCode::$cssCode[$k]:$css;
                     }
