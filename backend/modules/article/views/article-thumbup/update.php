@@ -5,7 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\startdata\ArticleThumbup */
 
-$this->title = Yii::t('app', 'Update Article Thumbup: {nameAttribute}', [
+$this->title = Yii::t('app', 'Update {modelname}: {nameAttribute}', [
+    'modelname' => Yii::t('app', 'Article Thumbups'),
     'nameAttribute' => $model->id,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Article Thumbups'), 'url' => ['index']];

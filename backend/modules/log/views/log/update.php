@@ -5,7 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\admindata\Log */
 
-$this->title = Yii::t('app', 'Update Log: {nameAttribute}', [
+$this->title = Yii::t('app', 'Update {modelname}: {nameAttribute}', [
+    'modelname' => Yii::t('app', 'Logs'),
     'nameAttribute' => $model->id,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Logs'), 'url' => ['index']];

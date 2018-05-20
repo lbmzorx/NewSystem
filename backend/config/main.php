@@ -18,6 +18,9 @@ return [
         'admin' => [
             'class' => 'backend\modules\admin\Module',
         ],
+        'user' => [
+            'class' => 'backend\modules\user\Module',
+        ],
         'article' => [
             'class' => 'backend\modules\article\Module',
         ],

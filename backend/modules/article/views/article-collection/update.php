@@ -5,7 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\startdata\ArticleCollection */
 
-$this->title = Yii::t('app', 'Update Article Collection: {nameAttribute}', [
+$this->title = Yii::t('app', 'Update {modelname}: {nameAttribute}', [
+    'modelname' => Yii::t('app', 'Article Collections'),
     'nameAttribute' => $model->id,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Article Collections'), 'url' => ['index']];

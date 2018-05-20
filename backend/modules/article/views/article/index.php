@@ -26,7 +26,7 @@ STYLE
         <div class="panel-body">
     <?php Pjax::begin(); ?>
     <p>
-        <?=Html::button(Yii::t('app','Search button').'  '.Html::tag('i','',['class'=>'fa fa-chevron-down']),['class'=>'btn btn-success ','id'=>'search-button'])?>
+        <?=Html::button(Yii::t('app','Unfolding Search Condition').'  '.Html::tag('i','',['class'=>'fa fa-chevron-down']),['class'=>'btn btn-success ','id'=>'search-button'])?>
         <?php
         $this->registerJs(<<<str
 var show=false;
@@ -53,7 +53,9 @@ str
     </div>
 
     <p>
-        <?= Html::a('<i class="fa fa-plus-square"></i> '.Yii::t('app', 'Create Article'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="fa fa-plus-square"></i> '. Yii::t('app', 'Create {modelname}', [
+    'modelname' => Yii::t('app', 'Articles'),
+]), ['create'], ['class' => 'btn btn-success']) ?>
         <?= BatchDelete::widget(['name'=>Yii::t('app', 'Batch Deletes'),'griViewKey'=>GridView::$counter]) ?>
         <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Remain'),'attribute'=>'remain','btnIcon'=>'remain','griViewKey'=>GridView::$counter]) ?>
         <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Auth'),'attribute'=>'auth','btnIcon'=>'auth','griViewKey'=>GridView::$counter]) ?>
@@ -73,6 +75,7 @@ str
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'pager' =>[
             'class'=>\lbmzorx\components\widget\JumpPager::className(),
             'firstPageLabel'=>Yii::t('app','First'),

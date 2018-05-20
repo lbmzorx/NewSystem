@@ -6,7 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\startdata\ArticleCommit */
 
-$this->title = Yii::t('app', 'Create Article Commit');
+$this->title = Yii::t('app', 'Create {modelname}', [
+    'modelname' => Yii::t('app', 'Article Commits'),
+]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Article Commits'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -6,7 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\admindata\Log */
 
-$this->title = Yii::t('app', 'Create Log');
+$this->title = Yii::t('app', 'Create {modelname}', [
+    'modelname' => Yii::t('app', 'Logs'),
+]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Logs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

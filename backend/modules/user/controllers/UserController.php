@@ -1,6 +1,5 @@
 <?php
-
-namespace backend\modules\temp\controllers;
+namespace backend\modules\user\controllers;
 
 use Yii;
 use backend\controllers\BaseCommon;

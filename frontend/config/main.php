@@ -16,7 +16,7 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\models\user\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
@@ -59,34 +59,50 @@ return [
             'rules' => [
             ],
         ],
-//        'assetManager' => [
-//            'bundles' => [
-//                'yii\web\JqueryAsset' => [
-//                    'sourcePath' => '@resource/vendor/jquery/', // 屏蔽jqueryAsset
-//                    'js' => [
-//                        'jquery.min.js'
-//                    ],
-//                    'jsOptions'=>[
-//                        'position' => \yii\web\View::POS_HEAD,
-//                    ]
-//                ],
-////                'yii\bootstrap\BootstrapAsset' => [
-////                    'css' => [
-////                        'css/bootstrap.min.css',
-////                    ],
-////                ],
-////                'yii\bootstrap\BootstrapPluginAsset' => [
-////                    'js' => [
-////                        'js/bootstrap.min.js',
-////                    ],
-////                ],
-////                'yii\bootstrap\BootstrapThemeAsset' => [
-////                    'css' => [
-////                        'css/bootstrap-theme.min.css',
-////                    ],
-////                ],
-//            ],
-//        ],
+        'i18n' => [
+            'translations' => [//多语言包设置
+                'app*' => [
+                    'class' => yii\i18n\PhpMessageSource::className(),
+                    'basePath' => '@frontend/message',
+                    'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'error' => 'error.php',
+                    ],
+                ],
+            ],
+        ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => '@resource/vendor/jquery/', // 屏蔽jqueryAsset
+                    'js' => [
+                        'jquery.min.js'
+                    ],
+                    'jsOptions'=>[
+                        'position' => \yii\web\View::POS_HEAD,
+                    ]
+                ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => '@resource/vendor/bootstrap/', // 屏蔽jqueryAsset
+                    'css' => [
+                        'css/bootstrap.min.css',
+                    ],
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'sourcePath' => '@resource/vendor/bootstrap/', // 屏蔽jqueryAsset
+                    'js' => [
+                        'js/bootstrap.min.js',
+                    ],
+                ],
+                'yii\bootstrap\BootstrapThemeAsset' => [
+                    'sourcePath' => '@resource/vendor/bootstrap/', // 屏蔽jqueryAsset
+                    'css' => [
+                        'css/bootstrap-theme.min.css',
+                    ],
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];

@@ -1,8 +1,12 @@
 <?php
-namespace common\models;
+namespace common\models\user;
 
+use lbmzorx\components\behavior\LimitLogin;
+use lbmzorx\components\behavior\RsaAttribute;
+use lbmzorx\components\event\LoginEvent;
 use Yii;
 use yii\base\Model;
+use yii\web\HttpException;
 
 /**
  * Login form
@@ -48,6 +52,20 @@ class LoginForm extends Model
         }
     }
 
+    public function behaviors()
+    {
+        return [
+            'bs_rsa'=>[
+                'class'=>RsaAttribute::className(),
+                'rsaAtAttributes'=>'password',
+            ],
+            'check_login'=>[
+                'class'=>LimitLogin::className(),
+                'attribute'=>'password',
+            ],
+        ];
+    }
+
     /**
      * Logs in a user using the provided username and password.
      *
@@ -55,12 +73,24 @@ class LoginForm extends Model
      */
     public function login()
     {
-        if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+        $loginEvent =new LoginEvent();
+        try{
+            $this->trigger(LoginEvent::EVENT_BEFORE_LOGIN,$loginEvent);
+        }catch (HttpException $e){
+            return false;
         }
-        
-        return false;
+
+        if ($this->validate()) {
+            $status = Yii::$app->user->login($this->getUser(),$this->rememberMe ? 3600 * 24 * 30 : 0);
+            $this->trigger(LoginEvent::EVENT_SUCCESS_LOGIN,$loginEvent);
+
+            return $status;
+        } else {
+            $this->trigger(LoginEvent::EVENT_FAILED_LOGIN,$loginEvent);
+            return false;
+        }
     }
+
 
     /**
      * Finds user by [[username]]
@@ -74,5 +104,17 @@ class LoginForm extends Model
         }
 
         return $this->_user;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => Yii::t('amodel', 'Username'),
+            'password' => Yii::t('amodel', 'Password'),
+            'rememberMe' => Yii::t('amodel', 'Remember Me'),
+        ];
     }
 }

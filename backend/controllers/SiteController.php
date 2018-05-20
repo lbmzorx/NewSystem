@@ -23,8 +23,10 @@ class SiteController extends Base
         return [
             'error' => [
                 'class' => 'lbmzorx\components\action\ErrorAction',
-                'guestView'=>\yii::$app->params['guest_layout'],
-                'userView'=>\yii::$app->params['layout'],
+                'guestView'=>'error-guest',
+                'userView'=>'error-user',
+                'guestLayout'=>\yii::$app->params['guest_layout'],
+                'userLayout'=>\yii::$app->params['layout'],
             ],
         ];
     }

@@ -101,4 +101,8 @@ return [
 	'Trade Sn'=>'',
 	'Info'=>'',
 	/*end*TestR*/
+
+	/*start*Tag*/
+	'Frequence'=>'频率',
+	/*end*Tag*/
 ];

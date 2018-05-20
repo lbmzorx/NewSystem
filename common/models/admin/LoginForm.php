@@ -63,7 +63,7 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->$attribute)) {
-                $this->addError($attribute, \Yii::t('model','Incorrect username or password!'.$this->$attribute));
+                $this->addError($attribute, \Yii::t('model','Incorrect username or password!'));
             }
         }
     }
@@ -88,7 +88,6 @@ class LoginForm extends Model
 
             return $status;
         } else {
-            var_dump($this->getErrors());
             $this->trigger(LoginEvent::EVENT_FAILED_LOGIN,$loginEvent);
             return false;
         }
