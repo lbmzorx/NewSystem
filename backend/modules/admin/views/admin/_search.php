@@ -113,10 +113,10 @@ STYLE
         ->label('');?>
 	</div>
 	<div class="col-lg-2 col-sm-2">
-		<?=$form->field($model, 'head',[
+		<?=$form->field($model, 'head_img',[
             'class'=>\lbmzorx\components\widget\InputAddField::className(),
-            'firstContent'=>$model->getAttributeLabel('head'),
-            'firstOption'=>['id'=>'icon-show-'.\yii\helpers\StringHelper::basename(get_class($model)).'-head'],
+            'firstContent'=>$model->getAttributeLabel('head_img'),
+            'firstOption'=>['id'=>'icon-show-'.\yii\helpers\StringHelper::basename(get_class($model)).'-head_img'],
         ])->textInput(['maxlength' => true])
         ->label('');?>
 	</div>

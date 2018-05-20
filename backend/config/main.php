@@ -12,10 +12,35 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+        'home' => [
+            'class' => 'backend\modules\home\Module',
+        ],
         'admin' => [
             'class' => 'backend\modules\admin\Module',
         ],
+        'article' => [
+            'class' => 'backend\modules\article\Module',
+        ],
+        'system' => [
+            'class' => 'backend\modules\system\Module',
+        ],
+        'setting' => [
+            'class' => 'backend\modules\setting\Module',
+        ],
+        'log' => [
+            'class' => 'backend\modules\log\Module',
+        ],
+        'auth' => [
+            'class' => 'backend\modules\auth\Module',
+        ],
+        'maintain' => [
+            'class' => 'backend\modules\maintain\Module',
+        ],
+        'temp' => [
+            'class' => 'backend\modules\temp\Module',
+        ],
     ],
+    'defaultRoute'=>'home',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',

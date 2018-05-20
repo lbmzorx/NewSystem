@@ -18,7 +18,7 @@ use yii\helpers\Html;
     <?php $this->head() ?>
 </head>
 <body>
-<!-- BEGIN WRAPPER -->
+<!-- WRAPPER -->
 <?php $this->beginBody() ?>
 <?=$content?>
 <?= $this->render('//widgets/_flash') ?>

@@ -85,8 +85,10 @@ class LoginForm extends Model
         if ($this->validate()) {
             $status = Yii::$app->user->login($this->getUser(),$this->rememberMe ? 3600 * 24 * 30 : 0);
             $this->trigger(LoginEvent::EVENT_SUCCESS_LOGIN,$loginEvent);
+
             return $status;
         } else {
+            var_dump($this->getErrors());
             $this->trigger(LoginEvent::EVENT_FAILED_LOGIN,$loginEvent);
             return false;
         }

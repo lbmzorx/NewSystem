@@ -37,8 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'admin_id',
             'route',
             'description:ntext',
-            'add_time',
-            'edit_time',
+            'add_time:datetime',
+            'edit_time:datetime',
         ],
     ]) ?>
 </div>

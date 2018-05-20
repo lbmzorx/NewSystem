@@ -30,18 +30,6 @@ class SiteController extends Base
     }
 
     /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-
-//        throw new Exception(VarDumper::dumpAsString($this->findLayoutFile($this->getView())));
-        return $this->render('index');
-    }
-
-    /**
      * Login action.
      *
      * @return string

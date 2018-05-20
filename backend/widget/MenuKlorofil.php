@@ -29,7 +29,6 @@ class MenuKlorofil extends Widget
     public $options = [];
 
     public $depency;
-    public static $depency_filename = '@backend/runtime/depency/backend_menu.txt';
 
     /**
      * @var \yii\caching\FileCache
@@ -75,7 +74,7 @@ class MenuKlorofil extends Widget
         $cache = $this->getCache();
         $key = ['top', 'top' => $this->top, __METHOD__];
         $menu = $cache->get($key);
-        $file=yii::getAlias(static::$depency_filename);
+        $file=yii::getAlias(Menu::$depency_filename);
         if(!file_exists($file)){
             $path=StringHelper::dirname(yii::getAlias($file));
             if(!is_dir($path)){
@@ -96,25 +95,29 @@ class MenuKlorofil extends Widget
 
         $string = '';
         if ($menu) {
-//            throw new \yii\db\Exception(VarDumper::dumpAsString($menu));
+
+//            throw new \yii\db\Exception(VarDumper::dumpAsString($menu).$this->left.$this->leftsub.$this->leftleftsub);
             foreach ($menu as $k => $v) {
+
+
+
                 if (!empty($v['sub'])) {
-                    $string .= '<li data-id=""><a href="#' . md5($v['url'] . $v['module']) . '" data-toggle="collapse"' .
-                        'class="' . ($v['module'] == $this->left ? 'active' : 'collapsed') . '"' .
-                        'aria-expanded="' . ($v['module'] == $this->left ? 'true' : 'false') . '">' .
+                    $string .= '<li data-id=""><a href="#' . md5($v['url'].(empty($v['module'])?$v['controller']:$v['module'])) . '" data-toggle="collapse"' .
+                        'class="' . ((empty($v['module'])?$v['controller']==$this->leftsub:$v['module']==$this->left)? 'active' : 'collapsed') . '"' .
+                        'aria-expanded="' . ((empty($v['module'])?$v['controller']==$this->leftsub:$v['module']==$this->left) ? 'true' : 'false') . '">' .
                         '<i class="' . Html::encode($v['icon']) . '"></i>' .
                         '<span>' . Html::encode($v['name']) . '</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>' .
-                        '<div id="' . md5($v['url'] . $v['module']) . '"' .
-                        'class="' . ($v['module'] == $this->left ? 'collapse in' : 'collapse') . '">' .
+                        '<div id="' . md5($v['url'] . $v['module'].$v['controller']) . '"' .
+                        'class="' . ((empty($v['module'])?$v['controller']==$this->leftsub:$v['module']==$this->left)? 'collapse in' : 'collapse') . '">' .
                         '<ul class="nav">';
                     foreach ($v['sub'] as $vv) {
-                        $string .= '<li><a href="' . Html::encode($vv['url']) . '" class="' . ($this->leftsub == $vv['controller'] ? 'active' : '') . '">' .
+                        $string .= '<li><a href="' . Html::encode($vv['url']) . '" class="'.($vv['module'].$vv['controller'].$vv['action']==$this->left.$this->leftsub.$this->leftleftsub ? 'active' : '') . '" target="'.trim($vv['target']).'">' .
                             '<i class="' . Html::encode($vv['icon']) . '"></i>' .
                             Html::encode($vv['name']) . '</a></li>';
                     };
                     $string .= '</ul></div></li>';
                 } else {
-                    $string .= '<li><a href="' . Html::encode($v['url']) . '" class="' . ($this->left == $v['module'] ? 'active' : '') . '">' .
+                    $string .= '<li><a href="' . Html::encode($v['url']) . '" class="' . ($v['module'].$v['controller'].$v['action']==$this->left.$this->leftsub.$this->leftleftsub? 'active' : '') . '" target="'.trim($v['target']).'">' .
                         '<i class="' . Html::encode($v['icon']) . '"></i> <span>' . Html::encode($v['name']) . '</span></a></li>';
                 }
             }

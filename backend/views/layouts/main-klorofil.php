@@ -13,7 +13,7 @@ use common\widgets\Alert;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= Yii::$app->language ?>" class="fullscreen-bg">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,8 +31,8 @@ use common\widgets\Alert;
 <div id="wrapper">
     <!-- NAVBAR -->
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="brand">
-            <a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+        <div class="brand" style="padding: 15px 39px">
+            <a href="<?=\yii\helpers\Url::to(['/'])?>"><img src="/img/logo-small-x.png" alt="Klorofil Logo" class="img-responsive logo"></a>
         </div>
         <div class="container-fluid">
             <div class="navbar-btn">
@@ -70,12 +70,12 @@ use common\widgets\Alert;
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<?=\yii::$app->getUser()->identity->head_img?>" class="img-circle" alt="<?=\yii::$app->getUser()->identity->username?>"> <span><?=\yii::$app->getUser()->identity->username?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-                            <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
-                            <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-                            <li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                            <li><a href="<?=\yii\helpers\Url::to(['/admin/default/index'])?>"><i class="lnr lnr-user"></i><span><?=\yii::t('app','My Profile')?></span></a></li>
+                            <li><a href="<?=\yii\helpers\Url::to(['/admin/admin-message/index'])?>"><i class="lnr lnr-envelope"></i> <span><?=\yii::t('app','Message')?></span></a></li>
+                            <li><a href="<?=\yii\helpers\Url::to(['/admin/message/index'])?>"><i class="lnr lnr-cog"></i> <span><?=\yii::t('app','Settings')?></span></a></li>
+                            <li><a href="<?=\yii\helpers\Url::to(['/site/logout'])?>"><i class="lnr lnr-exit"></i> <span><?=\yii::t('app','Logout')?></span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -112,12 +112,6 @@ use common\widgets\Alert;
     </div>
     <!-- END MAIN -->
     <div class="clearfix"></div>
-    <footer>
-        <div class="container-fluid">
-            <p class="copyright">&copy; <?= Html::encode(Yii::$app->name) ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
-        </div>
-    </footer>
 </div>
 <!-- END WRAPPER -->
 <?php $this->endBody() ?>

@@ -24,11 +24,13 @@ class KlorofilAsset extends AssetBundle
     public $depends=[
         'jquery'=>'yii\web\JqueryAsset',
         'slimscroll'=>'common\assets\JquerySlimscrollAsset',
+        'layui'=>'lbmzorx\components\assets\LayuiAsset',
         'boostrap'=>'yii\bootstrap\BootstrapAsset',
         'boostrapPlugs'=>'yii\bootstrap\BootstrapPluginAsset',
         'linearicons'=>'common\assets\LineariconsAsset',
         'fontawesome' =>'common\assets\FontAwesomeAsset',
         'toastr'=>'lbmzorx\components\assets\ToastrAsset',
+
     ];
 
     public $publishOptions=[

@@ -16,6 +16,7 @@ use Yii;
  * @property int $status	// 状态.tran:0=删除,1=冻结,2=未通过审核,3=限制登录,4=限制活动,5=登录异常,6=激活失败,9=未激活,10=正常.code:0=Delete,1=Freeze,2=Waiting audit,3=Limit Login,4=Limit Active,5=Login Error,6=Active Error,9=Waiting Active,10=Active.
  * @property int $created_at	// 添加时间
  * @property int $updated_at	// 修改时间
+ * @property string $head_img	// 头像
  */
 class Admin extends \yii\db\ActiveRecord
 {
@@ -43,7 +44,7 @@ class Admin extends \yii\db\ActiveRecord
         return [
             [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
             [['status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
+            [['username', 'password_hash', 'password_reset_token', 'email', 'head_img'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
             [['email'], 'unique'],
@@ -66,6 +67,7 @@ class Admin extends \yii\db\ActiveRecord
             'status' => Yii::t('amodel', 'Status'),
             'created_at' => Yii::t('amodel', 'Created At'),
             'updated_at' => Yii::t('amodel', 'Updated At'),
+            'head_img' => Yii::t('amodel', 'Head Img'),
         ];
     }
 }

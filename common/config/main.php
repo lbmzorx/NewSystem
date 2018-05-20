@@ -43,6 +43,9 @@ return [
                 ]
             ],
         ],
+        'formatter' => [
+            'datetimeFormat' => 'y-M-d H:i:s',
+        ],
     ],
     'timeZone' => 'Asia/Shanghai',
     'language'=>'zh-CN',

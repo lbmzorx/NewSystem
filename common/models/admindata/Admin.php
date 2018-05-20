@@ -64,6 +64,7 @@ class Admin extends BaseModelAdmin
                 'status',
                 'created_at',
                 'updated_at',
+                'head_img',
             ],
             'view' => [
                 'id',
@@ -75,6 +76,7 @@ class Admin extends BaseModelAdmin
                 'status',
                 'created_at',
                 'updated_at',
+                'head_img',
             ],
             'update' => [
                 'username',
@@ -83,6 +85,7 @@ class Admin extends BaseModelAdmin
                 'password_reset_token',
                 'email',
                 'status',
+                'head_img',
             ],
             'create' => [
                 'username',
@@ -91,6 +94,7 @@ class Admin extends BaseModelAdmin
                 'password_reset_token',
                 'email',
                 'status',
+                'head_img',
             ],
         ];
     }

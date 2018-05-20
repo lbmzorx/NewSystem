@@ -43,9 +43,9 @@ $this->params['breadcrumbs'][] = $this->title;
                'attribute'=>'status',
                'value'=>$model->getStatusCode('status','status_code'),
             ],
-            'created_at',
-            'updated_at',
-            'head',
+            'created_at:datetime',
+            'updated_at:datetime',
+            'head_img',
         ],
     ]) ?>
 </div>

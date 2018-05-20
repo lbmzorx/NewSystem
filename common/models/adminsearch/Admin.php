@@ -21,7 +21,7 @@ class Admin extends DataModel
     {
         return [
             [['id', 'status'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'head'], 'safe'],
+            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'head_img'], 'safe'],
             [['created_at', 'updated_at'], 'string'],
             [['status'], 'in', 'range'=>array_keys( DataModel::$status_code ) ],
         ];
@@ -89,7 +89,7 @@ class Admin extends DataModel
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
             ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'head', $this->head]);
+            ->andFilterWhere(['like', 'head_img', $this->head_img]);
         $this->trigger(SearchEvent::BEFORE_SEARCH, new SearchEvent(['query'=>$query]));
         return $dataProvider;
     }

@@ -17,8 +17,8 @@ class Base extends Controller
     public function init(){
         parent::init();
 
-        if(isset(\yii::$app->params['layout'])){
-            $this->layout=\yii::$app->params['layout'];
+        if(isset(\yii::$app->params['guest_layout'])){
+            $this->layout=\yii::$app->params['guest_layout'];
         }
 
     }

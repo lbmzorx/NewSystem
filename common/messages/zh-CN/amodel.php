@@ -12,6 +12,8 @@ return [
     'Remember Me'=>'记住我',
 	'Password Reset Token'=>'重置密码口令',
 	'Email'=>'邮箱',
+	
+	'Head Img'=>'头像',
 	/*end*Admin*/
 
 	/*start*AdminInfo*/
