@@ -54,6 +54,18 @@ class Admin extends BaseModelAdmin
     public function scenarios()
     {
         return [
+            'default' => [
+                'id',
+                'username',
+                'auth_key',
+                'password_hash',
+                'password_reset_token',
+                'email',
+                'status',
+                'created_at',
+                'updated_at',
+                'head_img',
+            ],
             'search' => [
                 'id',
                 'username',

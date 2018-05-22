@@ -34,6 +34,11 @@ $this->title = '';
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+            <div class="list">
+                <ul class="list">
+                    <li>alsdkjf</li>
+                </ul>
+            </div>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3 " id="side-box">
             <?=\frontend\widget\ArticleCateWidget::widget([

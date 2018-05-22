@@ -2,20 +2,20 @@
 namespace common\models\startdata;
 
 use Yii;
-use common\models\startdatabase\ArticleContent as BaseModelArticleContent;
+use common\models\startdatabase\Tag as BaseModelTag;
 use yii\caching\TagDependency;
 
 /**
-* This is the data class for [[common\models\startdatabase\ArticleContent]].
+* This is the data class for [[common\models\startdatabase\Tag]].
 * Data model definde model behavior and status code.
-* @see \common\models\startdatabase\ArticleContent
+* @see \common\models\startdatabase\Tag
 */
-class ArticleContent extends BaseModelArticleContent
+class Tag extends BaseModelTag
 {
     /**
      * The cache tag
      */
-    const CACHE_TAG='common_models_startdata_ArticleContent';
+    const CACHE_TAG='common_models_startdata_Tag';
 
 
     /**
@@ -32,7 +32,7 @@ class ArticleContent extends BaseModelArticleContent
     public function rules()
     {
         return array_merge(parent::rules(),[
-            [['seo_title','seo_keywords','seo_description'], 'default', 'value' =>'',],
+            [['frequence'], 'default', 'value' =>0,],
         ]);
     }
 
@@ -44,36 +44,26 @@ class ArticleContent extends BaseModelArticleContent
         return [
             'default' => [
                 'id',
-                'content',
-                'seo_title',
-                'seo_keywords',
-                'seo_description',
+                'name',
+                'frequence',
             ],
             'search' => [
                 'id',
-                'content',
-                'seo_title',
-                'seo_keywords',
-                'seo_description',
+                'name',
+                'frequence',
             ],
             'view' => [
                 'id',
-                'content',
-                'seo_title',
-                'seo_keywords',
-                'seo_description',
+                'name',
+                'frequence',
             ],
             'update' => [
-                'content',
-                'seo_title',
-                'seo_keywords',
-                'seo_description',
+                'name',
+                'frequence',
             ],
             'create' => [
-                'content',
-                'seo_title',
-                'seo_keywords',
-                'seo_description',
+                'name',
+                'frequence',
             ],
         ];
     }

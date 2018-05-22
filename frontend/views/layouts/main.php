@@ -69,13 +69,17 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
+<footer class="footer bg-info" id="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <div class="clearfix">
+            <span class="pull-left">Copyright © 2009-2017 by 重楼空间.</span>
+            <span class="pull-right hidden-xs hidden-sm">
+                <a href="http://www.miibeian.gov.cn" target="_blank"><?=\yii::$app->params['website_icp']?></a>
+            </span>
+        </div>
     </div>
 </footer>
+
 <?php $this->endBody() ?>
 </body>
 </html>

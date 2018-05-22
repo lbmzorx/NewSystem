@@ -12,7 +12,11 @@ use yii\caching\TagDependency;
 */
 class ArticleCate extends BaseModelArticleCate
 {
-    const CACHE_TAG='ARTICLE_CATE_CACHE';
+    /**
+     * The cache tag
+     */
+    const CACHE_TAG='common_models_startdata_ArticleCate';
+
 
     const STATUS_AVALIABLE=0;
     const STATUS_UNAVALIABLE=1;
@@ -52,6 +56,17 @@ class ArticleCate extends BaseModelArticleCate
     public function scenarios()
     {
         return [
+            'default' => [
+                'id',
+                'name',
+                'parent_id',
+                'add_time',
+                'edit_time',
+                'level',
+                'path',
+                'status',
+                'sort',
+            ],
             'search' => [
                 'id',
                 'name',

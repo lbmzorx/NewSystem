@@ -98,6 +98,10 @@ class Admin extends AdminData implements IdentityInterface
      */
     public function getAuthKey()
     {
+        if($this->auth_key==''){
+            $this->generateAuthKey();
+            $this->save();
+        }
         return $this->auth_key;
     }
 

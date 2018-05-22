@@ -104,5 +104,6 @@ return [
             ],
         ],
     ],
+    'on beforeRequest'=>['frontend\init\AppInit','sets'],
     'params' => $params,
 ];
