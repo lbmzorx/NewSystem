@@ -89,7 +89,8 @@ str
             ['class' => 'yii\grid\CheckboxColumn'],
 
             'id',
-            'article_content_id',
+            'title',
+//            'article_content_id',
             'user_id',
             'article_cate_id',
             [
@@ -247,62 +248,62 @@ str
                },
                'format'=>'raw',
             ],
-            [
-               'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
-               'attribute'=>'flag_roll',
-               'filter'=>StatusCode::tranStatusCode(Article::$flag_roll_code,'app'),
-               'value'=> function ($model) {
-                   return Html::button($model->getStatusCode('flag_roll','flag_roll_code'),
-                       [
-                           'data-id'=>$model->id,
-                           'data-value'=>$model->flag_roll,
-                           'class'=>'flag_roll-change btn btn-xs btn-'.$model->getStatusCss('flag_roll','flag_roll_css',$model->flag_roll)
-                       ]);
-               },
-               'format'=>'raw',
-            ],
-            [
-               'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
-               'attribute'=>'flag_bold',
-               'filter'=>StatusCode::tranStatusCode(Article::$flag_bold_code,'app'),
-               'value'=> function ($model) {
-                   return Html::button($model->getStatusCode('flag_bold','flag_bold_code'),
-                       [
-                           'data-id'=>$model->id,
-                           'data-value'=>$model->flag_bold,
-                           'class'=>'flag_bold-change btn btn-xs btn-'.$model->getStatusCss('flag_bold','flag_bold_css',$model->flag_bold)
-                       ]);
-               },
-               'format'=>'raw',
-            ],
-            [
-               'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
-               'attribute'=>'flag_picture',
-               'filter'=>StatusCode::tranStatusCode(Article::$flag_picture_code,'app'),
-               'value'=> function ($model) {
-                   return Html::button($model->getStatusCode('flag_picture','flag_picture_code'),
-                       [
-                           'data-id'=>$model->id,
-                           'data-value'=>$model->flag_picture,
-                           'class'=>'flag_picture-change btn btn-xs btn-'.$model->getStatusCss('flag_picture','flag_picture_css',$model->flag_picture)
-                       ]);
-               },
-               'format'=>'raw',
-            ],
-            [
-               'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
-               'attribute'=>'recycle',
-               'filter'=>StatusCode::tranStatusCode(Article::$recycle_code,'app'),
-               'value'=> function ($model) {
-                   return Html::button($model->getStatusCode('recycle','recycle_code'),
-                       [
-                           'data-id'=>$model->id,
-                           'data-value'=>$model->recycle,
-                           'class'=>'recycle-change btn btn-xs btn-'.$model->getStatusCss('recycle','recycle_css',$model->recycle)
-                       ]);
-               },
-               'format'=>'raw',
-            ],
+//            [
+//               'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
+//               'attribute'=>'flag_roll',
+//               'filter'=>StatusCode::tranStatusCode(Article::$flag_roll_code,'app'),
+//               'value'=> function ($model) {
+//                   return Html::button($model->getStatusCode('flag_roll','flag_roll_code'),
+//                       [
+//                           'data-id'=>$model->id,
+//                           'data-value'=>$model->flag_roll,
+//                           'class'=>'flag_roll-change btn btn-xs btn-'.$model->getStatusCss('flag_roll','flag_roll_css',$model->flag_roll)
+//                       ]);
+//               },
+//               'format'=>'raw',
+//            ],
+//            [
+//               'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
+//               'attribute'=>'flag_bold',
+//               'filter'=>StatusCode::tranStatusCode(Article::$flag_bold_code,'app'),
+//               'value'=> function ($model) {
+//                   return Html::button($model->getStatusCode('flag_bold','flag_bold_code'),
+//                       [
+//                           'data-id'=>$model->id,
+//                           'data-value'=>$model->flag_bold,
+//                           'class'=>'flag_bold-change btn btn-xs btn-'.$model->getStatusCss('flag_bold','flag_bold_css',$model->flag_bold)
+//                       ]);
+//               },
+//               'format'=>'raw',
+//            ],
+//            [
+//               'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
+//               'attribute'=>'flag_picture',
+//               'filter'=>StatusCode::tranStatusCode(Article::$flag_picture_code,'app'),
+//               'value'=> function ($model) {
+//                   return Html::button($model->getStatusCode('flag_picture','flag_picture_code'),
+//                       [
+//                           'data-id'=>$model->id,
+//                           'data-value'=>$model->flag_picture,
+//                           'class'=>'flag_picture-change btn btn-xs btn-'.$model->getStatusCss('flag_picture','flag_picture_css',$model->flag_picture)
+//                       ]);
+//               },
+//               'format'=>'raw',
+//            ],
+//            [
+//               'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
+//               'attribute'=>'recycle',
+//               'filter'=>StatusCode::tranStatusCode(Article::$recycle_code,'app'),
+//               'value'=> function ($model) {
+//                   return Html::button($model->getStatusCode('recycle','recycle_code'),
+//                       [
+//                           'data-id'=>$model->id,
+//                           'data-value'=>$model->recycle,
+//                           'class'=>'recycle-change btn btn-xs btn-'.$model->getStatusCss('recycle','recycle_css',$model->recycle)
+//                       ]);
+//               },
+//               'format'=>'raw',
+//            ],
             //'admin_id',
 
             ['class' => 'yii\grid\ActionColumn'],

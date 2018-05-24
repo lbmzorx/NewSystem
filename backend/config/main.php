@@ -102,9 +102,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'upload/<index:[\w\d]+(/[\w\d]+)*\.(png|jpg|jpeg)>'=>'upload/index',
             ],
         ],
     ],
     'on beforeRequest'=>['backend\init\AppInit','sets'],
     'params' => $params,
+    'language'=>'zh-CN',
 ];

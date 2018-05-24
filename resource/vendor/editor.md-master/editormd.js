@@ -150,7 +150,7 @@
         imageUploadURL       : "",
         crossDomainUpload    : false,
         uploadCallbackURL    : "",
-        imageInputName       :'UploadImg[imageFile]',
+        imageInputName       :'UploadImg[uploadFile]',
         imageCsrfName        :'_csrf',
         imageCsrfTocken      :'_csrf',
 

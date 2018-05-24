@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>    <?= $this->render('_form', [
         'model' => $model,
+        'ArticleContent'=>$ArticleContent,
     ]) ?>
 
 </div>

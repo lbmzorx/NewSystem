@@ -376,4 +376,7 @@ return [
 	
 	'Tag'=>'标签',
 	/*end*ModelName*/
+	'Image Height Don\'t Over {limit}'=>'图片高度不要超过{limit}',
+    'Image Width Don\'t Over {limit}'=>'图片宽度不要超过{limit}',
+    'Please Upload Image'=>'请上传图片',
 ];

@@ -30,7 +30,7 @@ use common\widgets\Alert;
 <!-- WRAPPER -->
 <div id="wrapper">
     <!-- NAVBAR -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top" id="nav-top">
         <div class="brand" style="padding: 15px 39px">
             <a href="<?=\yii\helpers\Url::to(['/'])?>"><img src="/img/logo-small-x.png" alt="Klorofil Logo" class="img-responsive logo"></a>
         </div>
