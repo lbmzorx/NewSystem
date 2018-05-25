@@ -379,4 +379,10 @@ return [
 	'Image Height Don\'t Over {limit}'=>'图片高度不要超过{limit}',
     'Image Width Don\'t Over {limit}'=>'图片宽度不要超过{limit}',
     'Please Upload Image'=>'请上传图片',
+
+
+    'Incorrect username or password'=>'用户名或者密码错误',
+    'You have {count} times to Failed login '=>'您已经登录失败了{count}次',
+    'You have failed to try login more than {count}times, please wait {time}s'=>'您已登录失败超过了{count}次，请等待{time}秒',
+    'You have failed to try login more than 10times, please try tomorrow!'=>'您已登录失败超过10次，请明天再试',
 ];

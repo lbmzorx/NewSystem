@@ -243,6 +243,7 @@ return [
     'Settings'=>'设置',
     /*end*AdminInfo*/
 
+    'Username'=>'用户名',
     'Help'=>'帮助',
     'More Messages'=>'更多消息',
     'Error Get Messages'=>'获取消息错误',
@@ -256,7 +257,8 @@ return [
     'Login'=>'登录',
     'Remember Me'=>'记住我',
     'Success Login'=>'登录成功',
-
+    'Signup'=>'注册',
+    'Forgot password'=>'忘记密码',
     /*start*NameCommon*/
     'No'=>'否',
     'Yes'=>'是',
@@ -351,4 +353,19 @@ return [
 	'Log'=>'',
 	'Maintain'=>'',
 	/*end*ModelName*/
+	'Password'=>'密码',
+    'Confirm Password'=>'确认密码',
+
+    'Incorrect username or password'=>'用户名或者密码错误',
+    'You have {count} times to Failed login '=>'您已经登录失败了{count}次',
+    'You have failed to try login more than {count}times, please wait {time}s'=>'您已登录失败超过了{count}次，请等待{time}秒',
+    'You have failed to try login more than 10times, please try tomorrow!'=>'您已登录失败超过10次，请明天再试',
+    'Send'=>'发送',
+
+    'Request password reset'=>'重置密码',
+    'Email'=>'邮箱',
+    'Please fill out your email. A link to reset password will be sent there.'=>'请填写邮箱，密码重置链接会发送给您',
+    'Welcome to DoubleFloor Space'=>'欢迎注册重楼空间',
+
+    'Password must include number,lowercase letters,and uppercase letters'=>'密码必须同时包含数字，小写字母，大写字母',
 ];

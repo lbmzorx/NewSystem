@@ -28,6 +28,4 @@ return [
 	'Action'=>'方法',
 	/*end*Menu*/
 
-
-
 ];
