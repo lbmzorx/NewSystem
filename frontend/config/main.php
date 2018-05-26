@@ -11,6 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute'=>'article/index',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
@@ -45,7 +46,7 @@ return [
                 'host' => 'smtp.163.com',  //每种邮箱的host配置不一样
                 'username' => 'lbmzorx@163.com',
                 'password' => 'H2ja92iz820mo2ul',
-                'port' => '586',
+                'port' => '25',
                 'encryption' => 'tls',
             ],
             'messageConfig' => [

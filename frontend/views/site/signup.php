@@ -25,8 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $form->field($model, 'email') ?>
                         <?= $form->field($model, 'password')->passwordInput() ?>
                         <?= $form->field($model, 'confirm_password')->passwordInput() ?>
+                        <?= $form->field($model, 'verifyCode', [
+                            'options' => ['class' => 'form-group input-group'],
+                        ])->widget(\yii\captcha\Captcha::className(),[
+                            'template' => "<div class='input-group'>{input}<span class='input-group-btn'>{image}</span></div>",
+                            'imageOptions' => ['alt' => '验证码'],
+                        ]); ?>
                         <div class="form-group">
-                            <?= Html::submitButton(\yii::t('app','Signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button','style'=>'width:100%;']) ?>
+                            <?= Html::submitButton(\yii::t('app','Signup'), ['class' => 'btn btn-primary btn-all', 'name' => 'signup-button','style'=>'width:100%;']) ?>
                         </div>
                         <?php ActiveForm::end(); ?>
                     </div>
@@ -38,14 +44,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php $pubkey=\lbmzorx\components\helper\Rsaenctype::getPubKey(true)?>
 <?php $passwordId=Html::getInputId($model,'password')?>
-
+<?php $passwordConfirmId=Html::getInputId($model,'confirm_password')?>
 <?=$this->registerJs(<<<SCRYPT
 var encrypt = new JSEncrypt();encrypt.setPublicKey('{$pubkey}');    
 function do_encrypt(str) { return encrypt.encrypt(str);}
 var count=1;
-$('#login-form').submit(function(){
+$('#form-signup').submit(function(){
     if(count==1){
          $('#{$passwordId}').val(do_encrypt($('#{$passwordId}').val().trim()));
+         $('#{$passwordConfirmId}').val(do_encrypt($('#{$passwordConfirmId}').val().trim()));
     }
     count++;
 });

@@ -81,6 +81,10 @@ a.desc:after {
     min-width: 50px;
 }
 
+.btn-all{
+    width:100%;
+}
+
 .hint-block {
     display: block;
     margin-top: 5px;

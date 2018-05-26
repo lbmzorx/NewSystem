@@ -75,4 +75,10 @@ return [
 	'Avaliable'=>'可用',
 	'Unavaliable'=>'不可用',
 	/*end*ArticleCate*/
+
+	/*start*UrlCheck*/
+	'Waiting'=>'等待',
+	'Clicked'=>'已点击',
+	'Useless'=>'失效',
+	/*end*UrlCheck*/
 ];

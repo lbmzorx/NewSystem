@@ -368,4 +368,22 @@ return [
     'Welcome to DoubleFloor Space'=>'欢迎注册重楼空间',
 
     'Password must include number,lowercase letters,and uppercase letters'=>'密码必须同时包含数字，小写字母，大写字母',
+    'This email address has already been taken.'=>'该邮箱已经被注册了',
+    'This username has already been taken.'=>'用户名已经被注册',
+    'Verify Code'=>'验证码',
+    'Success signup, the activation email has been sent to you email {email},checkout and click it.'=>'注册成功，激活邮件已经发到{email}中，请查收并点击链接激活',
+    'Welcome signup {name} click link and activate you account!'=>'欢迎注册{name}请点击链接并激活账号！',
+    'Follow the link below to activate your account:'=>'请点击以下链接激活您的账号',
+
+    'Type'=>'类型',
+    'Sign'=>'签名',
+    'Date'=>'日期',
+    'Expire'=>'期限',
+    'The activated link is not\'t exist'=>'激活链接并不存在',
+    'You need activate you account'=>'您需要激活您的账号',
+    'This url include some error!'=>'此链接有错误！',
+    'Activated Success , now you can login !'=>'激活成功，请登录',
+    'This url was invalid!'=>'该链接无效！',
+    'Activate Failed'=>'激活失败',
+    'This url was expired!'=>'该链接过期了！',
 ];

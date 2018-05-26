@@ -68,7 +68,15 @@ class User extends UserData implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+
+        $user= static::findOne(['username' => $username, 'status' => [self::STATUS_ACTIVE,self::STATUS_WAITING_ACTIVE]]);
+        if($user){
+            if($user->status==self::STATUS_WAITING_ACTIVE){
+                \Yii::$app->session->setFlash('warning',\yii::t('app','You need activate you account'));
+                return null;
+            }
+        }
+        return $user;
     }
 
     /**

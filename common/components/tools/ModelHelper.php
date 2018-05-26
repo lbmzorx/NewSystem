@@ -11,10 +11,15 @@ namespace common\components\tools;
 
 class ModelHelper
 {
-    public static function getErrorAsString($errors){
+    /**
+     * @param $model \yii\base\Model
+     * @param $errors
+     * @return string
+     */
+    public static function getErrorAsString($model,$errors){
         $err = '';
         foreach ($errors as $k=>$v) {
-            $err .=$k.':'.$v[0] . '<br>';
+            $err .=$model->getAttributeLabel($k).':'.$v[0] . '<br>';
         }
         return $err;
     }

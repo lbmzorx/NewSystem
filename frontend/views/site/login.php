@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ])->passwordInput()->label(false)?>
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
                 <div class="form-group">
-                    <?= Html::submitButton(\yii::t('app','Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton(\yii::t('app','Login'), ['class' => 'btn btn-primary btn-all', 'name' => 'login-button']) ?>
                 </div>
                 <div style="color:#999;margin:1em 0">
                     <span><?= Html::a(\yii::t('app','Forgot password'), ['site/request-password-reset'])?></span>

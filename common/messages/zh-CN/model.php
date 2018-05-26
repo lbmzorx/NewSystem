@@ -105,4 +105,12 @@ return [
 	/*start*Tag*/
 	'Frequence'=>'频率',
 	/*end*Tag*/
+
+	/*start*UrlCheck*/
+	'Md5'=>'校验值',
+	'Ip'=>'激活Ip',
+	
+	'Num'=>'次数',
+	'Expire Time'=>'失效时间',
+	/*end*UrlCheck*/
 ];

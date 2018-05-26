@@ -1,11 +1,15 @@
 <?php
 namespace frontend\controllers;
 
+use common\components\tools\ModelHelper;
 use common\models\startdata\Article;
 use common\models\startdata\ArticleCate;
+use frontend\models\ActiveAccount;
 use Yii;
+use yii\base\Exception;
 use yii\base\InvalidParamException;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -21,6 +25,7 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
+    public $layout= 'login';
     /**
      * {@inheritdoc}
      */
@@ -57,6 +62,20 @@ class SiteController extends Controller
      */
     public function actions()
     {
+        $fontFile=[
+            '@yii/captcha/SpicyRice.ttf',
+            '@resource/captcha/ttfs/1.ttf',
+            '@resource/captcha/ttfs/2.ttf',
+            '@resource/captcha/ttfs/3.ttf',
+            '@resource/captcha/ttfs/4.ttf',
+            '@resource/captcha/ttfs/5.ttf',
+            '@resource/captcha/ttfs/6.ttf',
+        ];
+        $backColor=rand(0x0,0xFFFFFF);
+        $foreColor1=rand(0x0,$backColor);
+        $foreColor2=rand($backColor,0xFFFFFF);
+        $foreColor=abs($backColor-$foreColor1)>abs($backColor-$foreColor2)?$foreColor2:$foreColor1;
+
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -64,35 +83,14 @@ class SiteController extends Controller
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'backColor'=>$backColor,
+                'foreColor'=>$foreColor,
+                'minLength'=>4,
+                'maxLength'=>6,
+                'height'=>36,
+                'fontFile'=>$fontFile[rand(0,4)],
             ],
         ];
-    }
-
-    /**
-     * Displays homepage.
-     *
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $query=Article::find()->where([
-            'status'=>Article::STATUS_AUDIT_PASSED,
-            'publish'=>Article::PUBLISH_PUBLISHED,
-            'auth'=>Article::AUTH_ALL_USERS,
-        ]);
-        $provider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'sort' => SORT_DESC,
-                    'id' => SORT_DESC,
-                ]
-            ],
-        ]);
-        return $this->render('index',['provider'=>$provider]);
     }
 
     /**
@@ -102,7 +100,6 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        $this->layout='login';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -185,6 +182,17 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionActiveAccount(){
+        $activeAccount=new ActiveAccount();
+        $activeAccount->load(\yii::$app->request->get(),'');
+//        throw new Exception(VarDumper::dumpAsString($activeAccount->toArray()));
+        if( $activeAccount->validate()){
+            $this->redirect(['site/login']);
+        }
+        \yii::$app->session->setFlash('error',ModelHelper::getErrorAsString($activeAccount,$activeAccount->getErrors()));
+        return $this->render('active-account');
+    }
+
     /**
      * Requests password reset.
      *
@@ -224,7 +232,6 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
             Yii::$app->session->setFlash('success', 'New password saved.');
-
             return $this->goHome();
         }
 
