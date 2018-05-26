@@ -386,4 +386,5 @@ return [
     'This url was invalid!'=>'该链接无效！',
     'Activate Failed'=>'激活失败',
     'This url was expired!'=>'该链接过期了！',
+    'Attention'=>'注意事项',
 ];

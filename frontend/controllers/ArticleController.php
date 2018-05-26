@@ -3,6 +3,8 @@ namespace frontend\controllers;
 
 use common\models\startdata\Article;
 use common\models\startdata\ArticleCate;
+use frontend\models\ArticleForm;
+use lbmzorx\components\helper\ModelHelper;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\data\ActiveDataProvider;
@@ -10,11 +12,6 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\user\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
 
 /**
  * Site controller
@@ -95,4 +92,30 @@ class ArticleController extends Controller
         return $this->render('index',['provider'=>$provider]);
     }
 
+    public function actionCreate(){
+        $articleForm=new ArticleForm();
+        $request=\yii::$app->request;
+        if($request->isPost){
+            if( $articleForm->load($request->post()) && $articleForm->createArticle() ){
+                $msg=\yii::t('app','Success create Article');
+                \yii::$app->session->setFlash('success',$msg);
+                $return=['status'=>true,'msg'=>$msg];
+            }else{
+                $msg=ModelHelper::getErrorAsString($articleForm,$articleForm->getErrors());
+                \yii::$app->session->setFlash('error',$msg);
+                $return=['status'=>false,'msg'=>$msg];
+            }
+
+            if($request->isAjax){
+                return $return;
+            }else{
+                return $this->redirect(['article/index']);
+            }
+        }
+
+
+        return $this->render('create',[
+            'model'=>$articleForm,
+        ]);
+    }
 }

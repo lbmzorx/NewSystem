@@ -10,6 +10,17 @@ use common\widgets\Alert;
 
 \frontend\assets\LoginAsset::register($this);
 ?>
+<?=$this->registerCss(<<<STYLE
+        #msg-count{
+            position:absolute;
+            top:-7px;
+            left:9px;
+            border:2px solid;
+            padding:2px 3px;
+            background-color:#F9354C;
+        }
+STYLE
+)?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -34,7 +45,7 @@ use common\widgets\Alert;
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Home', 'url' => ['/article/index']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
@@ -42,14 +53,30 @@ use common\widgets\Alert;
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
+        $menuItems[] =[
+            'label'=>Html::tag(
+                'span',
+                Html::tag('span',isset($message)?$message:'13',['class'=>'badge bg-danger','id'=>'msg-count']),
+                ['class'=>'glyphicon glyphicon-bell']
+            ),
+            'encode'=>false,
+            'url'=>['/user/message'],
+
+        ];
+
+        $menuItems[] =[
+            'label' => Yii::$app->user->identity->username,
+            'encode'=>false,
+            'items' => [
+                ['label' =>Html::tag('i','',['class'=>'fa fa-fw fa-user']).' 个人主页','encode'=>false, 'url' => ['/user/']],
+                ['label'=>'','options'=>['class'=>['widget'=>'divider']]],
+                ['label' =>Html::tag('i','',['class'=>'fa fa-fw fa-cog']).' 账户设置','encode'=>false, 'url' => ['/speak/index']],
+                ['label' =>Html::tag('i','',['class'=>'fa fa-fw fa-at']).' 与我相关','encode'=>false, 'url' => ['/speak/index']],
+                ['label' =>Html::tag('i','',['class'=>'fa fa-fw fa-list-ol']).' 我的发布','encode'=>false, 'url' => ['/speak/index']],
+                ['label'=>'','options'=>['class'=>['widget'=>'divider']]],
+                ['label' =>Html::tag('i','',['class'=>'fa fa-fw fa-power-off']).' 退出','encode'=>false, 'url' => ['/site/logout']],
+            ]
+        ];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
@@ -74,7 +101,7 @@ use common\widgets\Alert;
         </div>
     </div>
 </footer>
-
+<?php $this->registerJs('$("#user-head-nav").error(function(){$(this).attr(\'src\',\'/img/user/default-head.png\')})')?>
 <?php $this->endBody() ?>
 </body>
 </html>

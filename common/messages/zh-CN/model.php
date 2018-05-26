@@ -43,9 +43,9 @@ return [
 	'Flag Roll'=>'滚动',
 	'Flag Bold'=>'加粗',
 	'Flag Picture'=>'图片',
-	
+	'Article Cate ID'=>'文章分类',
 	'Article Content ID'=>'文章内容',
-	'Article Cate ID'=>'分类ID',
+	//'Article Cate ID'=>'分类ID',
 	'Commit'=>'评论',
 	
 	'Admin ID'=>'管理员ID',
@@ -113,4 +113,8 @@ return [
 	'Num'=>'次数',
 	'Expire Time'=>'失效时间',
 	/*end*UrlCheck*/
+
+	/*start*Attention*/
+	'Sign'=>'标识',
+	/*end*Attention*/
 ];

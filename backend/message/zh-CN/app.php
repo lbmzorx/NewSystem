@@ -375,6 +375,9 @@ return [
 	'Maintain'=>'运营',
 	
 	'Tag'=>'标签',
+	
+	'Attention'=>'',
+	'Url Check'=>'',
 	/*end*ModelName*/
 	'Image Height Don\'t Over {limit}'=>'图片高度不要超过{limit}',
     'Image Width Don\'t Over {limit}'=>'图片宽度不要超过{limit}',

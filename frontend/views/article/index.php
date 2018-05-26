@@ -10,6 +10,11 @@ $this->title = '';
 
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3 " id="side-box">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a class="btn btn-success btn-all" href="<?=\yii\helpers\Url::to(['article/create'])?>"><i class="fa fa-plus"></i>&nbsp; <?=\yii::t('app','Create New Article')?></a>
+                </div>
+            </div>
             <?=\frontend\widget\ArticleCateWidget::widget([
                 'options'=>[
                     'class'=>'panel panel-default',
