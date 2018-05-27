@@ -42,6 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id'=>'article-box'
                 ],
             ])?>
+
+            <?=$this->render('/widget/_commitForm',['model'=>$commitForm,'article_id'=>$model->id])?>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3 " id="side-box">
             <div class="panel panel-default">

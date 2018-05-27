@@ -147,7 +147,8 @@ class ArticleController extends Controller
     public function actionView($id){
         $article=Article::findOne($id);
         $article->updateCounters(['view'=>1]);
-        return $this->render('view',['model'=>$article]);
+        $commitForm=new ArticleCommitForm();
+        return $this->render('view',['model'=>$article,'commitForm'=>$commitForm]);
     }
 
     public function actionThumbup(){

@@ -73,7 +73,15 @@ STYLE
                 ['label' =>Html::tag('i','',['class'=>'fa fa-fw fa-at']).' 与我相关','encode'=>false, 'url' => ['/speak/index']],
                 ['label' =>Html::tag('i','',['class'=>'fa fa-fw fa-list-ol']).' 我的发布','encode'=>false, 'url' => ['/speak/index']],
                 ['label'=>'','options'=>['class'=>['widget'=>'divider']]],
-                ['label' =>Html::tag('i','',['class'=>'fa fa-fw fa-power-off']).' 退出','encode'=>false, 'url' => ['/site/logout']],
+                '<li>'
+                . Html::beginForm(['/site/logout'], 'post')
+                . Html::submitButton(
+                    Html::tag('i','',['class'=>'fa fa-fw fa-power-off']).' 退出',
+                    ['class' => 'btn btn-link btn-all logout']
+                )
+                . Html::endForm()
+                . '</li>',
+//                ['label' =>Html::tag('i','',['class'=>'fa fa-fw fa-power-off']).' 退出','encode'=>false, 'url' => ['/site/logout']],
             ]
         ];
     }
