@@ -153,7 +153,9 @@ class ArticleThumbup extends BaseModelArticleThumbup
         }
         $db=static::getDb();
         $t=$db->beginTransaction();
-        if($thumbup=self::findOne(['article'=>$article_id,'user_id'=>$user_id])){
+
+        $thumbup=self::findOne(['article_id'=>$article_id,'user_id'=>$user_id]);
+        if($thumbup){
             if($article && $thumbup->delete()!==false&&$article->updateCounters(['thumbup'=>-1])!==false ){
                 $t->commit();
                 return ['status'=>true,'msg'=>\yii::t('app','Thumbup success cancel!'),'thumbup'=>$article->thumbup,'action'=>-1];
@@ -171,13 +173,21 @@ class ArticleThumbup extends BaseModelArticleThumbup
         }else{
             $thumbup=new ArticleThumbup();
             $thumbup->setScenario('create');
-            $thumbup->load(['article'=>$article_id,'user_id'=>$user_id]);
-            if($article->updateCounters(['thumbup'=>-1])&&$thumbup->save()){
+            $thumbup->load(['article_id'=>$article_id,'user_id'=>$user_id],'');
+            if($article->updateCounters(['thumbup'=>1])&&$thumbup->save()){
                 $t->commit();
-                return ['status'=>true,'msg'=>\yii::t('app','Thumbup success cancel!'),'thumbup'=>$article->thumbup,'action'=>1];
+                return ['status'=>true,'msg'=>\yii::t('app','Thumbup Success!'),'thumbup'=>$article->thumbup,'action'=>1];
             }else{
                 $t->rollBack();
-                return ['status'=>false,'msg'=>\yii::t('app','Thumbup Success!'),'thumbup'=>$article->thumbup];
+                $msg='';
+                if($thumbup->hasErrors()){
+                    $msg=ModelHelper::getErrorAsString($thumbup,$thumbup->getErrors());
+                }
+                if($article->hasErrors()){
+                    $msg.=ModelHelper::getErrorAsString($article,$article->getErrors());
+                }
+                return ['status'=>false,'msg'=>$msg,];
+//                return ['status'=>false,'msg'=>\yii::t('app','Thumbup Failed!'),'thumbup'=>$article->thumbup];
             }
         }
     }

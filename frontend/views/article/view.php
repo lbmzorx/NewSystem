@@ -16,18 +16,23 @@ $this->params['breadcrumbs'][] = $this->title;
                   <?=Html::encode($model->title)?> <small></small>
                 </h1>
             </div>
-            <div class="action">
-                <span class="info-article" title=""><a href="<?=\yii\helpers\Url::to(['user/index','id'=>$model->user_id])?>" rel="author"><?=$model->user['username']?></a></span>
-                <span class="info-article" title=""><i class="fa fa-calendar"></i> <?=date("Y-m-d",$model->add_time)?></span>
+            <div class="info-action">
+                <div class="action">
+                    <span class="info-article" title=""><a href="<?=\yii\helpers\Url::to(['user/index','id'=>$model->user_id])?>" rel="author"><?=$model->user['username']?></a></span>
+                    <span class="info-article" title=""><i class="fa fa-calendar"></i> <?=date("Y-m-d",$model->add_time)?></span>
 
-                <span class="info-article" title="<?=$model->getAttributeLabel('view')?>"><i class="fa fa-eye"></i> <?=$model->view?></span>
-                <span class="info-article" title="<?=$model->getAttributeLabel('thumbup')?>"><a href="javascript:void(0)" id="thumbup-article" data-id="<?=$model->id?>"><i class="fa fa-thumbs<?=$model->ifThumbup?'':'-o'?>-up"></i> <?=$model->thumbup?></a></span>
-                <span class="info-article" title="<?=$model->getAttributeLabel('collection')?>"><a href="javascript:void(0)" id="collection-article" data-id="<?=$model->id?>"><i class="fa fa-folder<?=$model->ifThumbup?'':'-o'?>"></i> <?=$model->collection?></a></span>
-                <span class="info-article" title="<?=$model->getAttributeLabel('commit')?>"><i class="fa fa-commenting " data-id="<?=$model->id?>"></i> <?=$model->commit?></span>
+                    <span class="info-article" title="<?=$model->getAttributeLabel('view')?>"><i class="fa fa-eye"></i> <?=$model->view?></span>
+                    <span class="info-article" title="<?=$model->getAttributeLabel('thumbup')?>"><a href="javascript:void(0)" id="thumbup-article" data-id="<?=$model->id?>"><i class="fa fa-thumbs<?=$model->ifThumbup?'':'-o'?>-up"></i> <span id="thumbup-text"><?=$model->thumbup?></span></a></span>
+                    <span class="info-article" title="<?=$model->getAttributeLabel('collection')?>"><a href="javascript:void(0)" id="collection-article" data-id="<?=$model->id?>"><i class="fa fa-folder<?=$model->ifCollection?'':'-o'?>"></i> <span id="collection-text"><?=$model->collection?></span></a></span>
+                    <span class="info-article" title="<?=$model->getAttributeLabel('commit')?>"><i class="fa fa-commenting " data-id="<?=$model->id?>"></i> <?=$model->commit?></span>
+                </div>
+                <div class="action">
+                    <span class="label label-info"><?=Html::encode($model->tag) ?></span>
+                </div>
             </div>
-            <div class="action">
-                <span class="label label-info"><?=Html::encode($model->tag) ?></span>
-            </div>
+
+
+
             <?=\lbmzorx\components\widget\EditorMdView::widget([
                 'model' => $model->articleContent,
                 'attribute'=>'content'
@@ -81,12 +86,14 @@ $this->params['breadcrumbs'][] = $this->title;
             success:function (res) {
                 layer.msg(res.msg);
                 if(res.status){
+                    $('#thumbup-text').text(res.thumbup);
+                    var domi=$('#thumbup-article').find('i');
                     if(res.action==1){
-                        $('#thumbup-article').find('i').removeClass('fa-thumbs-o');
-                        $('#thumbup-article').find('i').addClass('fa-thumbs');
+                        domi.removeClass('fa-thumbs-o-up');
+                        domi.addClass('fa-thumbs-up');
                     }else{
-                        $('#thumbup-article').find('i').removeClass('fa-thumbs');
-                        $('#thumbup-article').find('i').addClass('fa-thumbs-o');
+                        domi.removeClass('fa-thumbs-up');
+                        domi.addClass('fa-thumbs-o-up');
                     }
                 }
             },
@@ -108,12 +115,14 @@ $this->params['breadcrumbs'][] = $this->title;
             success:function (res) {
                 layer.msg(res.msg);
                 if(res.status){
+                    $('#collection-text').text(res.collection);
+                    var domi=$('#collection-article').find('i');
                     if(res.action==1){
-                        $('#collection-article').find('i').removeClass('fa-thumbs-o');
-                        $('#collection-article').find('i').addClass('fa-thumbs');
+                        domi.removeClass('fa-folder-o');
+                        domi.addClass('fa-folder');
                     }else{
-                        $('#collection-article').find('i').removeClass('fa-thumbs');
-                        $('#collection-article').find('i').addClass('fa-thumbs-o');
+                        domi.removeClass('fa-folder');
+                        domi.addClass('fa-folder-o');
                     }
                 }
             },

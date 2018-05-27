@@ -107,6 +107,14 @@ $this->params['breadcrumbs'][] = $this->title;
                'value'=>$model->getStatusCode('recycle','recycle_code'),
             ],
             'admin_id',
+            [
+                'attribute'=>'article_content_id',
+                'format'=>'raw',
+                'value'=>\lbmzorx\components\widget\EditorMdView::widget([
+                    'model' => $model->articleContent,
+                    'attribute'=>'content'
+                ]),
+            ],
         ],
     ]) ?>
 </div>

@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use common\models\startdata\Article;
 use common\models\startdata\ArticleCate;
+use common\models\startdata\ArticleCollection;
 use common\models\startdata\ArticleThumbup;
 use common\models\tool\UploadImg;
 use frontend\models\ArticleForm;
@@ -91,8 +92,8 @@ class ArticleController extends Controller
     {
         $query=Article::find()->where([
             'status'=>Article::STATUS_AUDIT_PASSED,
-//            'publish'=>Article::PUBLISH_PUBLISHED,
-//            'auth'=>Article::AUTH_ALL_USERS,
+            'publish'=>Article::PUBLISH_PUBLISHED,
+            'auth'=>Article::AUTH_ALL_USERS,
         ])->andFilterWhere([
             'tag'=>\yii::$app->request->get('tag'),
             'user_id'=>\yii::$app->request->get('user_id'),
@@ -158,5 +159,9 @@ class ArticleController extends Controller
 
     public function actionCollection(){
         \yii::$app->response->format=Response::FORMAT_JSON;
+        $request=\yii::$app->request;
+        $article_id=$request->getBodyParam('article_id');
+        $user_id=\yii::$app->user->id;
+        return ArticleCollection::UserCollection($article_id,$user_id);
     }
 }

@@ -3,6 +3,7 @@ namespace backend\modules\article\controllers;
 
 use common\models\startdata\ArticleContent;
 use common\models\tool\UploadImg;
+use lbmzorx\components\action\MutiUpdateAction;
 use lbmzorx\components\action\UploadAction;
 use lbmzorx\components\action\MutiCreateAction;
 use Yii;
@@ -37,6 +38,14 @@ class ArticleController extends BaseCommon
             'create'=>[
                 'class' => MutiCreateAction::className(),
                 'modelClass' =>$this->modelNameCreate,
+                'depandeClass'=>[
+                    'class'=>ArticleContent::className(),
+                    'condition'=>['id'=>'{model:article_content_id}'],  //依赖关系
+                ],
+            ],
+            'update'=>[
+                'class' => MutiUpdateAction::className(),
+                'modelClass' =>$this->modelNameUpdate,
                 'depandeClass'=>[
                     'class'=>ArticleContent::className(),
                     'condition'=>['id'=>'{model:article_content_id}'],  //依赖关系

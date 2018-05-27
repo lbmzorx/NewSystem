@@ -402,4 +402,5 @@ return [
     'Collection Failed!'=>'收藏失败!',
     'Collection success cancel!'=>'取消收藏成功',
     'Collection Success!'=>'收藏成功',
+    'Collection Failed!'
 ];
