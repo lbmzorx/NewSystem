@@ -30,19 +30,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     <span class="label label-info"><?=Html::encode($model->tag) ?></span>
                 </div>
             </div>
-
-
-
             <?=\lbmzorx\components\widget\EditorMdView::widget([
                 'model' => $model->articleContent,
                 'attribute'=>'content'
             ])?>
-
-            <div class="panel panel-default">
-                <div class="panel-body">
-
-                </div>
-            </div>
+            <?=\frontend\widget\ArticleCommitWidget::widget([
+                'article_id'=>$model->id,
+                'commitCount'=>$model->commit,
+                'options'=>[
+                    'class'=>'panel panel-commit',
+                    'id'=>'article-box'
+                ],
+            ])?>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3 " id="side-box">
             <div class="panel panel-default">

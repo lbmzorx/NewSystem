@@ -98,7 +98,7 @@ class ArticleForm extends Model
         $article=Article::findOne([
             'id'=>$id,
             'user_id'=>\yii::$app->user->id,
-            'recycle'=>Article::RECYCLE_YES,
+            'recycle'=>Article::RECYCLE_NO,
             'status'=>Article::STATUS_AUDIT_PASSED,
         ]);
         if($article){

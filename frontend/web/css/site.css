@@ -21,6 +21,9 @@ body {
 .action{
     margin-bottom: 15px;
 }
+.panel-commit{
+    border-top: 1px solid #eee;
+}
 
 .footer {
     height: 60px;

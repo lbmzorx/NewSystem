@@ -402,5 +402,7 @@ return [
     'Collection Failed!'=>'收藏失败!',
     'Collection success cancel!'=>'取消收藏成功',
     'Collection Success!'=>'收藏成功',
-    'Collection Failed!'
+    'Commits'=>'评论',
+    'Rows'=>'条',
+    'Website is not allow to commit!'=>'网站不允许评论！',
 ];

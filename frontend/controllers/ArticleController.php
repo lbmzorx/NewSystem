@@ -6,6 +6,7 @@ use common\models\startdata\ArticleCate;
 use common\models\startdata\ArticleCollection;
 use common\models\startdata\ArticleThumbup;
 use common\models\tool\UploadImg;
+use frontend\models\ArticleCommitForm;
 use frontend\models\ArticleForm;
 use lbmzorx\components\action\UploadAction;
 use lbmzorx\components\helper\ModelHelper;
@@ -164,4 +165,12 @@ class ArticleController extends Controller
         $user_id=\yii::$app->user->id;
         return ArticleCollection::UserCollection($article_id,$user_id);
     }
+
+    public function actionCreateCommit(){
+        $model = new ArticleCommitForm();
+        if($model->load(\yii::$app->request->post())&&$model->validate()&&$model->createArticleCommit()){
+            return [''];
+        }
+    }
+
 }
