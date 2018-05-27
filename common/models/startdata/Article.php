@@ -394,6 +394,14 @@ class Article extends BaseModelArticle
     }
 
 
+    public function getIfThumbup(){
+        return ArticleThumbup::find()->where(['article_id'=>$this->id,'user_id'=>\yii::$app->user->id])->exists();
+    }
+
+    public function getIfCollection(){
+        return ArticleCollection::find()->where(['article_id'=>$this->id,'user_id'=>\yii::$app->user->id])->exists();
+    }
+
     /**
      * get relation columns
      * @return array

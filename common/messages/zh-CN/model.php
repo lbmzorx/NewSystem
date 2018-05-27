@@ -15,7 +15,7 @@ return [
 	'Parent ID'=>'父级id',
 	'Sort'=>'排序',
 	'Edit Time'=>'修改时间',
-	'Name'=>'标识符',
+	'Name'=>'名称',
 	/*end*NameCommon*/
 
 	/*start*Article*/
@@ -117,4 +117,10 @@ return [
 	/*start*Attention*/
 	'Sign'=>'标识',
 	/*end*Attention*/
+
+	/*start*Contact*/
+	'Subject'=>'主题',
+	
+	'Body'=>'内容',
+	/*end*Contact*/
 ];

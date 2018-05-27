@@ -3,15 +3,22 @@ namespace frontend\controllers;
 
 use common\models\startdata\Article;
 use common\models\startdata\ArticleCate;
+use common\models\startdata\ArticleThumbup;
+use common\models\tool\UploadImg;
 use frontend\models\ArticleForm;
+use lbmzorx\components\action\UploadAction;
 use lbmzorx\components\helper\ModelHelper;
+use Symfony\Component\CssSelector\Tests\Parser\ReaderTest;
 use Yii;
+use yii\base\Exception;
 use yii\base\InvalidParamException;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\Response;
 
 /**
  * Site controller
@@ -26,15 +33,15 @@ class ArticleController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only'=>['create','update','thumbup','collection'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
-                        'allow' => true,
+                        'actions' => ['create','update','thumbup','collection'],
+                        'allow' => false,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' =>  ['create','update','thumbup','collection'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -43,7 +50,11 @@ class ArticleController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'view'   => ['GET'],
+                    'create' => ['GET', 'PUT', 'POST'],
+                    'update' => ['GET', 'PUT', 'POST'],
+                    'thumbup' => ['PUT', 'POST'],
+                    'collection' => ['PUT', 'POST'],
                 ],
             ],
         ];
@@ -62,6 +73,12 @@ class ArticleController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'upload'=>[
+                'class'=>UploadAction::className(),
+                'modelClass' => Article::className(),
+                'imgAttribute'=>'imageFile',
+                'imgClass'=>UploadImg::className(),
+            ],
         ];
     }
 
@@ -74,13 +91,17 @@ class ArticleController extends Controller
     {
         $query=Article::find()->where([
             'status'=>Article::STATUS_AUDIT_PASSED,
-            'publish'=>Article::PUBLISH_PUBLISHED,
-            'auth'=>Article::AUTH_ALL_USERS,
-        ]);
+//            'publish'=>Article::PUBLISH_PUBLISHED,
+//            'auth'=>Article::AUTH_ALL_USERS,
+        ])->andFilterWhere([
+            'tag'=>\yii::$app->request->get('tag'),
+            'user_id'=>\yii::$app->request->get('user_id'),
+            'article_cate_id'=>\yii::$app->request->get('cate_id'),
+        ])->with('user');
         $provider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 20,
             ],
             'sort' => [
                 'defaultOrder' => [
@@ -109,7 +130,9 @@ class ArticleController extends Controller
             if($request->isAjax){
                 return $return;
             }else{
-                return $this->redirect(['article/index']);
+                if($return['status']){
+                    return $this->redirect(['article/index']);
+                }
             }
         }
 
@@ -117,5 +140,23 @@ class ArticleController extends Controller
         return $this->render('create',[
             'model'=>$articleForm,
         ]);
+    }
+
+    public function actionView($id){
+        $article=Article::findOne($id);
+        $article->updateCounters(['view'=>1]);
+        return $this->render('view',['model'=>$article]);
+    }
+
+    public function actionThumbup(){
+        \yii::$app->response->format=Response::FORMAT_JSON;
+        $request=\yii::$app->request;
+        $article_id=$request->getBodyParam('article_id');
+        $user_id=\yii::$app->user->id;
+        return ArticleThumbup::UserThumbup($article_id,$user_id);
+    }
+
+    public function actionCollection(){
+        \yii::$app->response->format=Response::FORMAT_JSON;
     }
 }

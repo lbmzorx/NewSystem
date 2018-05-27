@@ -93,22 +93,20 @@ class UploadImg extends Model
 //            throw new Exception($name.'-'.$this->outName.'--'.$this->getPath().'-'.$this->getName().'--'.$this->getFullFile());
 
             try{
-                $this->uploadFile->saveAs($name);
+                $this->imageFile->saveAs($name);
                 if(!$this->successUpload()){
                     return false;
                 }
+                $this->setUrlName();
+                if(!$this->afterUpload()){
+                    return false;
+                }
+                return true;
             }catch (Exception $e){
-                $this->addError('uploadFile',$e->getMessage());
+                $this->addError('imageFile',$e->getMessage());
                 $this->failedUpload();
-            }
-            $this->setUrlName();
-            if(!$this->afterUpload()){
                 return false;
             }
-            if(!$this->afterUpload()){
-                return false;
-            }
-            return true;
         } else {
             return false;
         }

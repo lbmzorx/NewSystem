@@ -51,15 +51,6 @@ return [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
-        'dbadmin' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1;dbname=start_admin',
-            'username' => 'root',
-            'password' => '1234569',
-            'charset' => 'utf8',
-            'tablePrefix'=>'sadmin_',
-            'enableSchemaCache'=>false,
-        ],
         'user' => [
             'identityClass' => 'common\models\admin\Admin',
             'enableAutoLogin' => true,

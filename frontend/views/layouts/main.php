@@ -48,7 +48,6 @@ STYLE
     $menuItems = [
         ['label' => 'Home', 'url' => ['/article/index']],
         ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
@@ -100,6 +99,7 @@ STYLE
     <div class="container">
         <div class="clearfix">
             <span class="pull-left">Copyright © 2009-2017 by 重楼空间.</span>
+            <span class="pull-left" style="margin-left: 10px;"><a href="<?=Url::to(['site/contact'])?>"><?=\yii::t('app','Contact Us')?></a></span>
             <span class="pull-right hidden-xs hidden-sm">
                 <a href="http://www.miibeian.gov.cn" target="_blank"><?=\yii::$app->params['website_icp']?></a>
             </span>

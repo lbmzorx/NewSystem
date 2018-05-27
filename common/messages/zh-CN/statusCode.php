@@ -81,4 +81,9 @@ return [
 	'Clicked'=>'已点击',
 	'Useless'=>'失效',
 	/*end*UrlCheck*/
+
+	/*start*Contact*/
+	'Unread'=>'未读',
+	'Read'=>'已读',
+	/*end*Contact*/
 ];

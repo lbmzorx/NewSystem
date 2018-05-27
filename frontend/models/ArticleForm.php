@@ -10,10 +10,12 @@ namespace frontend\models;
 use common\models\startdata\Article;
 use common\models\startdata\ArticleContent;
 use Yii;
+use yii\base\Exception;
 use yii\base\Model;
+use yii\helpers\VarDumper;
+
 class ArticleForm extends Model
 {
-    public $id;
     public $title;
     public $article_cate_id;	// 分类ID
     public $cover;	// 封面
@@ -31,7 +33,7 @@ class ArticleForm extends Model
     public function rules(){
         return [
             [[ 'title','content'], 'required'],
-            [['article_cate_id','publish','recycle','id'], 'integer'],
+            [['article_cate_id','publish','recycle',], 'integer'],
             [['title'], 'string', 'max' => 50],
             [['cover',], 'string', 'max' => 255],
             [['tag'], 'string', 'max' => 20],
@@ -55,7 +57,37 @@ class ArticleForm extends Model
     }
 
     public function createArticle(){
+        $db=Article::getDb();
+        $t=$db->beginTransaction();
 
+        $article=new Article();
+        $article->setScenario('create');
+        $article->loadDefaultValues();
+
+        $articleContent=new ArticleContent();
+        $articleContent->setScenario('create');
+        $articleContent->loadDefaultValues();
+
+        $articleContent->load($this->getAttributes(),'');
+
+        if($articleContent->save()){
+            $article->load($this->getAttributes(),'');
+            $article->author=\Yii::$app->user->identity->username;
+            $article->user_id=\yii::$app->user->id;
+            $article->article_content_id=$articleContent->id;
+            if($article->save()){
+                $t->commit();
+                return true;
+            }else{
+                $this->addError('content',VarDumper::dumpAsString($articleContent->getErrors()));
+                $t->rollBack();
+                return false;
+            }
+        }else{
+            $this->addError('content',VarDumper::dumpAsString($articleContent->getErrors()));
+            $t->rollBack();
+            return false;
+        }
     }
 
     public function updateArticle($id){
