@@ -86,4 +86,14 @@ return [
 	'Unread'=>'未读',
 	'Read'=>'已读',
 	/*end*Contact*/
+
+	/*start*UserRemain*/
+	'Commit'=>'评论',
+	'Answer'=>'回答',
+	'Reply'=>'回复',
+	'Collection'=>'收藏',
+	'Thumb Up'=>'点赞',
+	'Visitor'=>'访客',
+	'Fans'=>'粉丝',
+	/*end*UserRemain*/
 ];

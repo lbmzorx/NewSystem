@@ -92,6 +92,7 @@ str
                },
                'format'=>'raw',
             ],
+            'tips',
             'name',
             'value:ntext',
             [
@@ -122,12 +123,25 @@ str
                },
                'format'=>'raw',
             ],
-            'tips',
             [
             	'attribute'=>'sort',
             	'class'=>'lbmzorx\components\grid\SortColumn',
             ],
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons'=>[
+                    'delete' => function ($url, $model, $key) {
+                        $title = Yii::t('yii', 'Delete');
+                        $options = array_merge([
+                            'title' => $title,
+                            'aria-label' => $title,
+                            'data-pjax' => '0',
+                        ], [],[]);
+                        $icon = Html::tag('span', '', ['class' => "glyphicon glyphicon-trash"]);
+                        return ($model->id > 20)?Html::a($icon, $url, $options) : '';
+                    }
+                ],
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

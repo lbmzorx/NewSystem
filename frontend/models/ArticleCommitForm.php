@@ -53,10 +53,7 @@ class ArticleCommitForm extends Model
      */
     public function createArticleCommit(){
         $db=ArticleCommit::getDb();
-        $website_comment=\yii::$app->params['website_comment'];
-        $website_comment_need_verify=\yii::$app->params['website_comment_need_verify'];
-
-        if($website_comment==ArticleCommit::STATUS_AUDIT_PASS){
+        if(isset(\yii::$app->params['website_comment'])&&\yii::$app->params['website_comment']==ArticleCommit::STATUS_AUDIT_PASS){
             $t=$db->beginTransaction();
 
             $article=Article::findOne([
@@ -69,7 +66,7 @@ class ArticleCommitForm extends Model
             $articleCommit->setScenario('create');
             $articleCommit->loadDefaultValues();
             $articleCommit->load($this->attributes,'');
-            $articleCommit->status=$website_comment_need_verify;
+            $articleCommit->status=isset(\yii::$app->params['website_comment_need_verify'])?\yii::$app->params['website_comment_need_verify']:0;
             $articleCommit->user_id=\yii::$app->user->id;
             if($articleCommit->save() && $article->updateCounters(['commit'=>1])){
                 $t->commit();
@@ -89,7 +86,7 @@ class ArticleCommitForm extends Model
                 return false;
             }
         }else{
-            \yii::$app->session->setFlash('info',\yii::t('app','Website is not allow to commit!'));
+            \yii::$app->session->setFlash('error',\yii::t('app','Website is not allow to commit!').VarDumper::dumpAsString(\yii::$app->params));
             return false;
         }
     }

@@ -24,8 +24,8 @@ class AppInit extends Component
         if (($data = $cache->get($key)) === false) {
             $data = Options::find()->select('name,value')->where([
                 'type' =>[ Options::TYPE_SYSTEM,Options::TYPE_SELF],
-                'autoload' => Options::AUTOLOAD_YES,]
-            )->asArray()->all();
+                'autoload' => Options::AUTOLOAD_YES,
+                ])->asArray()->all();
 
             $cache->set($key, $data, 86400*(10+rand(1,10)), new yii\caching\TagDependency([
                 'tags'=>Options::CACHE_TAG,

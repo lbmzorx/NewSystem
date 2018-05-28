@@ -75,4 +75,32 @@ class SignHelper extends Component
         }
         return false;
     }
+
+    public static function signAll($data,$secretKey,$openKey,$isUrlCode=true,$isArray=false){
+        $str='';
+        if($secretKey){
+            $data=array_merge(['date'=>date('Y-m-d H:i:s')],$data);
+            ksort($data);
+            if($isUrlCode==true){
+                foreach ($data as $k=>$v){
+                    $str.=$k.'='.urlencode($v).'&';
+                }
+            }else{
+                foreach ($data as $k=>$v){
+                    $str.=$k.'='.$v.'&';
+                }
+            }
+
+            $sign=md5($str.'authKey='.$secretKey);
+            $str=$str.'sign='.$sign;
+            $data['sign']=$sign;
+            if($isArray){
+                return $data;
+            }else{
+                return $str;
+            }
+        }
+        return false;
+    }
+
 }

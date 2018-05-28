@@ -38,12 +38,12 @@ class ArticleController extends Controller
                 'only'=>['create','update','thumbup','collection'],
                 'rules' => [
                     [
-                        'actions' => ['create','update','thumbup','collection'],
+                        'actions' => ['create','update','thumbup','collection','commit'],
                         'allow' => false,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' =>  ['create','update','thumbup','collection'],
+                        'actions' =>  ['create','update','thumbup','collection','commit'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -167,11 +167,28 @@ class ArticleController extends Controller
         return ArticleCollection::UserCollection($article_id,$user_id);
     }
 
-    public function actionCreateCommit(){
+    public function actionCommit(){
         $model = new ArticleCommitForm();
         if($model->load(\yii::$app->request->post())&&$model->validate()&&$model->createArticleCommit()){
-            return [''];
+            $status=true;
+            $msg=\yii::t('app','Reply Success!');
+        }else{
+            $status=false;
+            $msg=ModelHelper::getErrorAsString($model,$model->getErrors());
         }
+
+        if(\yii::$app->request->isAjax){
+            \yii::$app->response->format=Response::FORMAT_JSON;
+            return ['status'=>$status,'msg'=>$msg];
+        }else{
+            if($status){
+                \yii::$app->session->setFlash('success',$msg);
+            }else{
+                \yii::$app->session->setFlash('',$msg);
+            }
+            return $this->redirect(\yii::$app->request->referrer);
+        }
+
     }
 
 }

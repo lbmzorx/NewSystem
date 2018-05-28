@@ -87,6 +87,9 @@ return [
 	'Email'=>'邮箱',
 	'Created At'=>'添加时间',
 	'Updated At'=>'修改时间',
+	
+	'Secret Key'=>'秘密授权码',
+	'Head Img'=>'',
 	/*end*User*/
 
 	/*start*Test2*/
@@ -123,4 +126,11 @@ return [
 	
 	'Body'=>'内容',
 	/*end*Contact*/
+
+	/*start*UserRemain*/
+	'To User ID'=>'接收用户ID',
+	'From User ID'=>'来源用户ID',
+	'Remain Type'=>'提醒类型',
+	'Link'=>'链接',
+	/*end*UserRemain*/
 ];

@@ -405,4 +405,5 @@ return [
     'Commits'=>'评论',
     'Rows'=>'条',
     'Website is not allow to commit!'=>'网站不允许评论！',
+    'Reply Success!'=>'回复成功',
 ];
