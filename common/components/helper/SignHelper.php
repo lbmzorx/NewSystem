@@ -13,7 +13,7 @@ use yii\base\Component;
 class SignHelper extends Component
 {
 
-    public static function generateSign($data,$isUrlCode=true){
+    public static function Sign($data,$isUrlCode=true){
         $str='';
         $data=array_merge(['date'=>date('Y-m-d H:i:s')],$data);
         ksort($data);
@@ -32,24 +32,13 @@ class SignHelper extends Component
     }
 
     /**
-     * @param $userId
-     * @return bool|string
-     */
-    public static function generateUserSign($userId){
-        if($userId && $user=User::findOne($userId)){
-            return $user->getAuthKey();
-        }
-        return false;
-    }
-
-    /**
      * @param $data
      * @param $auth
      * @param bool $isUrlCode
      * @param bool $isArray
      * @return array|bool|string
      */
-    public static function hiddenSignUrl($data,$auth,$isUrlCode=true,$isArray=false){
+    public static function signSecretKey($data,$secretKey,$isUrlCode=true,$isArray=false){
         $str='';
         if($auth){
             $data=array_merge(['date'=>date('Y-m-d H:i:s')],$data);
@@ -64,7 +53,7 @@ class SignHelper extends Component
                 }
             }
 
-            $sign=md5($str.'authKey='.$auth);
+            $sign=md5($str.'authKey='.$secretKey);
             $str=$str.'sign='.$sign;
             $data['sign']=$sign;
             if($isArray){
@@ -76,7 +65,7 @@ class SignHelper extends Component
         return false;
     }
 
-    public static function signAll($data,$secretKey,$openKey,$isUrlCode=true,$isArray=false){
+    public static function signSecretOpenKey($data,$secretKey,$openKey,$isUrlCode=true,$isArray=false){
         $str='';
         if($secretKey){
             $data=array_merge(['date'=>date('Y-m-d H:i:s')],$data);
