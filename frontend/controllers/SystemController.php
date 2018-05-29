@@ -54,7 +54,7 @@ class SystemController extends Controller
                 }
             }
         }
-        return  ['status'=>false,'msg'=>\yii::t('app','Error Clear Cache'),'query'=>$request->post()];
+        return  ['status'=>false,'msg'=>\yii::t('app','Error Clear Cache'),];
     }
 
     public function actionClearschameCache(){
@@ -63,12 +63,10 @@ class SystemController extends Controller
         if($admin){
             $sign=SignHelper::checkSignSecretKey($request->post(),$admin->getSecretKey(),true);
             if($sign){
-                $status= \yii::$app->db->schemaCache->flush();
-                if($status==true){
-                    return  ['status'=>true,'msg'=>\yii::t('app','Success Clear')];
-                }
+                \yii::$app->db->schema->refresh();
+                return  ['status'=>true,'msg'=>\yii::t('app','Success Clear')];
             }
         }
-        return  ['status'=>false,'msg'=>\yii::t('app','Error Clear Schame Cache')];
+        return  ['status'=>false,'msg'=>\yii::t('app','Error Clear Schame Cache'),'sign'=>$sign];
     }
 }

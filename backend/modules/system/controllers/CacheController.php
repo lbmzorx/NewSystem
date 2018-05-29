@@ -78,20 +78,42 @@ class CacheController extends BaseCommon
             if(isset($data['status'])&& $data['status']==true){
                 return ['status'=>true,'msg'=>\yii::t('app','Success'),'data'=>$data];
             }else{
-                return ['status'=>false,'msg'=>isset($data['msg'])?$data['msg']:\yii::t('app','Error'),'sign'=>$data];
+                return ['status'=>false,'msg'=>isset($data['msg'])?$data['msg']:\yii::t('app','Error'),];
             }
         }else{
             return ['status'=>false,'msg'=>\yii::t('app','Clear Failed'),];
         }
     }
 
-    public function actionClearSchameFrontent(){
+    public function actionClearSchameFrontend(){
         \yii::$app->response->format=Response::FORMAT_JSON;
-        try{
-            \yii::$app->db->schema->refresh();
-            return ['status'=>true,'msg'=>\yii::t('app','Success')];
-        }catch (Exception $e){
-            return ['status'=>false,'msg'=>$e->getMessage()];
+        $frontendHost=Options::findOne([
+            'name'=>'website_url',
+            'type'=>Options::TYPE_SYSTEM,
+        ]);
+        if(! $frontendHost->value){
+            return ['status'=>false,'msg'=>\yii::t('app','Please Set the Frontend Website Url!')];
+        }
+        $sign=SignHelper::signSecretOpenKey([],\yii::$app->user->identity->secret_key,\yii::$app->user->identity->getAuthKey(),true,true);
+        $client = new Client([
+            'responseConfig' => [
+                'format' => Client::FORMAT_JSON
+            ],
+        ]);
+        $response = $client->createRequest()
+            ->setMethod('POST')
+            ->setUrl($frontendHost->value.'system/clearschame-cache')
+            ->setData($sign)
+            ->send();
+        if ($response->isOk) {
+            $data = $response->data;
+            if(isset($data['status'])&& $data['status']==true){
+                return ['status'=>true,'msg'=>\yii::t('app','Success'),'data'=>$data];
+            }else{
+                return ['status'=>false,'msg'=>isset($data['msg'])?$data['msg']:\yii::t('app','Error'),'data'=>$data];
+            }
+        }else{
+            return ['status'=>false,'msg'=>\yii::t('app','Clear Failed'),'data'=>$response->getContent()];
         }
     }
 }
