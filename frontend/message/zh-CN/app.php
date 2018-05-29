@@ -406,4 +406,6 @@ return [
     'Rows'=>'条',
     'Website is not allow to commit!'=>'网站不允许评论！',
     'Reply Success!'=>'回复成功',
+    'Reply'=>'回复',
+    'Request Error!'=>'请求错误！',
 ];

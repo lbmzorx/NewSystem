@@ -43,6 +43,7 @@ class ArticleCommitWidget extends PanelWidget
     {
         $data=$this->getArticleCateData($this->condition);
         $li=$this->treeCommit($data,[]);
+        $this->renderJs();
         $str='';
         foreach ($li as $v){
             $str.=$v;
@@ -54,18 +55,23 @@ class ArticleCommitWidget extends PanelWidget
         $data = [];
         foreach ($input as $k => $v){
             if(isset($v['sub'])){
-                $data[$v['id']]= $v['name'];
                 $userInfo=Html::a(Html::img(Html::encode($v['user']['head_img']),['alt'=>Html::encode($v['user']['username'])]),['user/index','id'=>$v['user']['id']]);
                 $left=Html::tag('div',$userInfo,['class'=>'media-left']);
 
                 $userName=Html::a($v['user']['username']).'    '.date('Y-m-d',$v['add_time']);
                 $content=Html::tag('div',$v['content'],['class'=>'commit-box']);
-                $footer=Html::tag('div',Html::a('<i class="fas fa-reply"></i>'.\yii::t('app','Reply') ,'javascript:void(0)',[]),['class'=>'media-footer']);
 
+                $reply=Html::a('<i class="fa fa-reply"></i>' ,'javascript:void(0)',[
+                    'class'=>'replay-item reply-box',
+                    'title'=>\yii::t('app','Reply'),
+                    'data-id'=>$v['id'],
+                    'data-article_id'=>$v['article_id'],
+                ]);
                 $sub=$this->treeCommit($v['sub'],$options);
+                $substr=implode('',$sub);
+                $body=Html::tag('div',$userName.$reply.$content.$substr,['class'=>'media-body']);
+                $data[$v['id']]=Html::tag('div',$left.$body,['class'=>'commit-item']);;
 
-                $body=Html::tag('div',$userName.$content.$footer.$sub,['class'=>'media-body']);
-                $data[$v['id']]=$left.$body;
             }else{
 
                 $userInfo=Html::a(Html::img(Html::encode($v['user']['head_img']),['alt'=>Html::encode($v['user']['username'])]),['user/index','id'=>$v['user']['id']]);
@@ -73,10 +79,15 @@ class ArticleCommitWidget extends PanelWidget
 
                 $userName=Html::a($v['user']['username']).'    '.date('Y-m-d',$v['add_time']);
                 $content=Html::tag('div',$v['content'],['class'=>'commit-box']);
-                $footer=Html::tag('div',Html::a('<i class="fas fa-reply"></i>'.\yii::t('app','Reply') ,'javascript:void(0)',[]),['class'=>'media-footer']);
+                $reply=Html::a('<i class="fa fa-reply"></i>' ,'javascript:void(0)',[
+                    'class'=>'replay-item reply-box',
+                    'title'=>\yii::t('app','Reply'),
+                    'data-id'=>$v['id'],
+                    'data-article_id'=>$v['article_id'],
+                ]);
 
-                $body=Html::tag('div',$userName.$content.$footer,['class'=>'media-body']);
-                $data[$v['id']]=$left.$body;
+                $body=Html::tag('div',$userName.$reply.$content,['class'=>'media-body']);
+                $data[$v['id']]=Html::tag('div',$left.$body,['class'=>'commit-item']);
             }
         }
         return $data;
@@ -95,7 +106,7 @@ class ArticleCommitWidget extends PanelWidget
             )->andFilterWhere($condition)->orderBy(['id'=>SORT_ASC])->with('user')->asArray()->all();
 
             if($data){
-                $data=TreeHelper::array_cate_as_subarray($data);
+                $data=TreeHelper::array_cate_as_subarray($data,0,'parent_id');
             }
 
             $cache->set($key,$data,(3600*24*30+rand(1,600)),new TagDependency([
@@ -104,4 +115,70 @@ class ArticleCommitWidget extends PanelWidget
             return $data;
         }
     }
+
+    public function renderJs(){
+        $view = \yii::$app->view;
+        $title=\yii::t('app','Reply');
+        $btn=\yii::t('app','Ok').'\',\''.\yii::t('app','Cancel');;
+        $csrfParam=\yii::$app->request->csrfParam;
+        $csrfTocken=\yii::$app->request->csrfToken;
+        $action=Url::to(['commit']);
+        $errormsg=\yii::t('app','Request Error!');
+        $view->registerJs(<<<SCRITP
+        var layer;
+        layui.use(['layer'],function(){
+            layer=layui.layer;
+        });
+$('.reply-box').click(function(){
+    var id=$(this).attr('data-id'),
+        article_id=$(this).attr('data-article_id');
+        var widtharea;
+        var width = document.documentElement.clientWidth;
+        if(width>870){
+            widtharea='870px';
+        }else{
+            widtharea='80%';
+        }
+        
+        layer.open({
+            type:1,
+            'title':'{$title}',
+            area:[widtharea,'340px'],
+            btn:['{$btn}'],
+            content:$('#mdeditorarticlecommitform-content'),
+            yes:function(layuiIndex,layuiDom){
+                var form=new FormData();
+                form.append($(layuiDom).find('#articlecommitform-content').attr('name'),$(layuiDom).find('#articlecommitform-content').val());
+                form.append('ArticleCommitForm[article_id]',article_id);
+                form.append('ArticleCommitForm[parent_id]',id);
+                form.append('{$csrfParam}','{$csrfTocken}');
+                console.log(form);
+                $.ajax({
+                    'url':'{$action}',
+                    type:'post',                   
+                    data:form,
+                    dataType: 'json',
+                    contentType : false,
+                    processData : false, 
+                    success:function(res){
+                        if(res.status){
+                            layer.msg(res.msg);
+                            location.reload();
+                        }else{
+                            layer.alert(res.msg);
+                        }
+                    },
+                    error:function(){
+                        layer.alert('');
+                    }                    
+                });
+                
+            }
+        });
+    
+});
+SCRITP
+);
+    }
+
 }

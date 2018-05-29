@@ -15,7 +15,6 @@ use lbmzorx\components\helper\ModelHelper;
 use Yii;
 use yii\base\Exception;
 use yii\base\Model;
-use yii\helpers\VarDumper;
 
 class ArticleCommitForm extends Model
 {
@@ -31,7 +30,7 @@ class ArticleCommitForm extends Model
             [['content','article_id'], 'required'],
             [['parent_id','article_id',], 'integer'],
             ['article_id','exist','targetClass'=>Article::className(),'targetAttribute'=>'id'],
-            ['parent_id','exist', 'skipOnEmpty' => true,'targetAttribute'=>'id'],
+            ['parent_id','exist', 'skipOnEmpty' => true,'targetClass'=>ArticleCommit::className(),'targetAttribute'=>'id'],
             ['parent_id','default','value'=>0],
         ];
     }
@@ -86,7 +85,7 @@ class ArticleCommitForm extends Model
                 return false;
             }
         }else{
-            \yii::$app->session->setFlash('error',\yii::t('app','Website is not allow to commit!').VarDumper::dumpAsString(\yii::$app->params));
+            \yii::$app->session->setFlash('error',\yii::t('app','Website is not allow to commit!'));
             return false;
         }
     }

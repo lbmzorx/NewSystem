@@ -57,6 +57,7 @@ class ArticleController extends Controller
                     'update' => ['GET', 'PUT', 'POST'],
                     'thumbup' => ['PUT', 'POST'],
                     'collection' => ['PUT', 'POST'],
+                    'commit'=>['POST'],
                 ],
             ],
         ];
