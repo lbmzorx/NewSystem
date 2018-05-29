@@ -50,7 +50,8 @@ class ActiveAccount extends Model
         $urlCheck=UrlCheck::findOne(['md5'=>$this->sign,'status'=>UrlCheck::STATUS_WAITING]);
 
         if($urlCheck){
-            $checkSign=SignHelper::hiddenSignUrl(['date'=>$this->date,'type'=>'user-signup','expire'=>$urlCheck->expire_time],$urlCheck->auth_key,true,true);
+            $checkSign=SignHelper::signSecretKey([
+                'date'=>$this->date,'type'=>'user-signup','expire'=>$urlCheck->expire_time],$urlCheck->auth_key,true,true);
             if($urlCheck->expire_time<time()){
                 $urlCheck->status=UrlCheck::STATUS_USELESS;
                 $urlCheck->save();

@@ -5,6 +5,7 @@ use backend\controllers\BaseCommon;
 use common\components\helper\SignHelper;
 use common\models\startdata\Options;
 use yii\base\Exception;
+use yii\helpers\Url;
 use yii\httpclient\Client;
 use yii\httpclient\debug\HttpClientPanel;
 use yii\web\Response;
@@ -52,10 +53,8 @@ class CacheController extends BaseCommon
         return $this->render('frontend');
     }
 
-    public function actionClearCacheFrontent(){
-        $status=\yii::$app->cache->flush();
+    public function actionClearCacheFrontend(){
         \yii::$app->response->format=Response::FORMAT_JSON;
-
         $frontendHost=Options::findOne([
             'name'=>'website_url',
             'type'=>Options::TYPE_SYSTEM,
@@ -63,19 +62,26 @@ class CacheController extends BaseCommon
         if(! $frontendHost->value){
             return ['status'=>false,'msg'=>\yii::t('app','Please Set the Frontend Website Url!')];
         }
-
-        $sign=SignHelper::hiddenSignUrl(['type'=>'clear-cache'],\yii::$app->user->identity->getAuthKey(),true,true);
-        $client = new Client();
+        $sign=SignHelper::signSecretOpenKey([],\yii::$app->user->identity->secret_key,\yii::$app->user->identity->getAuthKey(),true,true);
+        $client = new Client([
+            'responseConfig' => [
+                'format' => Client::FORMAT_JSON
+            ],
+        ]);
         $response = $client->createRequest()
             ->setMethod('POST')
-            ->setUrl($frontendHost->value)
+            ->setUrl($frontendHost->value.'system/clear-cache')
             ->setData($sign)
             ->send();
         if ($response->isOk) {
-            $responsedata = $response->data;
-            return ['status'=>$status,'msg'=>\yii::t('app','Success'),'data'=>$responsedata];
+            $data = $response->data;
+            if(isset($data['status'])&& $data['status']==true){
+                return ['status'=>true,'msg'=>\yii::t('app','Success'),'data'=>$data];
+            }else{
+                return ['status'=>false,'msg'=>isset($data['msg'])?$data['msg']:\yii::t('app','Error'),'sign'=>$data];
+            }
         }else{
-            return ['status'=>$status,'msg'=>\yii::t('app','Clear Failed')];
+            return ['status'=>false,'msg'=>\yii::t('app','Clear Failed'),];
         }
     }
 

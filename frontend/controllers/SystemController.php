@@ -8,13 +8,28 @@
 namespace frontend\controllers;
 
 use common\components\helper\SignHelper;
-use common\models\admindata\Admin;
+use common\models\admin\Admin;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\Response;
 
 class SystemController extends Controller
 {
     public $enableCsrfValidation=false;
+
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'clear-cache' => ['post'],
+                    'clearschame-cache' => ['post'],
+                ],
+            ],
+        ];
+    }
+    
     public function beforeAction($action)
     {
         \yii::$app->response->format=Response::FORMAT_JSON;
@@ -23,15 +38,37 @@ class SystemController extends Controller
 
     public function actionClearCache(){
         $request=\yii::$app->request;
-        $admin=Admin::findOne(['auth_key'=>$request->getBodyParam('accessKey')]);
+        $admin=Admin::findOne(['auth_key'=>$request->post('access_key')]);
         if($admin){
-            $sign=SignHelper::signAll($request->getBodyParams(),$admin->secretKey,$admin->auth_key,true,true);
-            if($sign && $sign['sign']==$request->getBodyParam('sign')){
-
+            $sign=SignHelper::checkSignSecretKey($request->post(),$admin->getSecretKey(),true);
+            if($sign){
+                if($name=$request->post('name')){
+                    $status=\yii::$app->cache->delete($name);
+                }else{
+                    $status= \yii::$app->cache->flush();
+                }
+                if($status==true){
+                    return  ['status'=>true,'msg'=>\yii::t('app','Success Clear Cache')];
+                }else{
+                    return  ['status'=>false,'msg'=>\yii::t('app','Success Clear Cache'),'sign'=>$sign];
+                }
             }
-
         }
+        return  ['status'=>false,'msg'=>\yii::t('app','Error Clear Cache'),'query'=>$request->post()];
+    }
 
-
+    public function actionClearschameCache(){
+        $request=\yii::$app->request;
+        $admin=Admin::findOne(['auth_key'=>$request->post('access_key')]);
+        if($admin){
+            $sign=SignHelper::checkSignSecretKey($request->post(),$admin->getSecretKey(),true);
+            if($sign){
+                $status= \yii::$app->db->schemaCache->flush();
+                if($status==true){
+                    return  ['status'=>true,'msg'=>\yii::t('app','Success Clear')];
+                }
+            }
+        }
+        return  ['status'=>false,'msg'=>\yii::t('app','Error Clear Schame Cache')];
     }
 }

@@ -33,14 +33,14 @@ class SignHelper extends Component
 
     /**
      * @param $data
-     * @param $auth
+     * @param $secretKey
      * @param bool $isUrlCode
      * @param bool $isArray
      * @return array|bool|string
      */
     public static function signSecretKey($data,$secretKey,$isUrlCode=true,$isArray=false){
         $str='';
-        if($auth){
+        if($secretKey){
             $data=array_merge(['date'=>date('Y-m-d H:i:s')],$data);
             ksort($data);
             if($isUrlCode==true){
@@ -53,7 +53,7 @@ class SignHelper extends Component
                 }
             }
 
-            $sign=md5($str.'authKey='.$secretKey);
+            $sign=md5($str.'secret_key='.$secretKey);
             $str=$str.'sign='.$sign;
             $data['sign']=$sign;
             if($isArray){
@@ -69,6 +69,9 @@ class SignHelper extends Component
         $str='';
         if($secretKey){
             $data=array_merge(['date'=>date('Y-m-d H:i:s')],$data);
+            if($openKey){
+                $data=array_merge(['access_key'=>$openKey],$data);
+            }
             ksort($data);
             if($isUrlCode==true){
                 foreach ($data as $k=>$v){
@@ -80,7 +83,7 @@ class SignHelper extends Component
                 }
             }
 
-            $sign=md5($str.'authKey='.$secretKey);
+            $sign=md5($str.'secret_key='.$secretKey);
             $str=$str.'sign='.$sign;
             $data['sign']=$sign;
             if($isArray){
@@ -88,6 +91,29 @@ class SignHelper extends Component
             }else{
                 return $str;
             }
+        }
+        return false;
+    }
+
+    public static function checkSignSecretKey($data,$secretKey,$isUrlCode=true){
+        $str='';
+        if(empty($data['sign'])){
+            return false;
+        }
+        if($secretKey){
+            $sign=$data['sign'];
+            unset($data['sign']);
+            ksort($data);
+            if($isUrlCode==true){
+                foreach ($data as $k=>$v){
+                    $str.=$k.'='.urlencode($v).'&';
+                }
+            }else{
+                foreach ($data as $k=>$v){
+                    $str.=$k.'='.$v.'&';
+                }
+            }
+            return $sign==md5($str.'secret_key='.$secretKey);
         }
         return false;
     }

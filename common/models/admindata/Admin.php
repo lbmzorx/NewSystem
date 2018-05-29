@@ -50,7 +50,7 @@ class Admin extends BaseModelAdmin
     {
         return array_merge(parent::rules(),[
             [['status'], 'in', 'range' => [0,1,2,3,4,5,6,9,10,]],
-            [['secretKey'], 'default', 'value' =>'',],
+            [['secret_key'], 'default', 'value' =>'',],
             [['status'], 'default', 'value' =>9,],
         ]);
     }
@@ -65,7 +65,7 @@ class Admin extends BaseModelAdmin
                 'id',
                 'username',
                 'auth_key',
-                'secretKey',
+                'secret_key',
                 'password_hash',
                 'password_reset_token',
                 'email',
@@ -78,7 +78,7 @@ class Admin extends BaseModelAdmin
                 'id',
                 'username',
                 'auth_key',
-                'secretKey',
+                'secret_key',
                 'password_hash',
                 'password_reset_token',
                 'email',
@@ -91,7 +91,7 @@ class Admin extends BaseModelAdmin
                 'id',
                 'username',
                 'auth_key',
-                'secretKey',
+                'secret_key',
                 'password_hash',
                 'password_reset_token',
                 'email',
@@ -103,7 +103,7 @@ class Admin extends BaseModelAdmin
             'update' => [
                 'username',
                 'auth_key',
-                'secretKey',
+                'secret_key',
                 'password_hash',
                 'password_reset_token',
                 'email',
@@ -113,7 +113,7 @@ class Admin extends BaseModelAdmin
             'create' => [
                 'username',
                 'auth_key',
-                'secretKey',
+                'secret_key',
                 'password_hash',
                 'password_reset_token',
                 'email',

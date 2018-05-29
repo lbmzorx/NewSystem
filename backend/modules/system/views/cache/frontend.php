@@ -29,7 +29,7 @@
 
     $('#clear-cache').click(function () {
         $.ajax({
-            url:'<?=\yii\helpers\Url::to(['clear-cache-backend'])?>',
+            url:'<?=\yii\helpers\Url::to(['clear-cache-frontend'])?>',
             type:'get',
             success:function (res) {
                 if(res.status){
@@ -45,7 +45,7 @@
     });
     $('#clear-cache-schame').click(function () {
         $.ajax({
-            url:'<?=\yii\helpers\Url::to(['clear-schame-backend'])?>',
+            url:'<?=\yii\helpers\Url::to(['clear-schame-frontend'])?>',
             type:'get',
             success:function (res) {
                 if(res.status){

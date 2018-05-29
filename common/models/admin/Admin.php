@@ -23,6 +23,18 @@ class Admin extends AdminData implements IdentityInterface
         return array_merge(parent::rules(),$rules);
     }
 
+    public function getSecretKey(){
+        if($this->secret_key==''){
+            $this->generateSecretKey();
+            $this->save();
+        }
+        return $this->secret_key;
+    }
+
+    public function generateSecretKey(){
+        $this->secret_key = Yii::$app->security->generateRandomString(64);
+    }
+
     /**
      * @inheritdoc
      */

@@ -10,7 +10,7 @@ use Yii;
  * @property int $id	//
  * @property string $username	// 用户名
  * @property string $auth_key	// 授权码
- * @property string $secretKey	// 秘密授权码
+ * @property string $secret_key	// 秘密授权码
  * @property string $password_hash	// 密码
  * @property string $password_reset_token	// 重置密码口令
  * @property string $email	// 邮箱
@@ -47,9 +47,11 @@ class Admin extends \yii\db\ActiveRecord
             [['status', 'created_at', 'updated_at'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email', 'head_img'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
-            [['secretKey'], 'string', 'max' => 64],
+            [['secret_key'], 'string', 'max' => 64],
             [['username'], 'unique'],
             [['email'], 'unique'],
+            [['auth_key'], 'unique'],
+            [['secret_key'], 'unique'],
             [['password_reset_token'], 'unique'],
         ];
     }
@@ -63,7 +65,7 @@ class Admin extends \yii\db\ActiveRecord
             'id' => Yii::t('amodel', 'ID'),
             'username' => Yii::t('amodel', 'Username'),
             'auth_key' => Yii::t('amodel', 'Auth Key'),
-            'secretKey' => Yii::t('amodel', 'Secret Key'),
+            'secret_key' => Yii::t('amodel', 'Secret Key'),
             'password_hash' => Yii::t('amodel', 'Password Hash'),
             'password_reset_token' => Yii::t('amodel', 'Password Reset Token'),
             'email' => Yii::t('amodel', 'Email'),

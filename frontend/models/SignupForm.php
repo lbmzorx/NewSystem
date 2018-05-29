@@ -79,6 +79,7 @@ class SignupForm extends Model
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
+        $user->generateSecretKey();
         $user->status=User::STATUS_WAITING_ACTIVE;
 
         if( $user->save()&&$this->sendEmail($user)){
@@ -112,7 +113,7 @@ class SignupForm extends Model
         }
         $emailEvent=new EmailEvent();
         $this->trigger(EmailEvent::EVENT_BEFORE_EMAIL,$emailEvent);
-        $linkParams=SignHelper::hiddenSignUrl(['type'=>'user-signup','expire'=>strtotime('+7 day')],$user->getAuthKey(),true,true);
+        $linkParams=SignHelper::signSecretKey(['type'=>'user-signup','expire'=>strtotime('+7 day')],$user->getAuthKey(),true,true);
         if($linkParams!=false){
             array_unshift($linkParams,'site/active-account');
             $link=Url::to($linkParams,true);

@@ -44,6 +44,18 @@ class User extends UserData implements IdentityInterface
         ];
     }
 
+    public function getSecretKey(){
+        if($this->secret_key==''){
+            $this->generateSecretKey();
+            $this->save();
+        }
+        return $this->secret_key;
+    }
+
+    public function generateSecretKey(){
+        $this->secret_key = Yii::$app->security->generateRandomString(64);
+    }
+
     /**
      * {@inheritdoc}
      */
