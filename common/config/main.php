@@ -9,6 +9,12 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => '127.0.0.1',
+            'port' => 6379,
+            'database' =>1,
+        ],
         'i18n' => [
             'translations' => [//多语言包设置
                 'model' => [
