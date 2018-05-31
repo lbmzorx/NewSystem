@@ -2,7 +2,7 @@
 
 use yii\db\Schema;
 
-class m180529_233735_admin extends \yii\db\Migration
+class m180531_235518_admin extends \yii\db\Migration
 {
     public function safeUp()
     {
@@ -38,14 +38,14 @@ class m180529_233735_admin extends \yii\db\Migration
               'id' => $this->primaryKey(),
               'admin_id' => $this->integer(11)->notNull()->comment('管理员ID'),
               'real_name' => $this->string(50)->notNull()->defaultValue('')->comment('实名'),
-              'sex' => $this->tinyint(4)->notNull()->defaultValue(1)->comment('性别.tran:0=女,1=男.code:0=Female,1=Male.'),
+              'sex' => $this->tinyInteger(4)->notNull()->defaultValue(1)->comment('性别.tran:0=女,1=男.code:0=Female,1=Male.'),
               'birthday' => $this->string(20)->notNull()->defaultValue('')->comment('生日'),
               'province' => $this->string(20)->notNull()->defaultValue('')->comment('省'),
               'city' => $this->string(20)->notNull()->defaultValue('')->comment('市'),
               'county' => $this->string(20)->notNull()->defaultValue('')->comment('县/区'),
               'address' => $this->string(255)->notNull()->defaultValue('')->comment('详细地址'),
               'identified_card' => $this->string(18)->notNull()->defaultValue('')->comment('身份证'),
-              'status' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('状态.tran:0=未实名,1=已实名.code:0=Un Real Name,1=Real Name.'),
+              'status' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('状态.tran:0=未实名,1=已实名.code:0=Un Real Name,1=Real Name.'),
               'qq' => $this->string(12)->notNull()->defaultValue('')->comment('QQ'),
               'wechat' => $this->string(20)->notNull()->defaultValue('0')->comment('微信'),
               'weibo' => $this->string(20)->notNull()->defaultValue('0')->comment('微博'),
@@ -88,12 +88,12 @@ class m180529_233735_admin extends \yii\db\Migration
               'id' => $this->bigPrimaryKey(),
               'to_admin_id' => $this->integer(11)->notNull()->unsigned()->defaultValue('0')->comment('收信管理员'),
               'from_admin_id' => $this->integer(11)->notNull()->unsigned()->defaultValue('0')->comment('发信管理员'),
-              'spread_type' => $this->tinyint(4)->notNull()->unsigned()->defaultValue(3)->comment('消息类型.tran:0=广播,1=组,2=私信.code:0=Broadcast,1=Group,2=Private.'),
-              'level' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('级别.tran:0=一般,1=1星,2=2星,3=3星,4=4星,5=5星.code:0=Nomal,1=1Star,2=2Star,3=3Star,4=4Star,5=5Star'),
+              'spread_type' => $this->tinyInteger(4)->notNull()->unsigned()->defaultValue(3)->comment('消息类型.tran:0=广播,1=组,2=私信.code:0=Broadcast,1=Group,2=Private.'),
+              'level' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('级别.tran:0=一般,1=1星,2=2星,3=3星,4=4星,5=5星.code:0=Nomal,1=1Star,2=2Star,3=3Star,4=4Star,5=5Star'),
               'name' => $this->string(20)->notNull()->comment('消息名'),
               'content' => $this->string(255)->notNull()->comment('内容'),
-              'read' => $this->tinyint(4)->notNull()->unsigned()->defaultValue(0)->comment('已读.tran:0=未读,1=已读.code:0=Unread,1=Read.'),
-              'from_type' => $this->tinyint(3)->notNull()->unsigned()->defaultValue(0)->comment('来源类型.tran:0=管理员,1=用户,2=路人,10=操作系统,11=其他.code:0=Admin,1=User,2=Guest,10=Operate System,11=Other.'),
+              'read' => $this->tinyInteger(4)->notNull()->unsigned()->defaultValue(0)->comment('已读.tran:0=未读,1=已读.code:0=Unread,1=Read.'),
+              'from_type' => $this->tinyInteger(3)->notNull()->unsigned()->defaultValue(0)->comment('来源类型.tran:0=管理员,1=用户,2=路人,10=操作系统,11=其他.code:0=Admin,1=User,2=Guest,10=Operate System,11=Other.'),
               'add_time' => $this->integer(11)->notNull()->defaultValue(0)->comment('添加时间'),
         ], $tableOptions);
         $this->batchInsert('{{%admin_message}}', ['id','to_admin_id','from_admin_id','spread_type','level','name','content','read','from_type','add_time'],
@@ -264,7 +264,7 @@ class m180529_233735_admin extends \yii\db\Migration
         $this->createTable('{{%maintain}}', [
               'id' => $this->primaryKey(),
               'options_type' => $this->integer(11)->notNull()->unsigned()->defaultValue('0')->comment('位置类型.tran:0=首页轮播,1=侧栏1,2=侧栏.code:0=Home Carousel figure,1=Left Side,2=Right Side.'),
-              'show_type' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('显示类型.tran:0=图片,2=文字,3=Markdown.0=Image,2=Textarea,3=Markdown.'),
+              'show_type' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('显示类型.tran:0=图片,2=文字,3=Markdown.0=Image,2=Textarea,3=Markdown.'),
               'name' => $this->string(50)->notNull()->comment('名称'),
               'value' => $this->string(255)->notNull()->comment('值'),
               'sign' => $this->string(50)->notNull()->comment('标识'),
@@ -273,7 +273,7 @@ class m180529_233735_admin extends \yii\db\Migration
               'sort' => $this->integer(11)->notNull()->comment('排序'),
               'add_time' => $this->integer(11)->notNull()->defaultValue(0)->comment('添加时间'),
               'edit_time' => $this->integer(11)->notNull()->defaultValue(0)->comment('修改时间'),
-              'status' => $this->tinyint(4)->notNull()->defaultValue(1)->comment('状态.tran:0=禁用,1=启用.code:0=Forbbiden,1=Available.'),
+              'status' => $this->tinyInteger(4)->notNull()->defaultValue(1)->comment('状态.tran:0=禁用,1=启用.code:0=Forbbiden,1=Available.'),
         ], $tableOptions);
         $this->batchInsert('{{%maintain}}', ['id','options_type','show_type','name','value','sign','url','info','sort','add_time','edit_time','status'],
         [
@@ -286,16 +286,16 @@ class m180529_233735_admin extends \yii\db\Migration
         if (!in_array(Yii::$app->db->tablePrefix.'menu', $tables))  {
         $this->createTable('{{%menu}}', [
               'id' => $this->primaryKey(),
-              'position' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('位置.tran:0=左,1=上,2=右,3=下.code:0=Left,1=Top,2=Right,3=Botton.'),
+              'position' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('位置.tran:0=左,1=上,2=右,3=下.code:0=Left,1=Top,2=Right,3=Botton.'),
               'parent_id' => $this->integer(11)->notNull()->unsigned()->defaultValue('0')->comment('父级id'),
               'name' => $this->string(255)->notNull()->comment('名称'),
               'url' => $this->string(255)->notNull()->comment('url地址'),
               'icon' => $this->string(255)->defaultValue('')->comment('图标'),
               'sort' => $this->float()->notNull()->unsigned()->defaultValue(0)->comment('排序'),
               'target' => $this->string(255)->notNull()->defaultValue('_self')->comment('打开方式.tran:_blank=新窗口,_self=本窗口.code:_blank=New Tag,_self=Self Window'),
-              'is_absolute_url' => $this->tinyint(6)->notNull()->unsigned()->defaultValue(0)->comment('是否绝对地址.tran:0=否,1=是.code:0=No,1=Yes.'),
-              'is_display' => $this->tinyint(6)->notNull()->unsigned()->defaultValue(1)->comment('是否显示.tran:0=否,1=是.code:0=No,1=Yes.'),
-              'recycle' => $this->tinyint(3)->notNull()->unsigned()->defaultValue(0)->comment('删除.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'is_absolute_url' => $this->tinyInteger(6)->notNull()->unsigned()->defaultValue(0)->comment('是否绝对地址.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'is_display' => $this->tinyInteger(6)->notNull()->unsigned()->defaultValue(1)->comment('是否显示.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'recycle' => $this->tinyInteger(3)->notNull()->unsigned()->defaultValue(0)->comment('删除.tran:0=否,1=是.code:0=No,1=Yes.'),
               'add_time' => $this->integer(11)->notNull()->unsigned()->comment('添加时间'),
               'edit_time' => $this->integer(11)->notNull()->unsigned()->defaultValue('0')->comment('修改时间'),
               'top_id' => $this->integer(11)->notNull()->defaultValue(0)->comment('父级ID'),

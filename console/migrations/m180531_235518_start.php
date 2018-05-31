@@ -2,9 +2,9 @@
 
 use yii\db\Schema;
 
-class m180529_233735_start extends \yii\db\Migration
+class m180531_235518_start extends \yii\db\Migration
 {
-    public function up()
+    public function safeUp()
     {
         $tables = Yii::$app->db->schema->getTableNames();
         $tableOptions = null;
@@ -23,28 +23,28 @@ class m180529_233735_start extends \yii\db\Migration
               'author' => $this->string(255)->notNull()->comment('作者'),
               'cover' => $this->string(255)->defaultValue('')->comment('封面'),
               'abstract' => $this->string(255)->notNull()->defaultValue('')->comment('摘要'),
-              'remain' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('提醒.code:0=Not Reminding,1=Remained.tran:0=未提醒，1=已提醒'),
-              'auth' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('权限.tran:0=所有人,1=好友,2=加密,3=自己.code:0=All Users,1=Friend,2=Encrypt,3=Private'),
+              'remain' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('提醒.code:0=Not Reminding,1=Remained.tran:0=未提醒，1=已提醒'),
+              'auth' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('权限.tran:0=所有人,1=好友,2=加密,3=自己.code:0=All Users,1=Friend,2=Encrypt,3=Private'),
               'tag' => $this->string(20)->notNull()->defaultValue('')->comment('标签'),
               'commit' => $this->integer(11)->notNull()->unsigned()->defaultValue('0')->comment('评论'),
               'view' => $this->integer(11)->notNull()->unsigned()->defaultValue('0')->comment('浏览'),
               'collection' => $this->integer(11)->notNull()->unsigned()->defaultValue('0')->comment('收藏'),
               'thumbup' => $this->integer(11)->notNull()->defaultValue(0)->comment('赞'),
-              'level' => $this->tinyint(4)->notNull()->defaultValue(2)->comment('文章级别.tran:0=垃圾,1=较差,2=普通,3=较好,4=优秀,5=天才.code:0=Garbage,1=Non nutritive,2=General,3=Better,4=Good,5=Genius.'),
-              'score' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('评分'),
-              'publish' => $this->tinyint(4)->notNull()->defaultValue(1)->comment('发布.tran:0=草稿,1=发布.code:0=Unpublished,1=Published.'),
-              'status' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('状态值.tran:0=待审核,1=审核通过,2=正在审核,3=审核不通过.code:0=Waiting Audit,1=Audit Passed,2=Auditing,3=Audit Failed.'),
-              'page_type' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('显示类型.tran:0=多页,1=单页.code:0=Multi Pages,1=Single Page'),
+              'level' => $this->tinyInteger(4)->notNull()->defaultValue(2)->comment('文章级别.tran:0=垃圾,1=较差,2=普通,3=较好,4=优秀,5=天才.code:0=Garbage,1=Non nutritive,2=General,3=Better,4=Good,5=Genius.'),
+              'score' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('评分'),
+              'publish' => $this->tinyInteger(4)->notNull()->defaultValue(1)->comment('发布.tran:0=草稿,1=发布.code:0=Unpublished,1=Published.'),
+              'status' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('状态值.tran:0=待审核,1=审核通过,2=正在审核,3=审核不通过.code:0=Waiting Audit,1=Audit Passed,2=Auditing,3=Audit Failed.'),
+              'page_type' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('显示类型.tran:0=多页,1=单页.code:0=Multi Pages,1=Single Page'),
               'add_time' => $this->integer(11)->notNull()->defaultValue(0)->comment('添加时间'),
               'edit_time' => $this->integer(11)->notNull()->defaultValue(0)->comment('编辑时间'),
-              'flag_headline' => $this->tinyint(3)->notNull()->unsigned()->defaultValue(0)->comment('头条.tran:0=否,1=是.code:0=No,1=Yes.'),
-              'flag_recommend' => $this->tinyint(3)->notNull()->unsigned()->defaultValue(0)->comment('推荐.tran:0=否,1=是.code:0=No,1=Yes.'),
-              'flag_slide_show' => $this->tinyint(3)->notNull()->unsigned()->defaultValue(0)->comment('幻灯.tran:0=否,1=是.code:0=No,1=Yes.'),
-              'flag_special_recommend' => $this->tinyint(3)->notNull()->unsigned()->defaultValue(0)->comment('特别推荐.tran:0=否,1=是.code:0=No,1=Yes.'),
-              'flag_roll' => $this->tinyint(3)->notNull()->unsigned()->defaultValue(0)->comment('滚动.tran:0=否,1=是.code:0=No,1=Yes.'),
-              'flag_bold' => $this->tinyint(3)->notNull()->unsigned()->defaultValue(0)->comment('加粗.tran:0=否,1=是.code:0=No,1=Yes.'),
-              'flag_picture' => $this->tinyint(3)->notNull()->unsigned()->defaultValue(0)->comment('图片.tran:0=否,1=是.code:0=No,1=Yes.'),
-              'recycle' => $this->tinyint(3)->notNull()->unsigned()->defaultValue(0)->comment('删除.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'flag_headline' => $this->tinyInteger(3)->notNull()->unsigned()->defaultValue(0)->comment('头条.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'flag_recommend' => $this->tinyInteger(3)->notNull()->unsigned()->defaultValue(0)->comment('推荐.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'flag_slide_show' => $this->tinyInteger(3)->notNull()->unsigned()->defaultValue(0)->comment('幻灯.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'flag_special_recommend' => $this->tinyInteger(3)->notNull()->unsigned()->defaultValue(0)->comment('特别推荐.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'flag_roll' => $this->tinyInteger(3)->notNull()->unsigned()->defaultValue(0)->comment('滚动.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'flag_bold' => $this->tinyInteger(3)->notNull()->unsigned()->defaultValue(0)->comment('加粗.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'flag_picture' => $this->tinyInteger(3)->notNull()->unsigned()->defaultValue(0)->comment('图片.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'recycle' => $this->tinyInteger(3)->notNull()->unsigned()->defaultValue(0)->comment('删除.tran:0=否,1=是.code:0=No,1=Yes.'),
               'admin_id' => $this->integer(11)->notNull()->defaultValue(0)->comment('管理员ID'),
         ], $tableOptions);
         $this->batchInsert('{{%article}}', ['id','article_content_id','user_id','article_cate_id','sort','title','author','cover','abstract','remain','auth','tag','commit','view','collection','thumbup','level','score','publish','status','page_type','add_time','edit_time','flag_headline','flag_recommend','flag_slide_show','flag_special_recommend','flag_roll','flag_bold','flag_picture','recycle','admin_id'],
@@ -64,9 +64,9 @@ class m180529_233735_start extends \yii\db\Migration
               'parent_id' => $this->integer(11)->notNull()->defaultValue(0)->comment('父级ID'),
               'add_time' => $this->integer(11)->notNull()->defaultValue(0)->comment('添加时间'),
               'edit_time' => $this->integer(11)->notNull()->defaultValue(0)->comment('修改时间'),
-              'level' => $this->tinyint(4)->notNull()->comment('级别'),
+              'level' => $this->tinyInteger(4)->notNull()->comment('级别'),
               'path' => $this->string(255)->notNull()->defaultValue('0')->comment('路径'),
-              'status' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('状态.tran:0=可用,1=不可用,2=回收.code:0=Avaliable,1=Unavaliable,3=Recycle.'),
+              'status' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('状态.tran:0=可用,1=不可用,2=回收.code:0=Avaliable,1=Unavaliable,3=Recycle.'),
               'sort' => $this->integer(11)->notNull()->defaultValue(0)->comment('排序'),
         ], $tableOptions);
         $this->batchInsert('{{%article_cate}}', ['id','name','parent_id','add_time','edit_time','level','path','status','sort'],
@@ -100,10 +100,10 @@ class m180529_233735_start extends \yii\db\Migration
               'user_id' => $this->integer(11)->notNull()->unsigned()->comment('用户ID'),
               'parent_id' => $this->integer(11)->notNull()->unsigned()->comment('父级ID'),
               'content' => $this->string(400)->notNull()->comment('内容'),
-              'status' => $this->tinyint(4)->notNull()->unsigned()->defaultValue(1)->comment('状态.tran:0=待审核,1=评论成功,2=审核失败.code:0=Waiting audit,1=Audit Pass,2=Audit Failed.'),
+              'status' => $this->tinyInteger(4)->notNull()->unsigned()->defaultValue(1)->comment('状态.tran:0=待审核,1=评论成功,2=审核失败.code:0=Waiting audit,1=Audit Pass,2=Audit Failed.'),
               'add_time' => $this->integer(11)->notNull()->unsigned()->comment('添加时间'),
-              'recycle' => $this->tinyint(3)->notNull()->unsigned()->defaultValue(0)->comment('删除.tran:0=否,1=是.code:0=No,1=Yes.'),
-              'level' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('级别'),
+              'recycle' => $this->tinyInteger(3)->notNull()->unsigned()->defaultValue(0)->comment('删除.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'level' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('级别'),
               'path' => $this->string(255)->notNull()->defaultValue('0')->comment('路径'),
         ], $tableOptions);
         $this->batchInsert('{{%article_commit}}', ['id','article_id','user_id','parent_id','content','status','add_time','recycle','level','path'],
@@ -186,7 +186,7 @@ class m180529_233735_start extends \yii\db\Migration
               'subject' => $this->string(100)->notNull()->comment('主题'),
               'body' => $this->string(255)->notNull()->comment('内容'),
               'ip' => $this->string(128)->comment('IP'),
-              'status' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('状态.tran:0=未读,1=已读.code:0=Unread,1=Read.'),
+              'status' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('状态.tran:0=未读,1=已读.code:0=Unread,1=Read.'),
               'add_time' => $this->integer(11)->comment(''),
         ], $tableOptions);
         $this->batchInsert('{{%contact}}', ['id','name','email','subject','body','ip','status','add_time'],
@@ -202,16 +202,16 @@ class m180529_233735_start extends \yii\db\Migration
         if (!in_array(Yii::$app->db->tablePrefix.'menu', $tables))  {
         $this->createTable('{{%menu}}', [
               'id' => $this->primaryKey(),
-              'position' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('位置.tran:0=左,1=上,2=右,3=下.code:0=Left,1=Top,2=Right,3=Botton.'),
+              'position' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('位置.tran:0=左,1=上,2=右,3=下.code:0=Left,1=Top,2=Right,3=Botton.'),
               'parent_id' => $this->integer(11)->notNull()->unsigned()->defaultValue('0')->comment('父级id'),
               'name' => $this->string(255)->notNull()->comment('名称'),
               'url' => $this->string(255)->notNull()->comment('url地址'),
               'icon' => $this->string(255)->defaultValue('')->comment('图标'),
               'sort' => $this->float()->notNull()->unsigned()->defaultValue(0)->comment('排序'),
               'target' => $this->string(255)->notNull()->defaultValue('_self')->comment('打开方式.tran:_blank=新窗口,_self=本窗口.code:_blank=New Tag,_self=Self Window'),
-              'is_absolute_url' => $this->tinyint(6)->notNull()->unsigned()->defaultValue(0)->comment('是否绝对地址.tran:0=否,1=是.code:0=No,1=Yes.'),
-              'is_display' => $this->tinyint(6)->notNull()->unsigned()->defaultValue(1)->comment('是否显示.tran:0=否,1=是.code:0=No,1=Yes.'),
-              'recycle' => $this->tinyint(3)->notNull()->unsigned()->defaultValue(0)->comment('删除.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'is_absolute_url' => $this->tinyInteger(6)->notNull()->unsigned()->defaultValue(0)->comment('是否绝对地址.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'is_display' => $this->tinyInteger(6)->notNull()->unsigned()->defaultValue(1)->comment('是否显示.tran:0=否,1=是.code:0=No,1=Yes.'),
+              'recycle' => $this->tinyInteger(3)->notNull()->unsigned()->defaultValue(0)->comment('删除.tran:0=否,1=是.code:0=No,1=Yes.'),
               'add_time' => $this->integer(11)->notNull()->unsigned()->comment('添加时间'),
               'edit_time' => $this->integer(11)->notNull()->unsigned()->defaultValue('0')->comment('修改时间'),
         ], $tableOptions);
@@ -304,7 +304,7 @@ class m180529_233735_start extends \yii\db\Migration
               'user_id' => $this->integer(11)->notNull()->comment('用户ID'),
               'ip' => $this->string(128)->comment('激活Ip'),
               'num' => $this->integer(11)->defaultValue(0)->comment('次数.'),
-              'status' => $this->tinyint(4)->notNull()->defaultValue(0)->comment('状态.tran:0=等待,1=已点击,2=失效.code:0=Waiting,1=Clicked,2=Useless.'),
+              'status' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('状态.tran:0=等待,1=已点击,2=失效.code:0=Waiting,1=Clicked,2=Useless.'),
               'auth_key' => $this->string(100)->notNull()->comment('授权码'),
               'expire_time' => $this->integer(11)->defaultValue(0)->comment('失效时间'),
               'add_time' => $this->integer(11)->notNull()->comment('添加时间'),
@@ -351,7 +351,7 @@ class m180529_233735_start extends \yii\db\Migration
               'to_user_id' => $this->integer(11)->notNull()->defaultValue(0)->comment('接收用户ID'),
               'from_user_id' => $this->integer(11)->notNull()->defaultValue(0)->comment('来源用户ID'),
               'content' => $this->string(255)->comment('内容'),
-              'remain_type' => $this->tinyint(4)->comment('提醒类型.tran:0=评论,1=回答,2=回复,3=评价,4=收藏,5=点赞,6=访客,7=粉丝.code:0=Commit,1=Answer,2=Reply,4=Collection,5=Thumb Up,6=Visitor,7=Fans.'),
+              'remain_type' => $this->tinyInteger(4)->comment('提醒类型.tran:0=评论,1=回答,2=回复,3=评价,4=收藏,5=点赞,6=访客,7=粉丝.code:0=Commit,1=Answer,2=Reply,4=Collection,5=Thumb Up,6=Visitor,7=Fans.'),
               'link' => $this->string(200)->comment('链接'),
               'title' => $this->string(50)->comment('标题'),
               'add_time' => $this->integer(11)->comment(''),
@@ -362,7 +362,7 @@ class m180529_233735_start extends \yii\db\Migration
         
     }
 
-    public function down()
+    public function safeDown()
     {
         $this->dropTable('{{%user_remain}}');
         $this->dropTable('{{%user}}');
