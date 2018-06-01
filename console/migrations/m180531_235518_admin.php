@@ -6,13 +6,13 @@ class m180531_235518_admin extends \yii\db\Migration
 {
     public function safeUp()
     {
-        $tables = Yii::$app->db->schema->getTableNames();
+        $tables = Yii::$app->dbadmin->schema->getTableNames();
         $tableOptions = null;
-        if ($this->db->driverName === 'mysql') {
+        if ($this->dbadmin->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
         
-        if (!in_array(Yii::$app->db->tablePrefix.'admin', $tables))  {
+        if (!in_array(Yii::$app->dbadmin->tablePrefix.'admin', $tables))  {
         $this->createTable('{{%admin}}', [
               'id' => $this->primaryKey(),
               'username' => $this->string(255)->notNull()->unique()->comment('用户名'),
@@ -31,9 +31,9 @@ class m180531_235518_admin extends \yii\db\Migration
           	['1','orx','6wXn70Qk8u5q1CFcibKJj4Ye3Ms0ibsm','vA9wJzpaqcBtfAb5SEEQj-ptDcCYxZ7Nu50I1Pi9nGBJeuhUJ_f31rRuel5sK2UK','$2y$13$0PjwX8PU54T2GoqH7pbaO.vHzDKmoMp3BKKpj3h7NFb.UisXfLGUe','','lbmzorx@163.com','10','0','1526909542',''],
         ]);
         } else {
-          echo "\nTable `".Yii::$app->db->tablePrefix."admin` already exists!\n";
+          echo "\nTable `".Yii::$app->dbadmin->tablePrefix."admin` already exists!\n";
         }
-        if (!in_array(Yii::$app->db->tablePrefix.'admin_info', $tables))  {
+        if (!in_array(Yii::$app->dbadmin->tablePrefix.'admin_info', $tables))  {
         $this->createTable('{{%admin_info}}', [
               'id' => $this->primaryKey(),
               'admin_id' => $this->integer(11)->notNull()->comment('管理员ID'),
@@ -58,9 +58,9 @@ class m180531_235518_admin extends \yii\db\Migration
           	['1','1','orx','1','19910901','贵州省','黔南州','荔波县','贵州省荔波县','522722199109010714','0','234234','042342341','021341234','0213412432阿斯蒂芬','1523199335','1523201831'],
         ]);
         } else {
-          echo "\nTable `".Yii::$app->db->tablePrefix."admin_info` already exists!\n";
+          echo "\nTable `".Yii::$app->dbadmin->tablePrefix."admin_info` already exists!\n";
         }
-        if (!in_array(Yii::$app->db->tablePrefix.'admin_log', $tables))  {
+        if (!in_array(Yii::$app->dbadmin->tablePrefix.'admin_log', $tables))  {
         $this->createTable('{{%admin_log}}', [
               'id' => $this->primaryKey(),
               'admin_id' => $this->integer(11)->notNull()->unsigned()->comment('管理员用户id'),
@@ -81,9 +81,9 @@ class m180531_235518_admin extends \yii\db\Migration
           	['60','1','permission/create','{{%ADMIN_USER%}} [ orx ] {{%BY%}} backend\\models\\form\\Rbac  {{%CREATED%}}  {{%RECORD%}}: <br>角色(name) => /fsdff/asdfasd/f/asdfdasf:GET,<br>Type(type) => ,<br>描述(description) => asdfasfasfasfsfsfasdffasdfsf,<br>Rule Name(ruleName) => ,<br>Data(data) => ,<br>路由(route) => /fsdff/asdfasd/f/asdfdasf,<br>请求方式(method) => GET,<br>组(group) => asdfaasdfasdf,<br>分类(category) => asdfsdfsfsfs,<br>排序(sort) => 0,<br>权限(permissions) => ,<br>角色(roles) => ','1522497377','0'],
         ]);
         } else {
-          echo "\nTable `".Yii::$app->db->tablePrefix."admin_log` already exists!\n";
+          echo "\nTable `".Yii::$app->dbadmin->tablePrefix."admin_log` already exists!\n";
         }
-        if (!in_array(Yii::$app->db->tablePrefix.'admin_message', $tables))  {
+        if (!in_array(Yii::$app->dbadmin->tablePrefix.'admin_message', $tables))  {
         $this->createTable('{{%admin_message}}', [
               'id' => $this->bigPrimaryKey(),
               'to_admin_id' => $this->integer(11)->notNull()->unsigned()->defaultValue('0')->comment('收信管理员'),
@@ -139,18 +139,18 @@ class m180531_235518_admin extends \yii\db\Migration
           	['1','1','0','0','0','新年贺喜','阿斯利康打飞机阿萨德及开发','0','0','1523379561'],
         ]);
         } else {
-          echo "\nTable `".Yii::$app->db->tablePrefix."admin_message` already exists!\n";
+          echo "\nTable `".Yii::$app->dbadmin->tablePrefix."admin_message` already exists!\n";
         }
-        if (!in_array(Yii::$app->db->tablePrefix.'admin_message_log', $tables))  {
+        if (!in_array(Yii::$app->dbadmin->tablePrefix.'admin_message_log', $tables))  {
         $this->createTable('{{%admin_message_log}}', [
               'admin_message_id' => $this->integer(11)->notNull()->comment(''),
               'admin_id' => $this->integer(11)->notNull()->comment(''),
               'PRIMARY KEY ([[admin_message_id]], [[admin_id]])',
         ], $tableOptions);
         } else {
-          echo "\nTable `".Yii::$app->db->tablePrefix."admin_message_log` already exists!\n";
+          echo "\nTable `".Yii::$app->dbadmin->tablePrefix."admin_message_log` already exists!\n";
         }
-        if (!in_array(Yii::$app->db->tablePrefix.'auth_assignment', $tables))  {
+        if (!in_array(Yii::$app->dbadmin->tablePrefix.'auth_assignment', $tables))  {
         $this->createTable('{{%auth_assignment}}', [
               'item_name' => $this->string(64)->notNull()->comment('项目名'),
               'user_id' => $this->string(64)->notNull()->comment(''),
@@ -158,9 +158,9 @@ class m180531_235518_admin extends \yii\db\Migration
               'PRIMARY KEY ([[item_name]], [[user_id]])',
         ], $tableOptions);
         } else {
-          echo "\nTable `".Yii::$app->db->tablePrefix."auth_assignment` already exists!\n";
+          echo "\nTable `".Yii::$app->dbadmin->tablePrefix."auth_assignment` already exists!\n";
         }
-        if (!in_array(Yii::$app->db->tablePrefix.'auth_item', $tables))  {
+        if (!in_array(Yii::$app->dbadmin->tablePrefix.'auth_item', $tables))  {
         $this->createTable('{{%auth_item}}', [
               'name' => $this->string(64)->notNull()->comment('名称'),
               'type' => $this->smallInteger(6)->notNull()->comment('类型'),
@@ -182,9 +182,9 @@ class m180531_235518_admin extends \yii\db\Migration
           	['阿萨德发送方','1','阿萨德发送','','s:12:\"{\"sort\":\"1\"}\";','1522682981','1522758940'],
         ]);
         } else {
-          echo "\nTable `".Yii::$app->db->tablePrefix."auth_item` already exists!\n";
+          echo "\nTable `".Yii::$app->dbadmin->tablePrefix."auth_item` already exists!\n";
         }
-        if (!in_array(Yii::$app->db->tablePrefix.'auth_item_child', $tables))  {
+        if (!in_array(Yii::$app->dbadmin->tablePrefix.'auth_item_child', $tables))  {
         $this->createTable('{{%auth_item_child}}', [
               'parent' => $this->string(64)->notNull()->comment('父级'),
               'child' => $this->string(64)->notNull()->comment('子级'),
@@ -212,9 +212,9 @@ class m180531_235518_admin extends \yii\db\Migration
           	['阿萨德发送方','/fsdff/asdfasd/f/asdfdasf:GET'],
         ]);
         } else {
-          echo "\nTable `".Yii::$app->db->tablePrefix."auth_item_child` already exists!\n";
+          echo "\nTable `".Yii::$app->dbadmin->tablePrefix."auth_item_child` already exists!\n";
         }
-        if (!in_array(Yii::$app->db->tablePrefix.'auth_rule', $tables))  {
+        if (!in_array(Yii::$app->dbadmin->tablePrefix.'auth_rule', $tables))  {
         $this->createTable('{{%auth_rule}}', [
               'name' => $this->string(64)->notNull()->comment('名称'),
               'data' => $this->binary()->comment('数据'),
@@ -223,9 +223,9 @@ class m180531_235518_admin extends \yii\db\Migration
               'PRIMARY KEY ([[name]])',
         ], $tableOptions);
         } else {
-          echo "\nTable `".Yii::$app->db->tablePrefix."auth_rule` already exists!\n";
+          echo "\nTable `".Yii::$app->dbadmin->tablePrefix."auth_rule` already exists!\n";
         }
-        if (!in_array(Yii::$app->db->tablePrefix.'log', $tables))  {
+        if (!in_array(Yii::$app->dbadmin->tablePrefix.'log', $tables))  {
         $this->createTable('{{%log}}', [
               'id' => $this->bigPrimaryKey(),
               'level' => $this->integer(11)->comment('级别.tran:0x00=所有,0x01=致命错误,0x02=警告,0x04=信息,0x08=追踪,0x40=PROFILE,0x50=PROFILE_BEGIN,0x60=PROFILE_END.code:0x00=All,0x01=Error,0x02=Warning,0x04=Info,0x08=Trace,0x40=PROFILE,0x50=PROFILE_BEGIN,0x60=PROFILE_END'),
@@ -258,9 +258,9 @@ class m180531_235518_admin extends \yii\db\Migration
           	['1','1','yii\\web\\HttpException:404','1523630000','[127.0.0.1][1][ns7nk26fa416h8pg0spq6k3545]','yii\\web\\NotFoundHttpException: 页面未找到。 in E:\\www\\Yii\\chonglou\\vendor\\yiisoft\\yii2\\web\\Application.php:114\nStack trace:\n#0 E:\\www\\Yii\\chonglou\\vendor\\yiisoft\\yii2\\base\\Application.php(380): yii\\web\\Application->handleRequest(Object(yii\\web\\Request))\n#1 E:\\www\\Yii\\chonglou\\backend\\web\\index.php(19): yii\\base\\Application->run()\n#2 {main}'],
         ]);
         } else {
-          echo "\nTable `".Yii::$app->db->tablePrefix."log` already exists!\n";
+          echo "\nTable `".Yii::$app->dbadmin->tablePrefix."log` already exists!\n";
         }
-        if (!in_array(Yii::$app->db->tablePrefix.'maintain', $tables))  {
+        if (!in_array(Yii::$app->dbadmin->tablePrefix.'maintain', $tables))  {
         $this->createTable('{{%maintain}}', [
               'id' => $this->primaryKey(),
               'options_type' => $this->integer(11)->notNull()->unsigned()->defaultValue('0')->comment('位置类型.tran:0=首页轮播,1=侧栏1,2=侧栏.code:0=Home Carousel figure,1=Left Side,2=Right Side.'),
@@ -281,9 +281,9 @@ class m180531_235518_admin extends \yii\db\Migration
           	['1','0','0','asdfasfas','/upload/img/7930639c2d0c4e54ff99df7659df649d.png','asdfasfasdfdsaf','/askldfjka/asdfkaksl','asdfasdfdasfasdf','11','1522251818','1522515509','0'],
         ]);
         } else {
-          echo "\nTable `".Yii::$app->db->tablePrefix."maintain` already exists!\n";
+          echo "\nTable `".Yii::$app->dbadmin->tablePrefix."maintain` already exists!\n";
         }
-        if (!in_array(Yii::$app->db->tablePrefix.'menu', $tables))  {
+        if (!in_array(Yii::$app->dbadmin->tablePrefix.'menu', $tables))  {
         $this->createTable('{{%menu}}', [
               'id' => $this->primaryKey(),
               'position' => $this->tinyInteger(4)->notNull()->defaultValue(0)->comment('位置.tran:0=左,1=上,2=右,3=下.code:0=Left,1=Top,2=Right,3=Botton.'),
@@ -340,7 +340,7 @@ class m180531_235518_admin extends \yii\db\Migration
           	['1','0','0','首页','/','fa fa-home','0','_self','0','1','0','1521036199','1526739359','0','','',''],
         ]);
         } else {
-          echo "\nTable `".Yii::$app->db->tablePrefix."menu` already exists!\n";
+          echo "\nTable `".Yii::$app->dbadmin->tablePrefix."menu` already exists!\n";
         }
         
     }
