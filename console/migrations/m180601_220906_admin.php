@@ -2,15 +2,24 @@
 
 use yii\db\Schema;
 
-class m180531_235518_admin extends \yii\db\Migration
+class m180601_220906_admin extends \yii\db\Migration
 {
-    public function safeUp()
+
+    public function init()
+    {
+        $this->db = 'dbadmin';
+        parent::init();
+    }
+
+    public function up()
     {
         $tables = Yii::$app->dbadmin->schema->getTableNames();
         $tableOptions = null;
-        if ($this->dbadmin->driverName === 'mysql') {
+        if ($this->db->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
+
+        var_dump($this->db);
         
         if (!in_array(Yii::$app->dbadmin->tablePrefix.'admin', $tables))  {
         $this->createTable('{{%admin}}', [
@@ -345,7 +354,7 @@ class m180531_235518_admin extends \yii\db\Migration
         
     }
 
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('{{%menu}}');
         $this->dropTable('{{%maintain}}');

@@ -2,9 +2,10 @@
 
 use yii\db\Schema;
 
-class m180531_235518_start extends \yii\db\Migration
+class m180601_220906_start extends \yii\db\Migration
 {
-    public function safeUp()
+
+    public function up()
     {
         $tables = Yii::$app->db->schema->getTableNames();
         $tableOptions = null;
@@ -362,7 +363,7 @@ class m180531_235518_start extends \yii\db\Migration
         
     }
 
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('{{%user_remain}}');
         $this->dropTable('{{%user}}');
