@@ -43,14 +43,19 @@ return [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error', 'warning'],
+                ],
+                [
                     'class' => 'yii\log\DbTarget',
+                    'db'=>'dbadmin',
                     'levels' => ['error', 'warning'],
                     'logTable'=>'{{%yii_log}}',
-                ]
+                ],
             ],
         ],
         'formatter' => [
-            'datetimeFormat' => 'y-M-d H:i:s',
+            'datetimeFormat' => 'yyyy-MM-dd HH:mm:ss',
         ],
     ],
     'timeZone' => 'Asia/Shanghai',

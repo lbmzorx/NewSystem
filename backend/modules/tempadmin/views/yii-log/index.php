@@ -4,22 +4,22 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use lbmzorx\components\widget\BatchUpdate;
-use common\models\adminsearch\Admin;
+use common\models\adminsearch\YiiLog;
 use lbmzorx\components\behavior\StatusCode;
 use lbmzorx\components\widget\BatchDelete;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\adminsearch\Admin */
+/* @var $searchModel common\models\adminsearch\YiiLog */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Admins');
+$this->title = Yii::t('app', 'Yii Logs');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCss(<<<STYLE
         p .btn{margin-top:5px;}
 STYLE
 );
 ?>
-<div class="admin-index">
+<div class="yii-log-index">
     <?= \yii\widgets\Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>    <div class="panel">
@@ -54,10 +54,10 @@ str
 
     <p>
         <?= Html::a('<i class="fa fa-plus-square"></i> '. Yii::t('app', 'Create {modelname}', [
-    'modelname' => Yii::t('app', 'Admins'),
+    'modelname' => Yii::t('app', 'Yii Logs'),
 ]), ['create'], ['class' => 'btn btn-success']) ?>
         <?= BatchDelete::widget(['name'=>Yii::t('app', 'Batch Deletes'),'griViewKey'=>GridView::$counter]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Status'),'attribute'=>'status','btnIcon'=>'status','griViewKey'=>GridView::$counter]) ?>
+        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Level'),'attribute'=>'level','btnIcon'=>'level','griViewKey'=>GridView::$counter]) ?>
     </p>
 
     <?= GridView::widget([
@@ -76,29 +76,24 @@ str
             ['class' => 'yii\grid\CheckboxColumn'],
 
             'id',
-            'username',
-            'auth_key',
-            'secret_key',
-            'password_hash',
-            //'password_reset_token',
-            //'email:email',
             [
                'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
-               'attribute'=>'status',
-               'filter'=>StatusCode::tranStatusCode(Admin::$status_code,'app'),
+               'attribute'=>'level',
+               'filter'=>StatusCode::tranStatusCode(YiiLog::$level_code,'app'),
                'value'=> function ($model) {
-                   return Html::button($model->getStatusCode('status','status_code'),
+                   return Html::button($model->getStatusCode('level','level_code'),
                        [
                            'data-id'=>$model->id,
-                           'data-value'=>$model->status,
-                           'class'=>'status-change btn btn-xs btn-'.$model->getStatusCss('status','status_css',$model->status)
+                           'data-value'=>$model->level,
+                           'class'=>'level-change btn btn-xs btn-'.$model->getStatusCss('level','level_css',$model->level)
                        ]);
                },
                'format'=>'raw',
             ],
-            //'created_at',
-            //'updated_at',
-            //'head_img',
+            'category',
+            'log_time',
+            'prefix:ntext',
+            'message:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
@@ -107,17 +102,17 @@ str
         </div>
     </div>
 </div>
-<div id="status-change-dom" style="display: none;">
+<div id="level-change-dom" style="display: none;">
     <div style="padding: 10px;">
         <?=Html::beginForm(['change-status'],'post')?>
-        <input type="hidden" name="key" value="status">
+        <input type="hidden" name="key" value="level">
         <input type="hidden" name="id" value="">
-        <?php foreach ( Admin::$status_code as $k=>$v):?>           
+        <?php foreach ( YiiLog::$level_code as $k=>$v):?>           
             <label class="checkbox-inline" style="margin: 5px 10px;">
                 <?php
                     $css='warning';
-                    if( isset(Admin::$status_css) && isset(Admin::$status_css[$k])){
-                        $css = Admin::$status_css [$k];
+                    if( isset(YiiLog::$level_css) && isset(YiiLog::$level_css[$k])){
+                        $css = YiiLog::$level_css [$k];
                     }else{
                         $css=isset(StatusCode::$cssCode[$k])?StatusCode::$cssCode[$k]:$css;
                     }

@@ -14,6 +14,8 @@ return [
 	'Email'=>'邮箱',
 	
 	'Head Img'=>'头像',
+	
+	'Secret Key'=>'秘密授权码',
 	/*end*Admin*/
 
 	/*start*AdminInfo*/

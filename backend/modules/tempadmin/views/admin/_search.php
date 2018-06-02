@@ -49,6 +49,14 @@ STYLE
         ->label('');?>
 	</div>
 	<div class="col-lg-2 col-sm-2">
+		<?=$form->field($model, 'secret_key',[
+            'class'=>\lbmzorx\components\widget\InputAddField::className(),
+            'firstContent'=>$model->getAttributeLabel('secret_key'),
+            'firstOption'=>['id'=>'icon-show-'.\yii\helpers\StringHelper::basename(get_class($model)).'-secret_key'],
+        ])->textInput(['maxlength' => true])
+        ->label('');?>
+	</div>
+	<div class="col-lg-2 col-sm-2">
 		<?=$form->field($model, 'password_hash',[
             'class'=>\lbmzorx\components\widget\InputAddField::className(),
             'firstContent'=>$model->getAttributeLabel('password_hash'),
@@ -64,6 +72,8 @@ STYLE
         ])->textInput(['maxlength' => true])
         ->label('');?>
 	</div>
+</div>
+<div class="row">
 	<div class="col-lg-2 col-sm-2">
 		<?=$form->field($model, 'email',[
             'class'=>\lbmzorx\components\widget\InputAddField::className(),
@@ -72,8 +82,6 @@ STYLE
         ])->textInput(['maxlength' => true])
         ->label('');?>
 	</div>
-</div>
-<div class="row">
 	<div class="col-lg-2 col-sm-2">
 		<?=$form->field($model, 'status',[
             'class'=>\lbmzorx\components\widget\InputAddField::className(),

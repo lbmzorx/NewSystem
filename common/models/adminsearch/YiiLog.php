@@ -6,12 +6,12 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use lbmzorx\components\event\SearchEvent;
-use common\models\admindata\Admin as DataModel;
+use common\models\admindata\YiiLog as DataModel;
 
 /**
- * Admin represents the model behind the search form of `Admin`.
+ * YiiLog represents the model behind the search form of `YiiLog`.
  */
-class Admin extends DataModel
+class YiiLog extends DataModel
 
 {
     /**
@@ -20,10 +20,10 @@ class Admin extends DataModel
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
-            [['username', 'auth_key', 'secret_key', 'password_hash', 'password_reset_token', 'email', 'head_img'], 'safe'],
-            [['created_at', 'updated_at'], 'string'],
-            [['status'], 'in', 'range'=>array_keys( DataModel::$status_code ) ],
+            [['id', 'level'], 'integer'],
+            [['category', 'prefix', 'message'], 'safe'],
+            [['log_time'], 'number'],
+            [['level'], 'in', 'range'=>array_keys( DataModel::$level_code ) ],
         ];
     }
 
@@ -35,7 +35,7 @@ class Admin extends DataModel
         return [
             'searchTime'=>[
                 'class'=>\lbmzorx\components\behavior\TimeSearch::className(),
-                'timeAttributes' =>['created_at','updated_at'],
+                'timeAttributes' =>['log_time'],
              ],
         ];
     }
@@ -81,16 +81,12 @@ class Admin extends DataModel
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'status' => $this->status,
+            'level' => $this->level,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'secret_key', $this->secret_key])
-            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
-            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'head_img', $this->head_img]);
+        $query->andFilterWhere(['like', 'category', $this->category])
+            ->andFilterWhere(['like', 'prefix', $this->prefix])
+            ->andFilterWhere(['like', 'message', $this->message]);
         $this->trigger(SearchEvent::BEFORE_SEARCH, new SearchEvent(['query'=>$query]));
         return $dataProvider;
     }

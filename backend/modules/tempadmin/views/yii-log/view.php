@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\admindata\Admin */
+/* @var $model common\models\admindata\YiiLog */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Admins'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Yii Logs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="admin-view">
+<div class="yii-log-view">
     <?= \yii\widgets\Breadcrumbs::widget([
     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
@@ -34,19 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'username',
-            'auth_key',
-            'secret_key',
-            'password_hash',
-            'password_reset_token',
-            'email:email',
             [
-               'attribute'=>'status',
-               'value'=>$model->getStatusCode('status','status_code'),
+               'attribute'=>'level',
+               'value'=>$model->getStatusCode('level','level_code'),
             ],
-            'created_at:datetime',
-            'updated_at:datetime',
-            'head_img',
+            'category',
+            'log_time:datetime',
+            'prefix:ntext',
+            'message:ntext',
         ],
     ]) ?>
 </div>

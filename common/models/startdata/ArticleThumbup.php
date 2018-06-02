@@ -1,7 +1,7 @@
 <?php
 namespace common\models\startdata;
 
-use common\components\tools\ModelHelper;
+use lbmzorx\components\helper\ModelHelper;
 use Yii;
 use common\models\startdatabase\ArticleThumbup as BaseModelArticleThumbup;
 use yii\caching\TagDependency;

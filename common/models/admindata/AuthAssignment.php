@@ -76,10 +76,10 @@ class AuthAssignment extends BaseModelAuthAssignment
                     self::EVENT_BEFORE_INSERT => ['created_at'],
                 ],
             ],
-            'withOneUser'=>[
-                'class' => \lbmzorx\components\behavior\WithOneUser::className(),
-                'userClass'=> User::ClassName(),
-            ],
+//            'withOneUser'=>[
+//                'class' => \lbmzorx\components\behavior\WithOneUser::className(),
+//                'userClass'=> User::ClassName(),
+//            ],
         ];
     }
 

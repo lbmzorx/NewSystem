@@ -5,23 +5,23 @@ namespace common\models\admindatabase;
 use Yii;
 
 /**
- * This is the model class for table "{{%log}}".
+ * This is the model class for table "{{%yii_log}}".
  *
  * @property string $id	//
- * @property int $level	// 级别.tran:0x00=所有,0x01=致命错误,0x02=警告,0x04=信息,0x08=追踪,0x40=PROFILE,0x50=PROFILE_BEGIN,0x60=PROFILE_END.code:0x00=All,0x01=Error,0x02=Warning,0x04=Info,0x08=Trace,0x40=PROFILE,0x50=PROFILE_BEGIN,0x60=PROFILE_END
+ * @property int $level	// 级别.tran:0=所有,1=致命错误,2=警告,4=信息,8=追踪,64=PROFILE,80=PROFILE_BEGIN,96=PROFILE_END.code:0=All,1=Error,2=Warning,4=Info,8=Trace,64=PROFILE,80=PROFILE_BEGIN,96=PROFILE_END
  * @property string $category	// 分类
  * @property double $log_time	// 记录时间
  * @property string $prefix	// 前缀
  * @property string $message	// 信息
  */
-class Log extends \yii\db\ActiveRecord
+class YiiLog extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%log}}';
+        return '{{%yii_log}}';
     }
 
     /**

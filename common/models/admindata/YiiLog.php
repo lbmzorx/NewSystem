@@ -2,36 +2,36 @@
 namespace common\models\admindata;
 
 use Yii;
-use common\models\admindatabase\Log as BaseModelLog;
+use common\models\admindatabase\YiiLog as BaseModelYiiLog;
 use yii\caching\TagDependency;
 
 /**
-* This is the data class for [[common\models\admindatabase\Log]].
+* This is the data class for [[common\models\admindatabase\YiiLog]].
 * Data model definde model behavior and status code.
-* @see \common\models\admindatabase\Log
+* @see \common\models\admindatabase\YiiLog
 */
-class Log extends BaseModelLog
+class YiiLog extends BaseModelYiiLog
 {
     /**
      * The cache tag
      */
-    const CACHE_TAG='common_models_admindata_Log';
+    const CACHE_TAG='common_models_admindata_YiiLog';
 
 
-    const LEVEL_ALL='0x00';
-    const LEVEL_ERROR='0x01';
-    const LEVEL_WARNING='0x02';
-    const LEVEL_INFO='0x04';
-    const LEVEL_TRACE='0x08';
-    const LEVEL_PROFILE='0x40';
-    const LEVEL_PROFILE_BEGIN='0x50';
-    const LEVEL_PROFILE_END='0x60';
+    const LEVEL_ALL=0;
+    const LEVEL_ERROR=1;
+    const LEVEL_WARNING=2;
+    const LEVEL_INFO=4;
+    const LEVEL_TRACE=8;
+    const LEVEL_PROFILE=64;
+    const LEVEL_PROFILE_BEGIN=80;
+    const LEVEL_PROFILE_END=96;
     /**
     * 级别
-    * 级别.tran:0x00=所有,0x01=致命错误,0x02=警告,0x04=信息,0x08=追踪,0x40=PROFILE,0x50=PROFILE_BEGIN,0x60=PROFILE_END.code:0x00=All,0x01=Error,0x02=Warning,0x04=Info,0x08=Trace,0x40=PROFILE,0x50=PROFILE_BEGIN,0x60=PROFILE_END
+    * 级别.tran:0=所有,1=致命错误,2=警告,4=信息,8=追踪,64=PROFILE,80=PROFILE_BEGIN,96=PROFILE_END.code:0=All,1=Error,2=Warning,4=Info,8=Trace,64=PROFILE,80=PROFILE_BEGIN,96=PROFILE_END
     * @var array $level_code
     */
-    public static $level_code = ['0x00'=>'All','0x01'=>'Error','0x02'=>'Warning','0x04'=>'Info','0x08'=>'Trace','0x40'=>'PROFILE','0x50'=>'PROFILE_BEGIN','0x60'=>'PROFILE_END',];
+    public static $level_code = [0=>'All',1=>'Error',2=>'Warning',4=>'Info',8=>'Trace',64=>'PROFILE',80=>'PROFILE_BEGIN',96=>'PROFILE_END',];
 
     /**
      * get status code attribute list
@@ -48,7 +48,7 @@ class Log extends BaseModelLog
     public function rules()
     {
         return array_merge(parent::rules(),[
-            [['level'], 'in', 'range' => ['0x00','0x01','0x02','0x04','0x08','0x40','0x50','0x60',]],
+            [['level'], 'in', 'range' => [0,1,2,4,8,64,80,96,]],
         ]);
     }
 

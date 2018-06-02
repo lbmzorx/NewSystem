@@ -4,7 +4,7 @@ namespace backend\modules\home\controllers;
 
 use backend\controllers\BaseCommon;
 use common\components\tools\System;
-use common\models\admindata\Log;
+use common\models\admindata\YiiLog;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -25,7 +25,7 @@ class DefaultController extends BaseCommon
             $data=System::getAll();
             return $data;
         }
-        $yiilogCount=Log::find()->where(['>=','log_time',strtotime(date("Y-m-d"))])->count();
+        $yiilogCount=YiiLog::find()->where(['>=','log_time',strtotime(date("Y-m-d"))])->count();
         return $this->render('index',['yiilogCount'=>$yiilogCount]);
     }
 }

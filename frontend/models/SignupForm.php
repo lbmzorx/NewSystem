@@ -130,11 +130,17 @@ class SignupForm extends Model
                     ->mailer
                     ->compose(
                         ['html' => 'signup-html', 'text' => 'signup-text'],
-                        ['user' => $user,'link'=>$link]
+                        [
+                            'user' => $user,
+                            'link'=>$link,
+                            'expire'=>$urlCheck->expire_time,
+                        ]
                     )
                     ->setFrom(Yii::$app->params['supportEmail'])
                     ->setTo($this->email)
-                    ->setSubject(\yii::t('app','Welcome signup {name} click link and activate you account!',['name'=>\yii::t('app',Yii::$app->name),'link'=>$link]))
+                    ->setSubject(\yii::t('app','Welcome signup {name} click link and activate you account!',[
+                        'name'=>\yii::t('app',Yii::$app->name),
+                    ]))
                     ->send();
                 if($mail){
                     $this->trigger(EmailEvent::EVENT_SUCCESS_EMAIL,$emailEvent);

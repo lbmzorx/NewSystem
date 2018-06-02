@@ -408,4 +408,6 @@ return [
     'Reply Success!'=>'回复成功',
     'Reply'=>'回复',
     'Request Error!'=>'请求错误！',
+    'Attention this link will be invalid at {date}!'=>'注意，此链接有效期到{date}',
+    'Congratulations! You have successfully activated your account,please login!'=>'恭喜！您已经成功激活账号，请登录！',
 ];

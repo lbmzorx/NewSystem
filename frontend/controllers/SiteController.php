@@ -1,7 +1,7 @@
 <?php
 namespace frontend\controllers;
 
-use common\components\tools\ModelHelper;
+use lbmzorx\components\helper\ModelHelper;
 use common\models\startdata\Article;
 use common\models\startdata\ArticleCate;
 use frontend\models\ActiveAccount;
@@ -186,8 +186,8 @@ class SiteController extends Controller
     public function actionActiveAccount(){
         $activeAccount=new ActiveAccount();
         $activeAccount->load(\yii::$app->request->get(),'');
-//        throw new Exception(VarDumper::dumpAsString($activeAccount->toArray()));
-        if( $activeAccount->validate()){
+        if( $activeAccount->validate() && $activeAccount->verifySign()){
+            \yii::$app->session->setFlash('Success',\yii::t('app','Congratulations! You have successfully activated your account,please login!'));
             $this->redirect(['site/login']);
         }
         \yii::$app->session->setFlash('error',ModelHelper::getErrorAsString($activeAccount,$activeAccount->getErrors()));
