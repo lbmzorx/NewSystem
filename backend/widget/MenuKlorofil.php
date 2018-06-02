@@ -98,9 +98,6 @@ class MenuKlorofil extends Widget
 
 //            throw new \yii\db\Exception(VarDumper::dumpAsString($menu).$this->left.$this->leftsub.$this->leftleftsub);
             foreach ($menu as $k => $v) {
-
-
-
                 if (!empty($v['sub'])) {
                     $string .= '<li data-id=""><a href="#' . md5($v['url'].(empty($v['module'])?$v['controller']:$v['module'])) . '" data-toggle="collapse"' .
                         'class="' . ((empty($v['module'])?$v['controller']==$this->leftsub:$v['module']==$this->left)? 'active' : 'collapsed') . '"' .

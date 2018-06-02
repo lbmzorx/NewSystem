@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use lbmzorx\components\behavior\StatusCode;
-use common\models\adminsearch\Log as SearchModel;
+use common\models\adminsearch\YiiLog as SearchModel;
 /* @var $this yii\web\View */
-/* @var $model common\models\adminsearch\Log */
+/* @var $model common\models\adminsearch\YiiLog */
 /* @var $form yii\widgets\ActiveForm */
 $this->registerCss(<<<STYLE
 .search-box .form-group{margin-bottom: 5px;line-height:0.2}
@@ -13,7 +13,7 @@ STYLE
         );
 ?>
 
-<div class="log-search search-box">
+<div class="yii-log-search search-box">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

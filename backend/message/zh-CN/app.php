@@ -393,4 +393,10 @@ return [
     'You have failed to try login more than {count}times, please wait {time}s'=>'您已登录失败超过了{count}次，请等待{time}秒',
     'You have failed to try login more than 10times, please try tomorrow!'=>'您已登录失败超过10次，请明天再试',
     'Please Set the Frontend Website Url!'=>'请设置前台网站的URL',
+    'There is no database {db} connection!'=>'无此数据库{db}连接',
+    'Can\'t truncate {table}'=>'清空表{table}失败',
+    'Delete All'=>'删除所有',
+    'Do you want to Delete all yii logs?'=>'您想删除所有的Yii日志吗?',
+    'Request Error !'=>'请求错误！',
+    'Request Error Type!'=>'错误请求方式',
 ];

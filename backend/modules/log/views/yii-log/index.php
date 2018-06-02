@@ -4,22 +4,22 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use lbmzorx\components\widget\BatchUpdate;
-use common\models\adminsearch\Log;
+use common\models\adminsearch\YiiLog;
 use lbmzorx\components\behavior\StatusCode;
 use lbmzorx\components\widget\BatchDelete;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\adminsearch\Log */
+/* @var $searchModel common\models\adminsearch\YiiLog */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Logs');
+$this->title = Yii::t('app', 'Yii Logs');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCss(<<<STYLE
         p .btn{margin-top:5px;}
 STYLE
 );
 ?>
-<div class="log-index">
+<div class="yii-log-index">
     <?= \yii\widgets\Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>    <div class="panel">
@@ -53,11 +53,9 @@ str
     </div>
 
     <p>
-        <?= Html::a('<i class="fa fa-plus-square"></i> '. Yii::t('app', 'Create {modelname}', [
-    'modelname' => Yii::t('app', 'Logs'),
-]), ['create'], ['class' => 'btn btn-success']) ?>
         <?= BatchDelete::widget(['name'=>Yii::t('app', 'Batch Deletes'),'griViewKey'=>GridView::$counter]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Level'),'attribute'=>'level','btnIcon'=>'level','griViewKey'=>GridView::$counter]) ?>
+        <?= Html::button('<i class="fa fa-trash-o"></i> '. Yii::t('app', 'Delete All'),
+            ['class' => 'btn btn-success','id'=>'truncate-all']) ?>
     </p>
 
     <?= GridView::widget([
@@ -79,7 +77,7 @@ str
             [
                'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
                'attribute'=>'level',
-               'filter'=>StatusCode::tranStatusCode(Log::$level_code,'app'),
+               'filter'=>StatusCode::tranStatusCode(YiiLog::$level_code,'app'),
                'value'=> function ($model) {
                    return Html::button($model->getStatusCode('level','level_code'),
                        [
@@ -93,9 +91,13 @@ str
             'category',
             'log_time',
             'prefix:ntext',
-            'message:ntext',
+//            'message:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template'=>'{view}  {delete}',
+
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>
@@ -107,12 +109,12 @@ str
         <?=Html::beginForm(['change-status'],'post')?>
         <input type="hidden" name="key" value="level">
         <input type="hidden" name="id" value="">
-        <?php foreach ( Log::$level_code as $k=>$v):?>           
+        <?php foreach ( YiiLog::$level_code as $k=>$v):?>           
             <label class="checkbox-inline" style="margin: 5px 10px;">
                 <?php
                     $css='warning';
-                    if( isset(Log::$level_css) && isset(Log::$level_css[$k])){
-                        $css = Log::$level_css [$k];
+                    if( isset(YiiLog::$level_css) && isset(YiiLog::$level_css[$k])){
+                        $css = YiiLog::$level_css [$k];
                     }else{
                         $css=isset(StatusCode::$cssCode[$k])?StatusCode::$cssCode[$k]:$css;
                     }
@@ -124,3 +126,30 @@ str
         <?=Html::endForm()?>
     </div>
 </div>
+<?php \lbmzorx\components\widget\JsBlock::begin()?>
+<script type="text/javascript">
+    $('#truncate-all').click(function () {
+        layer.confirm('<?=\yii::t('app','Do you want to Delete all yii logs?')?>'
+            ,function () {
+                $.ajax({
+                    url:'<?=\yii\helpers\Url::to(['truncate'])?>',
+                    type:'post',
+                    success:function(res){
+                        if(res.status){
+                            layer.msg(res.msg,{time:1000},function(){
+                                $.pjax.reload('#w<?=GridView::$counter-1?>');
+                            });
+                        }else{
+                            layer.alert(res.msg);
+                        }
+                    },
+                    error:function () {
+                        layer.alert('<?=\yii::t('app','Request Error !')?>');
+                    },
+                    dataType:'json'
+                });
+            }
+        );
+    });
+</script>
+<?php \lbmzorx\components\widget\JsBlock::end()?>
