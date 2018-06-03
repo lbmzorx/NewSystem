@@ -189,7 +189,6 @@ class ArticleController extends Controller
             }
             return $this->redirect(\yii::$app->request->referrer);
         }
-
     }
 
 }

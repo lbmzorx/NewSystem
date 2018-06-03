@@ -16,6 +16,9 @@ use yii\helpers\Html;
 <body>
     <?php $this->beginBody() ?>
     <?= $content ?>
+    <p>
+        <?=\yii::$app->name?>
+    </p>
     <?php $this->endBody() ?>
 </body>
 </html>

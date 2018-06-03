@@ -54,7 +54,8 @@ class ArticleCommit extends BaseModelArticleCommit
         return array_merge(parent::rules(),[
             [['status'], 'in', 'range' => [0,1,2,]],
             [['recycle'], 'in', 'range' => [0,1,]],
-            [['status','recycle','level'], 'default', 'value' =>0,],
+            [['status'], 'default', 'value' =>1,],
+            [['recycle','level'], 'default', 'value' =>0,],
             [['path'], 'default', 'value' =>'0',],
         ]);
     }

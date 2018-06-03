@@ -59,6 +59,13 @@ return [
                     'sourceLanguage' => 'en-US',
                     'fileMap' => [
                         'app' => 'app.php',
+                    ],
+                ],
+                'error' => [
+                    'class' => yii\i18n\PhpMessageSource::className(),
+                    'basePath' => '@frontend/message',
+                    'sourceLanguage' => 'en-US',
+                    'fileMap' => [
                         'error' => 'error.php',
                     ],
                 ],

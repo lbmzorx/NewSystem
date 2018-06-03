@@ -184,7 +184,7 @@ class User extends UserData implements IdentityInterface
      */
     public function generatePasswordResetToken()
     {
-        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+        return $this->password_reset_token = Yii::$app->security->generateRandomString().microtime(true). '_' .time();
     }
 
     /**

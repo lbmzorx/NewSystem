@@ -10,5 +10,6 @@ use yii\helpers\Html;
 <?php $this->beginPage() ?>
 <?php $this->beginBody() ?>
 <?= $content ?>
+<?=\yii::$app->name?>
 <?php $this->endBody() ?>
 <?php $this->endPage() ?>

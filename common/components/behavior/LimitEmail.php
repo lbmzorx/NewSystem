@@ -39,7 +39,7 @@ class LimitEmail extends  Behavior
     }
 
     public function getIpKey(){
-        return $this->prefix.\yii::$app->request->userIP;
+        return \yii::$app->request->userIP;
     }
 
     public function beforeEmail($event){

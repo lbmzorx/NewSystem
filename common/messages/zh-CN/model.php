@@ -90,6 +90,8 @@ return [
 	
 	'Secret Key'=>'秘密授权码',
 	'Head Img'=>'',
+	
+	'Mobile'=>'手机号码',
 	/*end*User*/
 
 	/*start*Test2*/

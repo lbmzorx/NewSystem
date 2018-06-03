@@ -17,6 +17,3 @@ use yii\helpers\Html;
         <strong><?=\yii::t('app','Attention this link will be invalid at {date}!',['date'=>\yii::$app->formatter->format($expire,'datetime')])?></strong>
     </p>
 </div>
-<p>
-    <?=\yii::$app->name?>
-</p>

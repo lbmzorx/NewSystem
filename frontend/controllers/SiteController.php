@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\ActivateForm;
 use lbmzorx\components\helper\ModelHelper;
 use common\models\startdata\Article;
 use common\models\startdata\ArticleCate;
@@ -183,12 +184,22 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionActivate(){
+        $artivate=new ActivateForm();
+        if(  $artivate->load(\yii::$app->request->get())&& $artivate->validate() && $artivate->sendEmail()){
+            \yii::$app->session->setFlash('Success',\yii::t('app','Congratulations! You have successfully activated your account,please login!'));
+            $this->redirect(['site/login']);
+        }
+        \yii::$app->session->setFlash('error',ModelHelper::getErrorAsString($artivate,$artivate->getErrors()));
+        return $this->render('activate');
+    }
+
     public function actionActiveAccount(){
         $activeAccount=new ActiveAccount();
         $activeAccount->load(\yii::$app->request->get(),'');
         if( $activeAccount->validate() && $activeAccount->verifySign()){
             \yii::$app->session->setFlash('Success',\yii::t('app','Congratulations! You have successfully activated your account,please login!'));
-            $this->redirect(['site/login']);
+            $this->redirect(['/site/login']);
         }
         \yii::$app->session->setFlash('error',ModelHelper::getErrorAsString($activeAccount,$activeAccount->getErrors()));
         return $this->render('active-account');
@@ -205,7 +216,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
                 Yii::$app->session->setFlash('success', yii::t('app','Check your email for further instructions.'));
-                return $this->goHome();
+                return $this->redirect('/site/login');
             } else {
                 Yii::$app->session->setFlash('error', yii::t('app','Sorry, we are unable to reset password for the provided email address.'));
             }
@@ -223,17 +234,18 @@ class SiteController extends Controller
      * @return mixed
      * @throws BadRequestHttpException
      */
-    public function actionResetPassword($token)
+    public function actionResetPassword($date,$expire,$type,$sign)
     {
         try {
-            $model = new ResetPasswordForm($token);
+            $model = new ResetPasswordForm();
+            $model->checkUrl($date,$expire,$type,$sign);
         } catch (InvalidParamException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password saved.');
-            return $this->goHome();
+            Yii::$app->session->setFlash('success', \yii::t('app','New password saved.'));
+            return $this->redirect('/site/login');
         }
 
         return $this->render('resetPassword', [

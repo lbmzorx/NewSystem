@@ -20,6 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-body">
             <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form']); ?>
             <?= $form->field($model,'email')->textInput(['autofocus' => true]) ?>
+            <?= $form->field($model, 'verifyCode', [
+                'options' => ['class' => 'form-group input-group'],
+            ])->widget(\yii\captcha\Captcha::className(),[
+                'template' => "<div class='input-group'>{input}<span class='input-group-btn'>{image}</span></div>",
+                'imageOptions' => ['alt' => '验证码'],
+            ]); ?>
             <div class="form-group">
                 <?= Html::submitButton( \yii::t('app','Send'), ['class' => 'btn btn-primary']) ?>
             </div>
