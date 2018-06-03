@@ -5,6 +5,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Html;
 use yii\web\IdentityInterface;
 use common\models\startdata\User as UserData;
 /**
@@ -84,7 +85,7 @@ class User extends UserData implements IdentityInterface
         $user= static::findOne(['username' => $username, 'status' => [self::STATUS_ACTIVE,self::STATUS_WAITING_ACTIVE]]);
         if($user){
             if($user->status==self::STATUS_WAITING_ACTIVE){
-                \Yii::$app->session->setFlash('warning',\yii::t('app','You need activate you account'));
+                \Yii::$app->session->setFlash('warning',\yii::t('app','You need activate you account').Html::a(\Yii::t('app','Activate'),['/site/activate']));
                 return null;
             }
         }

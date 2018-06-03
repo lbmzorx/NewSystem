@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use frontend\models\ActivateForm;
+use lbmzorx\components\action\FormAction;
 use lbmzorx\components\helper\ModelHelper;
 use common\models\startdata\Article;
 use common\models\startdata\ArticleCate;
@@ -90,6 +91,14 @@ class SiteController extends Controller
                 'maxLength'=>6,
                 'height'=>36,
                 'fontFile'=>$fontFile[rand(0,4)],
+            ],
+            'activate'=>[
+                'class'=>FormAction::className(),
+                'modelClass'=>ActivateForm::className(),
+                'verifyMethod'=>'sendEmail',
+                'successMsg'=>\yii::t('app','Congratulations! We have send an email to you account, please click it and activate you account'),
+                'isErrorMsg'=>true,
+                'successRedirectvView'=>'/site/login',
             ],
         ];
     }
@@ -184,21 +193,11 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionActivate(){
-        $artivate=new ActivateForm();
-        if(  $artivate->load(\yii::$app->request->get())&& $artivate->validate() && $artivate->sendEmail()){
-            \yii::$app->session->setFlash('Success',\yii::t('app','Congratulations! You have successfully activated your account,please login!'));
-            $this->redirect(['site/login']);
-        }
-        \yii::$app->session->setFlash('error',ModelHelper::getErrorAsString($artivate,$artivate->getErrors()));
-        return $this->render('activate');
-    }
-
     public function actionActiveAccount(){
         $activeAccount=new ActiveAccount();
         $activeAccount->load(\yii::$app->request->get(),'');
         if( $activeAccount->validate() && $activeAccount->verifySign()){
-            \yii::$app->session->setFlash('Success',\yii::t('app','Congratulations! You have successfully activated your account,please login!'));
+            \yii::$app->session->addFlash('Success',\yii::t('app','Congratulations! You have successfully activated your account,please login!'));
             $this->redirect(['/site/login']);
         }
         \yii::$app->session->setFlash('error',ModelHelper::getErrorAsString($activeAccount,$activeAccount->getErrors()));

@@ -422,4 +422,5 @@ return [
     'Check your email for further instructions.'=>'请检查您的邮箱并点击链接。',
     'Sorry, we are unable to reset password for the provided email address.'=>'抱歉，您的的邮箱无法发送邮件。',
     'New password saved.'=>'新的密码已经保存。',
+    'Congratulations! We have send an email to you account, please click it and activate you account'=>'恭喜！我们已经发送了邮件到您的邮箱，请点击邮箱链接激活您的账号',
 ];

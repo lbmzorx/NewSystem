@@ -6,10 +6,8 @@ use common\components\helper\SignHelper;
 use common\models\startdata\UrlCheck;
 use common\models\user\User;
 use lbmzorx\components\helper\ModelHelper;
-use yii\base\Exception;
 use yii\base\Model;
 use Yii;
-use yii\helpers\VarDumper;
 
 /**
  * Signup form
