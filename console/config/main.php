@@ -36,7 +36,7 @@ return [
                 'daemonize' => true,
                 'log_file' =>__DIR__ . '/../../frontend/runtime/swoole/swoole.log',
                 'log_level' => 4,   //4 warning
-                'pid_file' => __DIR__ . '/../../frontend/runtime/swoole/server.pid',
+                'pid_file' => __DIR__ . '/../../frontend/runtime/swoole/swoole.pid',
                 'user'=>'www',
                 'group'=>'www',
                 'max_request'=>300,     //防止内存溢出，如果应用比较消耗内存，则应减小
@@ -57,7 +57,7 @@ return [
                 'daemonize' => true,
                 'log_file' => __DIR__ . '/../../backend/runtime/swoole/swoole.log',
                 'log_level' => 4,   //4 warning
-                'pid_file' => __DIR__ . '/../../backend/runtime/swoole/server.pid',
+                'pid_file' => __DIR__ . '/../../backend/runtime/swoole/swoole.pid',
                 'user'=>'www',
                 'group'=>'www',
                 'max_request'=>300,     //防止内存溢出，如果应用比较消耗内存，则应减小,
