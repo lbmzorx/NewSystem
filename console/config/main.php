@@ -33,7 +33,7 @@ return [
             'swooleConfig' => [//标准的swoole配置项都可以再此加入
                 'reactor_num' => 2,
                 'worker_num' => 4,
-                'daemonize' => false,
+                'daemonize' => true,
                 'log_file' =>__DIR__ . '/../../frontend/runtime/swoole/swoole.log',
                 'log_level' => 4,   //4 warning
                 'pid_file' => __DIR__ . '/../../frontend/runtime/swoole/server.pid',
@@ -50,11 +50,11 @@ return [
             'port' => 9530,
             'web' => 'web',//默认为web。rootDir app web目的是拼接yii2的根目录，如果你的应用为basic，那么app为空即可。
             'debug' => false,//默认开启debug，上线应置为false
-            'env' => 'dev',//默认为dev，上线应置为prod
+            'env' => 'prod',//默认为dev，上线应置为prod
             'swooleConfig' => [
                 'reactor_num' => 2,
                 'worker_num' => 4,
-                'daemonize' => false,
+                'daemonize' => true,
                 'log_file' => __DIR__ . '/../../backend/runtime/swoole/swoole.log',
                 'log_level' => 4,   //4 warning
                 'pid_file' => __DIR__ . '/../../backend/runtime/swoole/server.pid',
