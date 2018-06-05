@@ -66,13 +66,13 @@ str
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pager' =>[
-            'class'=>\lbmzorx\components\widget\JumpPager::className(),
+            'class'=>\yii\widgets\LinkPager::className(),
             'firstPageLabel'=>Yii::t('app','First'),
             'nextPageLabel'=>Yii::t('app','Next'),
             'prevPageLabel'=>Yii::t('app','Prev'),
             'lastPageLabel'=>Yii::t('app','Last'),
-            'jButtonLabel' =>Yii::t('app','Jump'),
-            'sButtonLabel' =>Yii::t('app','PageSize'),
+//            'jButtonLabel' =>Yii::t('app','Jump'),
+//            'sButtonLabel' =>Yii::t('app','PageSize'),
         ],
         'columns' => [
             ['class' => 'yii\grid\CheckboxColumn'],
