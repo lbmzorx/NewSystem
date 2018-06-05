@@ -13,7 +13,7 @@ use yii\helpers\Url;
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <p>系统今日请求错误记录：<a href="<?=Url::to(['/log/log/index'])?>" target="_top" class="btn btn-warning"><?=$yiilogCount?></a></p>
+                        <p>系统今日请求错误记录：<a href="<?=Url::to(['/log/yii-log/index'])?>" target="_top" class="btn btn-warning"><?=$yiilogCount?></a></p>
                     </div>
                 </div>
             </div>

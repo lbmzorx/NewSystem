@@ -34,6 +34,10 @@ class AppInit extends Component
         foreach ($data as $v) {
             \yii::$app->params[$v['name']]=$v['value'];
         }
+
+        if(isset(\yii::$app->params['website_title'])){
+            \yii::$app->name=\yii::$app->params['website_title'];
+        }
     }
 
 

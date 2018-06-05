@@ -24,6 +24,7 @@ return [
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
+
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
