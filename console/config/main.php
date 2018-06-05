@@ -39,7 +39,7 @@ return [
                 'pid_file' => __DIR__ . '/../../frontend/runtime/swoole/swoole.pid',
                 'user'=>'www',
                 'group'=>'www',
-                'max_request'=>300,     //防止内存溢出，如果应用比较消耗内存，则应减小
+                'max_request'=>100,     //防止内存溢出，如果应用比较消耗内存，则应减小
             ],
         ],
         'swoole-backend' => [
@@ -52,15 +52,15 @@ return [
             'debug' => false,//默认开启debug，上线应置为false
             'env' => 'prod',//默认为dev，上线应置为prod
             'swooleConfig' => [
-                'reactor_num' => 2,
-                'worker_num' => 4,
+                'reactor_num' => 1,
+                'worker_num' => 2,
                 'daemonize' => true,
                 'log_file' => __DIR__ . '/../../backend/runtime/swoole/swoole.log',
                 'log_level' => 4,   //4 warning
                 'pid_file' => __DIR__ . '/../../backend/runtime/swoole/swoole.pid',
                 'user'=>'www',
                 'group'=>'www',
-                'max_request'=>300,     //防止内存溢出，如果应用比较消耗内存，则应减小,
+                'max_request'=>100,     //防止内存溢出，如果应用比较消耗内存，则应减小,
             ],
         ]
     ],
