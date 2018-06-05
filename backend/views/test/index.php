@@ -18,15 +18,36 @@ $pagination=new \yii\data\Pagination(['totalCount'=>100]);
 </head>
 <body>
 <div>
-    <button id="time" >时间</button>
-    <a href="<?=Url::to(['site/index','a'=>'b'])?>">site/index</a>
-    <button>page-creat2 <?=$pagination->createUrl(1)?></button>
-    <a href="<?=Url::to(['site/index','a'=>'b','d'=>'b'])?>">site/index</a>
-    <?=\yii\helpers\Html::a('testhtmla',['site/index','page'=>1])?>
-    <?=\yii\helpers\Html::a('testhtmla-create-link-1',$pagination->createUrl(1))?>
-    <?=\yii\widgets\LinkPager::widget([
+    <p>
+        <button id="time" >时间</button>
+    </p>
+
+    <p>
+        url to
+        <a href="<?=Url::to(['site/index','a'=>'b'])?>">site/index</a>
+    </p>
+    <p>
+        page直接创建
+        <button>page-creat2 <?=$pagination->createUrl(1)?></button>
+    </p>
+    <p>
+        url to 有参数
+        <a href="<?=Url::to(['site/index','a'=>'b','d'=>'b'])?>">site/index</a>
+    </p>
+    <p>
+        html a 数组有参数
+        <?=\yii\helpers\Html::a('testhtmla',['site/index','page'=>1])?>
+    </p>
+    <p>
+        html a page创建url
+        <?=\yii\helpers\Html::a('testhtmla-create-link-1',$pagination->createUrl(1))?>
+    </p>
+    <p>
+        <?=\yii\widgets\LinkPager::widget([
             'pagination'=>$pagination,
-    ])?>
+        ])?>
+    </p>
+
 </div>
 <script type="text/javascript" src="/assets/layui-v2.3.0/layui-v2.3.0/layui/layui.js"></script>
 <script type="text/javascript" src="/assets/layer-v3.1.1/layer-v3.1.1/layer/layer.js"></script>
