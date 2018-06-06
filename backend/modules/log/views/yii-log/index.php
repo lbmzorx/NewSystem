@@ -92,7 +92,6 @@ str
             'log_time',
             'prefix:ntext',
 //            'message:ntext',
-
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template'=>'{view}  {delete}',
@@ -100,6 +99,9 @@ str
             ],
         ],
     ]); ?>
+            <?=\yii\widgets\LinkPager::widget([
+                    'pagination'=>(new \yii\data\Pagination(['totalCount'=>1000])),
+            ])?>
     <?php Pjax::end(); ?>
         </div>
     </div>
