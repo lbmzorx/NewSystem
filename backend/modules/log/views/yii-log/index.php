@@ -104,28 +104,7 @@ str
         </div>
     </div>
 </div>
-<div id="level-change-dom" style="display: none;">
-    <div style="padding: 10px;">
-        <?=Html::beginForm(['change-status'],'post')?>
-        <input type="hidden" name="key" value="level">
-        <input type="hidden" name="id" value="">
-        <?php foreach ( YiiLog::$level_code as $k=>$v):?>           
-            <label class="checkbox-inline" style="margin: 5px 10px;">
-                <?php
-                    $css='warning';
-                    if( isset(YiiLog::$level_css) && isset(YiiLog::$level_css[$k])){
-                        $css = YiiLog::$level_css [$k];
-                    }else{
-                        $css=isset(StatusCode::$cssCode[$k])?StatusCode::$cssCode[$k]:$css;
-                    }
-                ?>               
-                <?=Html::input('radio','value',$k)?>
-                <?=Html::tag('span',\Yii::t('app',$v),['class'=>'btn btn-'.$css])?>
-            </label>          
-        <?php endforeach;?>
-        <?=Html::endForm()?>
-    </div>
-</div>
+
 <?php \lbmzorx\components\widget\JsBlock::begin()?>
 <script type="text/javascript">
     $('#truncate-all').click(function () {

@@ -8,7 +8,6 @@
 namespace backend\controllers;
 
 
-use common\models\admindata\Log;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\Response;
@@ -16,7 +15,12 @@ use yii\web\Response;
 class TestController extends Controller
 {
     public function actionIndex(){
+
+
+
         return $this->renderPartial('index');
     }
+
+
 
 }
