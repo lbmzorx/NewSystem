@@ -125,7 +125,8 @@ use yii\helpers\Url;
         hover: {
             animationDuration: 0 // duration of animations when hovering an item
         },
-        responsiveAnimationDuration: 0 // animation duration after a resize
+        responsiveAnimationDuration: 0, // animation duration after a resize
+        pointRadius:0
     };
 
 
@@ -167,6 +168,7 @@ use yii\helpers\Url;
             animationDuration: 0, // duration of animations when hovering an item
         },
         responsiveAnimationDuration: 0, // animation duration after a resize
+        pointRadius:0,
     };
     var dfchart;
 
