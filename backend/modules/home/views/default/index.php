@@ -97,7 +97,7 @@ use yii\helpers\Url;
             pointRadius:0,
             yAxisID: 'mem-total'
         }, {
-            label: 'Actural Mem',
+            label: 'Percent Mem',
             borderColor: 'blue',
             backgroundColor: 'blue',
             fill: false,
@@ -359,6 +359,7 @@ use yii\helpers\Url;
             cpudom.css('width',dataJSON[v].sys+'%');
             cpudom.css('background-color',coloMode(cpudomcolor,dataJSON[v].sys));
             if(typeof cpu_chart_data.datasets[j]=="undefined" ){
+                cpudataTemplate.label=v;
                 cpudataTemplate.borderColor="#"+("00000"+((Math.random()*16777215+0.5)>>0).toString(16)).slice(-6);
                 cpudataTemplate.backgroundColor=cpudataTemplate.borderColor;
                 cpu_chart_data.datasets.push(cpudataTemplate);
