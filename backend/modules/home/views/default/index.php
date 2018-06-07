@@ -93,6 +93,7 @@ use yii\helpers\Url;
             fill: false,
             borderWidth:1,
             data:rom_used_data,
+            lineTension:0,
             pointRadius:0,
             yAxisID: 'mem-total'
         }, {
@@ -101,6 +102,7 @@ use yii\helpers\Url;
             backgroundColor: 'blue',
             fill: false,
             borderWidth:1,
+            lineTension:0,
             data: rom_actural_data,
             pointRadius:0,
             yAxisID: 'mem-total'
@@ -143,6 +145,7 @@ use yii\helpers\Url;
             backgroundColor: 'red',
             pointRadius:0,
             borderWidth:1,
+            lineTension:0,
             fill: false,
             data:df_used_data,
             yAxisID: 'Disk-Total'
