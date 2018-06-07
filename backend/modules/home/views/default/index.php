@@ -91,14 +91,18 @@ use yii\helpers\Url;
             borderColor: 'red',
             backgroundColor: 'red',
             fill: false,
+            borderWidth:1,
             data:rom_used_data,
+            pointRadius:0,
             yAxisID: 'mem-total'
         }, {
             label: 'Actural Mem',
             borderColor: 'blue',
             backgroundColor: 'blue',
             fill: false,
+            borderWidth:1,
             data: rom_actural_data,
+            pointRadius:0,
             yAxisID: 'mem-total'
         }]
     };
@@ -126,7 +130,6 @@ use yii\helpers\Url;
             animationDuration: 0 // duration of animations when hovering an item
         },
         responsiveAnimationDuration: 0, // animation duration after a resize
-        pointRadius:0
     };
 
 
@@ -138,6 +141,8 @@ use yii\helpers\Url;
             label: 'Disk-Used',
             borderColor: 'red',
             backgroundColor: 'red',
+            pointRadius:0,
+            borderWidth:1,
             fill: false,
             data:df_used_data,
             yAxisID: 'Disk-Total'
@@ -168,7 +173,6 @@ use yii\helpers\Url;
             animationDuration: 0, // duration of animations when hovering an item
         },
         responsiveAnimationDuration: 0, // animation duration after a resize
-        pointRadius:0,
     };
     var dfchart;
 
