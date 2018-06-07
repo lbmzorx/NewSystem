@@ -9,11 +9,9 @@ use yii\web\AssetBundle;
  */
 class ChartAsset extends AssetBundle
 {
-    public $sourcePath = '@resource/vendor/chartist';
-    public $css=[
-        'css/chartist-custom.css',
-    ];
+    public $sourcePath = null;
+
     public $js = [
-        'js/chartist.min.js'
+        '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js'
     ];
 }

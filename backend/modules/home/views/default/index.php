@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\Url;
+
+\common\assets\ChartAsset::register($this);
 ?>
 <div class="panel panel-default">
     <div class="panel-body">
@@ -65,13 +67,108 @@ use yii\helpers\Url;
                 </div>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-sm-4"><canvas id="df-chart"></canvas></div>
+            <div class="col-sm-4"><canvas id="rom-chart"></canvas></div>
+            <div class="col-sm-4"><canvas id="cpu-chart"></canvas></div>
+        </div>
     </div>
 </div>
 
 <?php \lbmzorx\components\widget\JsBlock::begin(['pos'=>\yii\web\View::POS_END]);?>
 <script type="text/javascript">
+    var df_chart_dom  = document.getElementById('df-chart').getContext('2d');
+    var rom_chart_dom = document.getElementById('rom-chart').getContext('2d');
+    var cpu_chart_dom = document.getElementById('cpu-chart').getContext('2d');
 
+    var labels=["Used Mem","Actural Mem"];
+    var rom_used_data=[],
+        rom_actural_data=[];
+    var rom_chart_data = {
+        labels: labels,
+        datasets: [{
+            label: 'Used Mem',
+            borderColor: 'red',
+            backgroundColor: 'red',
+            fill: false,
+            data:rom_used_data,
+            yAxisID: 'mem-total'
+        }, {
+            label: 'Actural Mem',
+            borderColor: 'blue',
+            backgroundColor: 'blue',
+            fill: false,
+            data: rom_actural_data,
+            yAxisID: 'mem-total'
+        }]
+    };
+
+    var rom_chart_options={
+        responsive: true,
+            hoverMode: 'index',
+            stacked: false,
+            title: {
+            display: true,
+                text: 'Server Memery'
+        },
+        scales: {
+            yAxes: [{
+                type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                display: true,
+                position: 'left',
+                id: 'mem-total'
+            }]
+        },
+        animation: {
+            duration: 0 // general animation time
+        },
+        hover: {
+            animationDuration: 0 // duration of animations when hovering an item
+        },
+        responsiveAnimationDuration: 0 // animation duration after a resize
+    };
+
+
+    var dflabels=["Disk-Used"];
+    var df_used_data=[];
+    var df_chart_data = {
+        labels: dflabels,
+        datasets: [{
+            label: 'Disk-Used',
+            borderColor: 'red',
+            backgroundColor: 'red',
+            fill: false,
+            data:df_used_data,
+            yAxisID: 'Disk-Total'
+        }]
+    };
+    var rowchart;
+
+    var df_chart_options={
+        responsive: true,
+        hoverMode: 'index',
+        stacked: false,
+        title: {
+            display: true,
+            text: 'Server Memery'
+        },
+        scales: {
+            yAxes: [{
+                type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                display: true,
+                position: 'left',
+                id: 'Disk-Total'
+            }]
+        },
+        animation: {
+            duration: 0, // general animation time
+        },
+        hover: {
+            animationDuration: 0, // duration of animations when hovering an item
+        },
+        responsiveAnimationDuration: 0, // animation duration after a resize
+    };
+    var dfchart;
     function getSystemData()
     {
         setTimeout("getSystemData()", 1000);
@@ -104,6 +201,7 @@ use yii\helpers\Url;
         $("#system-buffers").html(dataJSON.Buffers);
         $("#system-vmem-total").html(dataJSON.VmallocTotal);
         $("#system-vmem-used").html(dataJSON.VmallocUsed);
+
 
         $("#system-mem-total-unit").html(dataJSON.MemTotal_unit);
         $("#system-mem-free-unit").html(dataJSON.MemFree_unit);
@@ -164,6 +262,25 @@ use yii\helpers\Url;
         $("#system-cpu-procs_running").html(dataJSON.procs_running);
         $("#system-cpu-procs_blocked").html(dataJSON.procs_blocked);
 
+        rom_used_data.push(dataJSON.MemRealUsed);
+        rom_actural_data.push(dataJSON.MemRealUsed);
+
+        df_used_data.push(dataJSON.df.dfUsed);
+
+        rowchart = Chart.Line(rom_chart_dom, {
+            type: 'line',
+            data:rom_chart_data,
+            options: rom_chart_options
+        });
+
+        dfchart = Chart.Line(df_chart_dom, {
+            type: 'line',
+            data:df_chart_data,
+            options: df_chart_options
+        });
+
+
+        console.log(df_chart_data);
         $.each(dataJSON.cpu,function (k,v) {
             $("#system-cpu-sys-"+v).html(dataJSON[v].sys);
             $("#system-cpu-nice-"+v).html(dataJSON[v].nice);
