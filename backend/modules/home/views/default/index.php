@@ -105,7 +105,7 @@ use yii\helpers\Url;
             lineTension:0,
             data: rom_actural_data,
             pointRadius:0,
-            yAxisID: 'mem-total'
+            yAxisID: 'mem-percent'
         }]
     };
 
@@ -123,6 +123,11 @@ use yii\helpers\Url;
                 display: true,
                 position: 'left',
                 id: 'mem-total'
+            },{
+                type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                display: true,
+                position: 'left',
+                id: 'mem-percent'
             }]
         },
         animation: {
