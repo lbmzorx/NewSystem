@@ -69,8 +69,8 @@ use yii\helpers\Url;
         </div>
         <div class="row">
             <div class="col-sm-4"><canvas id="df-chart"></canvas></div>
-            <div class="col-sm-4"><canvas id="rom-chart"></canvas></div>
             <div class="col-sm-4"><canvas id="cpu-chart"></canvas></div>
+            <div class="col-sm-4"><canvas id="rom-chart"></canvas></div>
         </div>
     </div>
 </div>
@@ -179,6 +179,90 @@ use yii\helpers\Url;
     };
     var dfchart;
 
+    var cpu_used_data=[];
+    var cpu_chart_data = {
+        labels: labels,
+        datasets: [{
+            label: 'CUP0-Used',
+            borderColor: 'red',
+            backgroundColor: 'red',
+            pointRadius:0,
+            borderWidth:1,
+            lineTension:0,
+            fill: false,
+            data:cpu_used_data,
+            yAxisID: 'CUP-Total'
+        },{
+            label: 'CUP1-Used',
+            borderColor: 'red',
+            backgroundColor: 'red',
+            pointRadius:0,
+            borderWidth:1,
+            lineTension:0,
+            fill: false,
+            data:cpu_used_data,
+            yAxisID: 'CUP-Total'
+        },{
+            label: 'CUP2-Used',
+            borderColor: 'red',
+            backgroundColor: 'red',
+            pointRadius:0,
+            borderWidth:1,
+            lineTension:0,
+            fill: false,
+            data:cpu_used_data,
+            yAxisID: 'CUP-Total'
+        },{
+            label: 'CUP3-Used',
+            borderColor: 'red',
+            backgroundColor: 'red',
+            pointRadius:0,
+            borderWidth:1,
+            lineTension:0,
+            fill: false,
+            data:cpu_used_data,
+            yAxisID: 'CUP-Total'
+        },{
+            label: 'CUP5-Used',
+            borderColor: 'red',
+            backgroundColor: 'red',
+            pointRadius:0,
+            borderWidth:1,
+            lineTension:0,
+            fill: false,
+            data:cpu_used_data,
+            yAxisID: 'CUP-Total'
+        }]
+    };
+
+    var cpu_chart_options={
+        responsive: true,
+        hoverMode: 'index',
+        stacked: false,
+        title: {
+            display: true,
+            text: 'Server Memery'
+        },
+        scales: {
+            yAxes: [{
+                type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                display: true,
+                position: 'left',
+                id: 'CUP-Total'
+            }]
+        },
+        animation: {
+            duration: 0, // general animation time
+        },
+        hover: {
+            animationDuration: 0, // duration of animations when hovering an item
+        },
+        responsiveAnimationDuration: 0, // animation duration after a resize
+    };
+    var cpuchart;
+
+
+
     var i=1;
     function getSystemData()
     {
@@ -275,7 +359,7 @@ use yii\helpers\Url;
 
         labels.push(++i);
         rom_used_data.push(dataJSON.MemRealUsed);
-        rom_actural_data.push(dataJSON.MemRealUsed);
+        rom_actural_data.push(dataJSON.MemRealPercent);
 
         df_used_data.push(dataJSON.df.dfUsed);
 
@@ -307,6 +391,13 @@ use yii\helpers\Url;
             cpudom.attr('aria-valuemax',100);
             cpudom.css('width',dataJSON[v].sys+'%');
             cpudom.css('background-color',coloMode(cpudomcolor,dataJSON[v].sys));
+            cpu_chart_data.datasets.[k].data.push(dataJSON[v].sys);
+        });
+
+        cpuchart = Chart.Line(cpu_chart_dom, {
+            type: 'line',
+            data:cpu_chart_data,
+            options: cpu_chart_options
         });
     }
 
