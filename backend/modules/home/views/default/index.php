@@ -182,58 +182,20 @@ use yii\helpers\Url;
     var cpu_used_data=[];
     var cpu_chart_data = {
         labels: labels,
-        datasets: [{
-            label: 'CUP0-Used',
-            borderColor: 'red',
-            backgroundColor: 'red',
-            pointRadius:0,
-            borderWidth:1,
-            lineTension:0,
-            fill: false,
-            data:cpu_used_data,
-            yAxisID: 'CUP-Total'
-        },{
-            label: 'CUP1-Used',
-            borderColor: 'red',
-            backgroundColor: 'red',
-            pointRadius:0,
-            borderWidth:1,
-            lineTension:0,
-            fill: false,
-            data:cpu_used_data,
-            yAxisID: 'CUP-Total'
-        },{
-            label: 'CUP2-Used',
-            borderColor: 'red',
-            backgroundColor: 'red',
-            pointRadius:0,
-            borderWidth:1,
-            lineTension:0,
-            fill: false,
-            data:cpu_used_data,
-            yAxisID: 'CUP-Total'
-        },{
-            label: 'CUP3-Used',
-            borderColor: 'red',
-            backgroundColor: 'red',
-            pointRadius:0,
-            borderWidth:1,
-            lineTension:0,
-            fill: false,
-            data:cpu_used_data,
-            yAxisID: 'CUP-Total'
-        },{
-            label: 'CUP5-Used',
-            borderColor: 'red',
-            backgroundColor: 'red',
-            pointRadius:0,
-            borderWidth:1,
-            lineTension:0,
-            fill: false,
-            data:cpu_used_data,
-            yAxisID: 'CUP-Total'
-        }]
+        datasets: []
     };
+    var cpudataTemplate={
+        label: 'CUP0-Used',
+        borderColor: 'red',
+        backgroundColor: 'red',
+        pointRadius:0,
+        borderWidth:1,
+        lineTension:0,
+        fill: false,
+        data:cpu_used_data,
+        yAxisID: 'CUP-Total'
+    };
+
 
     var cpu_chart_options={
         responsive: true,
@@ -241,7 +203,7 @@ use yii\helpers\Url;
         stacked: false,
         title: {
             display: true,
-            text: 'Server Memery'
+            text: 'Server CPU'
         },
         scales: {
             yAxes: [{
@@ -375,9 +337,9 @@ use yii\helpers\Url;
             options: df_chart_options
         });
 
-
-        console.log(df_chart_data);
+        var j=0;
         $.each(dataJSON.cpu,function (k,v) {
+
             $("#system-cpu-sys-"+v).html(dataJSON[v].sys);
             $("#system-cpu-nice-"+v).html(dataJSON[v].nice);
             $("#system-cpu-idle-"+v).html(dataJSON[v].idle);
@@ -391,8 +353,15 @@ use yii\helpers\Url;
             cpudom.attr('aria-valuemax',100);
             cpudom.css('width',dataJSON[v].sys+'%');
             cpudom.css('background-color',coloMode(cpudomcolor,dataJSON[v].sys));
-            cpu_chart_data.datasets.[k].data.push(dataJSON[v].sys);
+            if(typeof cpu_chart_data.datasets[j]=="undefined" ){
+                cpudataTemplate.borderColor="#"+("00000"+((Math.random()*16777215+0.5)>>0).toString(16)).slice(-6);
+                cpudataTemplate.backgroundColor=cpudataTemplate.borderColor;
+                cpu_chart_data.datasets.push(cpudataTemplate);
+            }
+            cpu_chart_data.datasets[j].data.push(dataJSON[v].sys);
+            j++;
         });
+
 
         cpuchart = Chart.Line(cpu_chart_dom, {
             type: 'line',
