@@ -79,11 +79,11 @@ str
                'attribute'=>'level',
                'filter'=>StatusCode::tranStatusCode(YiiLog::$level_code,'app'),
                'value'=> function ($model) {
-                   return Html::button($model->getStatusCode('level','level_code'),
+                   return Html::tag('label',$model->getStatusCode('level','level_code'),
                        [
                            'data-id'=>$model->id,
                            'data-value'=>$model->level,
-                           'class'=>'level-change btn btn-xs btn-'.$model->getStatusCss('level','level_css',$model->level)
+                           'class'=>'btn btn-xs btn-'.$model->getStatusCss('level','level_css',$model->level)
                        ]);
                },
                'format'=>'raw',
@@ -99,9 +99,6 @@ str
             ],
         ],
     ]); ?>
-            <?=\yii\widgets\LinkPager::widget([
-                    'pagination'=>(new \yii\data\Pagination(['totalCount'=>1000])),
-            ])?>
     <?php Pjax::end(); ?>
         </div>
     </div>

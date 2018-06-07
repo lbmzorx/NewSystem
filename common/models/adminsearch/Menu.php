@@ -73,7 +73,11 @@ class Menu extends DataModel
                     'id' => SORT_DESC,
                     'sort' => SORT_ASC,
                 ]
-            ]
+            ],
+            'pagination'=>[
+               'pageParam'=>'page',
+               'pageSizeParam'=>'per-page',
+            ],
         ]);
 
         $this->load($params);

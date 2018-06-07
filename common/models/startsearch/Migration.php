@@ -61,6 +61,10 @@ class Migration extends DataModel
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination'=>[
+               'pageParam'=>'page',
+               'pageSizeParam'=>'per-page',
+            ],
         ]);
 
         $this->load($params);

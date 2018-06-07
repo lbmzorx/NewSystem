@@ -52,7 +52,11 @@ class ArticleContent extends DataModel
                 'defaultOrder' => [
                     'id' => SORT_DESC,
                 ]
-            ]
+            ],
+             'pagination'=>[
+               'pageParam'=>'page',
+               'pageSizeParam'=>'per-page',
+             ],
         ]);
 
         $this->load($params);
