@@ -324,23 +324,23 @@ use yii\helpers\Url;
         $("#system-cpu-procs_running").html(dataJSON.procs_running);
         $("#system-cpu-procs_blocked").html(dataJSON.procs_blocked);
 
-        labels.push(++i);
-        rom_used_data.push(dataJSON.MemRealUsed);
-        rom_actural_data.push(dataJSON.MemRealPercent);
-
-        df_used_data.push(dataJSON.df.dfUsed);
-
-        rowchart = Chart.Line(rom_chart_dom, {
-            type: 'line',
-            data:rom_chart_data,
-            options: rom_chart_options
-        });
-
-        dfchart = Chart.Line(df_chart_dom, {
-            type: 'line',
-            data:df_chart_data,
-            options: df_chart_options
-        });
+//        labels.push(++i);
+//        rom_used_data.push(dataJSON.MemRealUsed);
+//        rom_actural_data.push(dataJSON.MemRealPercent);
+//
+//        df_used_data.push(dataJSON.df.dfUsed);
+//
+//        rowchart = Chart.Line(rom_chart_dom, {
+//            type: 'line',
+//            data:rom_chart_data,
+//            options: rom_chart_options
+//        });
+//
+//        dfchart = Chart.Line(df_chart_dom, {
+//            type: 'line',
+//            data:df_chart_data,
+//            options: df_chart_options
+//        });
 
         var j=0;
         $.each(dataJSON.cpu,function (k,v) {
@@ -358,22 +358,23 @@ use yii\helpers\Url;
             cpudom.attr('aria-valuemax',100);
             cpudom.css('width',dataJSON[v].sys+'%');
             cpudom.css('background-color',coloMode(cpudomcolor,dataJSON[v].sys));
-            if(typeof cpu_chart_data.datasets[j]=="undefined" ){
-                cpudataTemplate.label=v;
-                cpudataTemplate.borderColor="#"+("00000"+((Math.random()*16777215+0.5)>>0).toString(16)).slice(-6);
-                cpudataTemplate.backgroundColor=cpudataTemplate.borderColor;
-                cpu_chart_data.datasets.push(cpudataTemplate);
-            }
-            cpu_chart_data.datasets[j].data.push(dataJSON[v].sys);
-            j++;
+
+//            if(typeof cpu_chart_data.datasets[j]=="undefined" ){
+//                cpudataTemplate.label=v;
+//                cpudataTemplate.borderColor="#"+("00000"+((Math.random()*16777215+0.5)>>0).toString(16)).slice(-6);
+//                cpudataTemplate.backgroundColor=cpudataTemplate.borderColor;
+//                cpu_chart_data.datasets.push(cpudataTemplate);
+//            }
+//            cpu_chart_data.datasets[j].data.push(dataJSON[v].sys);
+//            j++;
         });
 
 
-        cpuchart = Chart.Line(cpu_chart_dom, {
-            type: 'line',
-            data:cpu_chart_data,
-            options: cpu_chart_options
-        });
+//        cpuchart = Chart.Line(cpu_chart_dom, {
+//            type: 'line',
+//            data:cpu_chart_data,
+//            options: cpu_chart_options
+//        });
     }
 
     function coloMode(colormode,percent) {
