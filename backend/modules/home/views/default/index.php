@@ -81,7 +81,7 @@ use yii\helpers\Url;
     var rom_chart_dom = document.getElementById('rom-chart').getContext('2d');
     var cpu_chart_dom = document.getElementById('cpu-chart').getContext('2d');
 
-    var labels=["Used Mem","Actural Mem"];
+    var labels=[];
     var rom_used_data=[],
         rom_actural_data=[];
     var rom_chart_data = {
@@ -129,10 +129,10 @@ use yii\helpers\Url;
     };
 
 
-    var dflabels=["Disk-Used"];
+
     var df_used_data=[];
     var df_chart_data = {
-        labels: dflabels,
+        labels: labels,
         datasets: [{
             label: 'Disk-Used',
             borderColor: 'red',
@@ -169,6 +169,8 @@ use yii\helpers\Url;
         responsiveAnimationDuration: 0, // animation duration after a resize
     };
     var dfchart;
+
+    var i=1;
     function getSystemData()
     {
         setTimeout("getSystemData()", 1000);
@@ -262,6 +264,7 @@ use yii\helpers\Url;
         $("#system-cpu-procs_running").html(dataJSON.procs_running);
         $("#system-cpu-procs_blocked").html(dataJSON.procs_blocked);
 
+        labels.push(++i);
         rom_used_data.push(dataJSON.MemRealUsed);
         rom_actural_data.push(dataJSON.MemRealUsed);
 
