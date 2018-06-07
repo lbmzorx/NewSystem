@@ -62,7 +62,11 @@ return [
                 'group'=>'www',
                 'max_request'=>100,     //防止内存溢出，如果应用比较消耗内存，则应减小,
             ],
-        ]
+        ],
+        'swoole-queue-frontend' =>[
+            'class'=>'console\controllers\UserMessageController',
+
+        ],
     ],
     'components' => [
         'log' => [

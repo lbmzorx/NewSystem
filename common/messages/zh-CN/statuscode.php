@@ -96,4 +96,14 @@ return [
 	'Visitor'=>'访客',
 	'Fans'=>'粉丝',
 	/*end*UserRemain*/
+
+	/*start*UserMessage*/
+	'Normal'=>'正常',
+	'Stress'=>'着急',
+	'Urgency'=>'立即',
+	'User'=>'用户',
+	'Personal'=>'个人',
+	'Group'=>'组',
+	'All'=>'全体',
+	/*end*UserMessage*/
 ];

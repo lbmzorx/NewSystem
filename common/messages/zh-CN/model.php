@@ -135,4 +135,15 @@ return [
 	'Remain Type'=>'提醒类型',
 	'Link'=>'链接',
 	/*end*UserRemain*/
+
+	/*start*UserMessage*/
+	'Send ID'=>'发送者ID',
+	'To ID'=>'接收者ID',
+	'Read'=>'查看',
+	'Priority'=>'优先级',
+	'Send Type'=>'来源类型',
+	'Is Link'=>'是否链接',
+	'Group Type'=>'分组类型',
+	'User Message Group Content ID'=>'组内容',
+	/*end*UserMessage*/
 ];
