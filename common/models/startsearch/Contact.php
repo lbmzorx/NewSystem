@@ -21,7 +21,8 @@ class Contact extends DataModel
     {
         return [
             [['id'], 'integer'],
-            [['name', 'email', 'subject', 'content', 'ip', 'status', 'add_time'], 'safe'],
+            [['name', 'email', 'subject', 'body', 'ip', 'status'], 'safe'],
+            [['add_time'], 'string'],
             [['status'], 'in', 'range'=>array_keys( DataModel::$status_code ) ],
         ];
     }
@@ -65,12 +66,12 @@ class Contact extends DataModel
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC,
-                ]
+                ],
             ],
-             'pagination'=>[
-               'pageParam'=>'page',
-               'pageSizeParam'=>'per-page',
-             ],
+            'pagination'=>[
+                'pageParam'=>'page',
+                'pageSizeParam'=>'per-page',
+            ],
         ]);
 
         $this->load($params);
@@ -89,7 +90,7 @@ class Contact extends DataModel
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'subject', $this->subject])
-            ->andFilterWhere(['like', 'content', $this->content])
+            ->andFilterWhere(['like', 'body', $this->body])
             ->andFilterWhere(['like', 'ip', $this->ip])
             ->andFilterWhere(['like', 'status', $this->status]);
         $this->trigger(SearchEvent::BEFORE_SEARCH, new SearchEvent(['query'=>$query]));

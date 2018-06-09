@@ -105,5 +105,10 @@ return [
 	'Personal'=>'个人',
 	'Group'=>'组',
 	'All'=>'全体',
+	
+	'Success'=>'成功',
+	'Info'=>'信息',
+	'Wairning'=>'警告',
+	'Danger'=>'危险',
 	/*end*UserMessage*/
 ];

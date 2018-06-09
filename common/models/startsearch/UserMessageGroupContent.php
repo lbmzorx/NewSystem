@@ -6,12 +6,12 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use lbmzorx\components\event\SearchEvent;
-use common\models\startdata\ArticleCollection as DataModel;
+use common\models\startdata\UserMessageGroupContent as DataModel;
 
 /**
- * ArticleCollection represents the model behind the search form of `ArticleCollection`.
+ * UserMessageGroupContent represents the model behind the search form of `UserMessageGroupContent`.
  */
-class ArticleCollection extends DataModel
+class UserMessageGroupContent extends DataModel
 
 {
     /**
@@ -20,21 +20,8 @@ class ArticleCollection extends DataModel
     public function rules()
     {
         return [
-            [['id', 'article_id', 'user_id'], 'integer'],
-            [['add_time'], 'string'],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'searchTime'=>[
-                'class'=>\lbmzorx\components\behavior\TimeSearch::className(),
-                'timeAttributes' =>['add_time'],
-             ],
+            [['id'], 'integer'],
+            [['content'], 'safe'],
         ];
     }
 
@@ -83,9 +70,9 @@ class ArticleCollection extends DataModel
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'article_id' => $this->article_id,
-            'user_id' => $this->user_id,
         ]);
+
+        $query->andFilterWhere(['like', 'content', $this->content]);
         $this->trigger(SearchEvent::BEFORE_SEARCH, new SearchEvent(['query'=>$query]));
         return $dataProvider;
     }

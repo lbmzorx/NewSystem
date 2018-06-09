@@ -145,5 +145,12 @@ return [
 	'Is Link'=>'是否链接',
 	'Group Type'=>'分组类型',
 	'User Message Group Content ID'=>'组内容',
+	
+	'Message Type'=>'消息类型',
 	/*end*UserMessage*/
+
+	/*start*UserFans*/
+	'Attention ID'=>'被关注者',
+	'Fans ID'=>'粉丝',
+	/*end*UserFans*/
 ];

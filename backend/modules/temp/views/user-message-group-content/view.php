@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\startdata\Contact */
+/* @var $model common\models\startdata\UserMessageGroupContent */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Contacts'), 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'User Message Group Contents'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="contact-view">
+<div class="user-message-group-content-view">
     <?= \yii\widgets\Breadcrumbs::widget([
     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
@@ -34,16 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
-            'email:email',
-            'subject',
-            'body',
-            'ip',
-            [
-               'attribute'=>'status',
-               'value'=>$model->getStatusCode('status','status_code'),
-            ],
-            'add_time:datetime',
+            'content',
         ],
     ]) ?>
 </div>

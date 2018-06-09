@@ -36,15 +36,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'username',
             'auth_key',
+            'secret_key',
             'password_hash',
             'password_reset_token',
             'email:email',
+            'mobile',
             [
                'attribute'=>'status',
                'value'=>$model->getStatusCode('status','status_code'),
             ],
             'created_at:datetime',
             'updated_at:datetime',
+            'head_img',
         ],
     ]) ?>
 </div>

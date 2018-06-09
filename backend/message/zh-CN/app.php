@@ -382,6 +382,10 @@ return [
 	'Contact'=>'',
 	
 	'Yii Log'=>'',
+	
+	'User Fans'=>'',
+	'User Message'=>'',
+	'User Message Group Content'=>'',
 	/*end*ModelName*/
 	'Image Height Don\'t Over {limit}'=>'图片高度不要超过{limit}',
     'Image Width Don\'t Over {limit}'=>'图片宽度不要超过{limit}',

@@ -57,10 +57,10 @@ STYLE
         ->label('');?>
 	</div>
 	<div class="col-lg-2 col-sm-2">
-		<?=$form->field($model, 'content',[
+		<?=$form->field($model, 'body',[
             'class'=>\lbmzorx\components\widget\InputAddField::className(),
-            'firstContent'=>$model->getAttributeLabel('content'),
-            'firstOption'=>['id'=>'icon-show-'.\yii\helpers\StringHelper::basename(get_class($model)).'-content'],
+            'firstContent'=>$model->getAttributeLabel('body'),
+            'firstOption'=>['id'=>'icon-show-'.\yii\helpers\StringHelper::basename(get_class($model)).'-body'],
         ])->textInput(['maxlength' => true])
         ->label('');?>
 	</div>

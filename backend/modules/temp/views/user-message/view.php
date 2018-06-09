@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\startdata\Contact */
+/* @var $model common\models\startdata\UserMessage */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Contacts'), 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'User Messages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="contact-view">
+<div class="user-message-view">
     <?= \yii\widgets\Breadcrumbs::widget([
     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
@@ -34,16 +34,40 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
-            'email:email',
-            'subject',
-            'body',
-            'ip',
+            'send_id',
+            'to_id',
+            [
+               'attribute'=>'read',
+               'value'=>$model->getStatusCode('read','read_code'),
+            ],
             [
                'attribute'=>'status',
                'value'=>$model->getStatusCode('status','status_code'),
             ],
+            [
+               'attribute'=>'priority',
+               'value'=>$model->getStatusCode('priority','priority_code'),
+            ],
+            [
+               'attribute'=>'send_type',
+               'value'=>$model->getStatusCode('send_type','send_type_code'),
+            ],
+            [
+               'attribute'=>'is_link',
+               'value'=>$model->getStatusCode('is_link','is_link_code'),
+            ],
+            'content',
+            'link',
             'add_time:datetime',
+            [
+               'attribute'=>'group_type',
+               'value'=>$model->getStatusCode('group_type','group_type_code'),
+            ],
+            [
+               'attribute'=>'message_type',
+               'value'=>$model->getStatusCode('message_type','message_type_code'),
+            ],
+            'user_message_group_content_id',
         ],
     ]) ?>
 </div>

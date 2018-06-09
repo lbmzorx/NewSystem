@@ -6,12 +6,12 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use lbmzorx\components\event\SearchEvent;
-use common\models\startdata\ArticleCollection as DataModel;
+use common\models\startdata\UserFans as DataModel;
 
 /**
- * ArticleCollection represents the model behind the search form of `ArticleCollection`.
+ * UserFans represents the model behind the search form of `UserFans`.
  */
-class ArticleCollection extends DataModel
+class UserFans extends DataModel
 
 {
     /**
@@ -20,21 +20,7 @@ class ArticleCollection extends DataModel
     public function rules()
     {
         return [
-            [['id', 'article_id', 'user_id'], 'integer'],
-            [['add_time'], 'string'],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'searchTime'=>[
-                'class'=>\lbmzorx\components\behavior\TimeSearch::className(),
-                'timeAttributes' =>['add_time'],
-             ],
+            [['attention_id', 'fans_id'], 'integer'],
         ];
     }
 
@@ -61,15 +47,6 @@ class ArticleCollection extends DataModel
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ],
-            ],
-            'pagination'=>[
-                'pageParam'=>'page',
-                'pageSizeParam'=>'per-page',
-            ],
         ]);
 
         $this->load($params);
@@ -82,9 +59,8 @@ class ArticleCollection extends DataModel
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'article_id' => $this->article_id,
-            'user_id' => $this->user_id,
+            'attention_id' => $this->attention_id,
+            'fans_id' => $this->fans_id,
         ]);
         $this->trigger(SearchEvent::BEFORE_SEARCH, new SearchEvent(['query'=>$query]));
         return $dataProvider;

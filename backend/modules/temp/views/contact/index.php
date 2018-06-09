@@ -79,7 +79,7 @@ str
             'name',
             'email:email',
             'subject',
-            'content',
+            'body',
             //'ip',
             [
                'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
@@ -95,7 +95,7 @@ str
                },
                'format'=>'raw',
             ],
-            //'add_time',
+            //'add_time:datetime',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

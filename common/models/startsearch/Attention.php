@@ -52,11 +52,11 @@ class Attention extends DataModel
                 'defaultOrder' => [
                     'id' => SORT_DESC,
                     'sort' => SORT_ASC,
-                ]
+                ],
             ],
             'pagination'=>[
-               'pageParam'=>'page',
-               'pageSizeParam'=>'per-page',
+                'pageParam'=>'page',
+                'pageSizeParam'=>'per-page',
             ],
         ]);
 

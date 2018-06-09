@@ -28,7 +28,7 @@ use lbmzorx\components\behavior\StatusCode;
 	    <?= $form->field($model, 'subject')->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="col-lg-3 col-sm-3">
-	    <?= $form->field($model, 'content')->textInput(['maxlength' => true]) ?>
+	    <?= $form->field($model, 'body')->textInput(['maxlength' => true]) ?>
 	</div>
 </div>
 <div class="row">

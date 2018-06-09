@@ -20,8 +20,8 @@ class User extends DataModel
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'safe'],
+            [['id', 'mobile', 'status'], 'integer'],
+            [['username', 'auth_key', 'secret_key', 'password_hash', 'password_reset_token', 'email', 'head_img'], 'safe'],
             [['created_at', 'updated_at'], 'string'],
             [['status'], 'in', 'range'=>array_keys( DataModel::$status_code ) ],
         ];
@@ -66,12 +66,12 @@ class User extends DataModel
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC,
-                ]
+                ],
             ],
-             'pagination'=>[
-               'pageParam'=>'page',
-               'pageSizeParam'=>'per-page',
-             ],
+            'pagination'=>[
+                'pageParam'=>'page',
+                'pageSizeParam'=>'per-page',
+            ],
         ]);
 
         $this->load($params);
@@ -85,14 +85,17 @@ class User extends DataModel
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'mobile' => $this->mobile,
             'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['like', 'secret_key', $this->secret_key])
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
             ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-            ->andFilterWhere(['like', 'email', $this->email]);
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'head_img', $this->head_img]);
         $this->trigger(SearchEvent::BEFORE_SEARCH, new SearchEvent(['query'=>$query]));
         return $dataProvider;
     }

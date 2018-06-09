@@ -51,12 +51,12 @@ class Tag extends DataModel
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC,
-                ]
+                ],
             ],
-             'pagination'=>[
-               'pageParam'=>'page',
-               'pageSizeParam'=>'per-page',
-             ],
+            'pagination'=>[
+                'pageParam'=>'page',
+                'pageSizeParam'=>'per-page',
+            ],
         ]);
 
         $this->load($params);

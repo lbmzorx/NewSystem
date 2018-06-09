@@ -49,6 +49,14 @@ STYLE
         ->label('');?>
 	</div>
 	<div class="col-lg-2 col-sm-2">
+		<?=$form->field($model, 'secret_key',[
+            'class'=>\lbmzorx\components\widget\InputAddField::className(),
+            'firstContent'=>$model->getAttributeLabel('secret_key'),
+            'firstOption'=>['id'=>'icon-show-'.\yii\helpers\StringHelper::basename(get_class($model)).'-secret_key'],
+        ])->textInput(['maxlength' => true])
+        ->label('');?>
+	</div>
+	<div class="col-lg-2 col-sm-2">
 		<?=$form->field($model, 'password_hash',[
             'class'=>\lbmzorx\components\widget\InputAddField::className(),
             'firstContent'=>$model->getAttributeLabel('password_hash'),
@@ -64,6 +72,8 @@ STYLE
         ])->textInput(['maxlength' => true])
         ->label('');?>
 	</div>
+</div>
+<div class="row">
 	<div class="col-lg-2 col-sm-2">
 		<?=$form->field($model, 'email',[
             'class'=>\lbmzorx\components\widget\InputAddField::className(),
@@ -72,8 +82,14 @@ STYLE
         ])->textInput(['maxlength' => true])
         ->label('');?>
 	</div>
-</div>
-<div class="row">
+	<div class="col-lg-2 col-sm-2">
+		<?=$form->field($model, 'mobile',[
+            'class'=>\lbmzorx\components\widget\InputAddField::className(),
+            'firstContent'=>$model->getAttributeLabel('mobile'),
+            'firstOption'=>['id'=>'icon-show-'.\yii\helpers\StringHelper::basename(get_class($model)).'-mobile'],
+        ])->textInput(['maxlength' => true])
+        ->label('');?>
+	</div>
 	<div class="col-lg-2 col-sm-2">
 		<?=$form->field($model, 'status',[
             'class'=>\lbmzorx\components\widget\InputAddField::className(),
@@ -112,7 +128,16 @@ STYLE
         ])->textInput(['maxlength' => true])
         ->label('');?>
 	</div>
-</div>    <div class="form-group">
+	<div class="col-lg-2 col-sm-2">
+		<?=$form->field($model, 'head_img',[
+            'class'=>\lbmzorx\components\widget\InputAddField::className(),
+            'firstContent'=>$model->getAttributeLabel('head_img'),
+            'firstOption'=>['id'=>'icon-show-'.\yii\helpers\StringHelper::basename(get_class($model)).'-head_img'],
+        ])->textInput(['maxlength' => true])
+        ->label('');?>
+	</div>
+</div>
+    <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>

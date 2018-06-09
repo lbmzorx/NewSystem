@@ -25,18 +25,29 @@ use lbmzorx\components\behavior\StatusCode;
 	    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="col-lg-3 col-sm-3">
-	    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
+	    <?= $form->field($model, 'secret_key')->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="col-lg-3 col-sm-3">
-	    <?= $form->field($model, 'password_reset_token')->textInput(['maxlength' => true]) ?>
+	    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
 	</div>
 </div>
 <div class="row">
 	<div class="col-lg-3 col-sm-3">
+	    <?= $form->field($model, 'password_reset_token')->textInput(['maxlength' => true]) ?>
+	</div>
+	<div class="col-lg-3 col-sm-3">
 	    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 	</div>
 	<div class="col-lg-3 col-sm-3">
+	    <?= $form->field($model, 'mobile')->textInput(['maxlength' => true]) ?>
+	</div>
+	<div class="col-lg-3 col-sm-3">
 	    <?= $form->field($model, 'status')->dropDownList(StatusCode::tranStatusCode(User::$status_code,'app'),['prompt'=>\Yii::t('app','Please Select')]) ?>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-3 col-sm-3">
+	    <?= $form->field($model, 'head_img')->textInput(['maxlength' => true]) ?>
 	</div>
     </div>
     <div class="row">

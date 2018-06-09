@@ -37,15 +37,16 @@ class UserMessage extends BaseModelUserMessage
     */
     public static $status_code = [0=>'Waiting audit',1=>'Audit Pass',2=>'Audit Failed',];
 
-    const PRIORITY_NORMAL=0;
-    const PRIORITY_STRESS=1;
-    const PRIORITY_URGENCY=2;
+    const PRIORITY_SUCCESS=0;
+    const PRIORITY_INFO=1;
+    const PRIORITY_WAIRNING=2;
+    const PRIORITY_DANGER=3;
     /**
     * 优先级
-    * 优先级.tran:0=正常,1=着急,2=立即.code:0=Normal,1=Stress,2=Urgency.
+    * 优先级.tran:0=成功,1=信息,2=警告,3=危险.code:0=Success,1=Info,2=Wairning,3=Danger.
     * @var array $priority_code
     */
-    public static $priority_code = [0=>'Normal',1=>'Stress',2=>'Urgency',];
+    public static $priority_code = [0=>'Success',1=>'Info',2=>'Wairning',3=>'Danger',];
 
     const SEND_TYPE_USER=0;
     const SEND_TYPE_SYSTEM=1;
@@ -75,12 +76,26 @@ class UserMessage extends BaseModelUserMessage
     */
     public static $group_type_code = [0=>'Personal',1=>'Group',2=>'All',];
 
+    const MESSAGE_TYPE_COMMIT=0;
+    const MESSAGE_TYPE_ANSWER=1;
+    const MESSAGE_TYPE_REPLY=2;
+    const MESSAGE_TYPE_COLLECTION=4;
+    const MESSAGE_TYPE_THUMB_UP=5;
+    const MESSAGE_TYPE_VISITOR=6;
+    const MESSAGE_TYPE_FANS=7;
+    /**
+    * 消息类型
+    * 消息类型.tran:0=评论,1=回答,2=回复,3=评价,4=收藏,5=点赞,6=访客,7=粉丝.code:0=Commit,1=Answer,2=Reply,4=Collection,5=Thumb Up,6=Visitor,7=Fans.
+    * @var array $message_type_code
+    */
+    public static $message_type_code = [0=>'Commit',1=>'Answer',2=>'Reply',4=>'Collection',5=>'Thumb Up',6=>'Visitor',7=>'Fans',];
+
     /**
      * get status code attribute list
      */
     public static function statusCodes(){
         return [
-            'read','status','priority','send_type','is_link','group_type'
+            'read','status','priority','send_type','is_link','group_type','message_type'
         ];
     }
 
@@ -91,9 +106,11 @@ class UserMessage extends BaseModelUserMessage
     {
         return array_merge(parent::rules(),[
             [['read','send_type','is_link'], 'in', 'range' => [0,1,]],
-            [['status','priority','group_type'], 'in', 'range' => [0,1,2,]],
+            [['status','group_type'], 'in', 'range' => [0,1,2,]],
+            [['priority'], 'in', 'range' => [0,1,2,3,]],
+            [['message_type'], 'in', 'range' => [0,1,2,4,5,6,7,]],
             [['send_id','add_time'], 'default', 'value' =>'0',],
-            [['read','priority','send_type','is_link','group_type'], 'default', 'value' =>0,],
+            [['read','priority','send_type','is_link','group_type','message_type'], 'default', 'value' =>0,],
             [['status'], 'default', 'value' =>1,],
         ]);
     }
@@ -117,6 +134,7 @@ class UserMessage extends BaseModelUserMessage
                 'link',
                 'add_time',
                 'group_type',
+                'message_type',
                 'user_message_group_content_id',
             ],
             'search' => [
@@ -132,6 +150,7 @@ class UserMessage extends BaseModelUserMessage
                 'link',
                 'add_time',
                 'group_type',
+                'message_type',
                 'user_message_group_content_id',
             ],
             'view' => [
@@ -147,6 +166,7 @@ class UserMessage extends BaseModelUserMessage
                 'link',
                 'add_time',
                 'group_type',
+                'message_type',
                 'user_message_group_content_id',
             ],
             'update' => [
@@ -160,6 +180,7 @@ class UserMessage extends BaseModelUserMessage
                 'content',
                 'link',
                 'group_type',
+                'message_type',
                 'user_message_group_content_id',
             ],
             'create' => [
@@ -173,6 +194,7 @@ class UserMessage extends BaseModelUserMessage
                 'content',
                 'link',
                 'group_type',
+                'message_type',
                 'user_message_group_content_id',
             ],
         ];

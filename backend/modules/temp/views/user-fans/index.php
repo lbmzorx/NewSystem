@@ -4,22 +4,22 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use lbmzorx\components\widget\BatchUpdate;
-use common\models\startsearch\User;
+use common\models\startsearch\UserFans;
 use lbmzorx\components\behavior\StatusCode;
 use lbmzorx\components\widget\BatchDelete;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\startsearch\User */
+/* @var $searchModel common\models\startsearch\UserFans */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Users');
+$this->title = Yii::t('app', 'User Fans');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCss(<<<STYLE
         p .btn{margin-top:5px;}
 STYLE
 );
 ?>
-<div class="user-index">
+<div class="user-fans-index">
     <?= \yii\widgets\Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>    <div class="panel">
@@ -54,10 +54,9 @@ str
 
     <p>
         <?= Html::a('<i class="fa fa-plus-square"></i> '. Yii::t('app', 'Create {modelname}', [
-    'modelname' => Yii::t('app', 'Users'),
+    'modelname' => Yii::t('app', 'User Fans'),
 ]), ['create'], ['class' => 'btn btn-success']) ?>
         <?= BatchDelete::widget(['name'=>Yii::t('app', 'Batch Deletes'),'griViewKey'=>GridView::$counter]) ?>
-        <?= BatchUpdate::widget([ 'name'=>\Yii::t('model','Status'),'attribute'=>'status','btnIcon'=>'status','griViewKey'=>GridView::$counter]) ?>
     </p>
 
     <?= GridView::widget([
@@ -75,58 +74,13 @@ str
         'columns' => [
             ['class' => 'yii\grid\CheckboxColumn'],
 
-            'id',
-            'username',
-            'auth_key',
-            'secret_key',
-            'password_hash',
-            //'password_reset_token',
-            //'email:email',
-            //'mobile',
-            [
-               'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
-               'attribute'=>'status',
-               'filter'=>StatusCode::tranStatusCode(User::$status_code,'app'),
-               'value'=> function ($model) {
-                   return Html::button($model->getStatusCode('status','status_code'),
-                       [
-                           'data-id'=>$model->id,
-                           'data-value'=>$model->status,
-                           'class'=>'status-change btn btn-xs btn-'.$model->getStatusCss('status','status_css',$model->status)
-                       ]);
-               },
-               'format'=>'raw',
-            ],
-            //'created_at',
-            //'updated_at',
-            //'head_img',
+            'attention_id',
+            'fans_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
     <?php Pjax::end(); ?>
         </div>
-    </div>
-</div>
-<div id="status-change-dom" style="display: none;">
-    <div style="padding: 10px;">
-        <?=Html::beginForm(['change-status'],'post')?>
-        <input type="hidden" name="key" value="status">
-        <input type="hidden" name="id" value="">
-        <?php foreach ( User::$status_code as $k=>$v):?>           
-            <label class="checkbox-inline" style="margin: 5px 10px;">
-                <?php
-                    $css='warning';
-                    if( isset(User::$status_css) && isset(User::$status_css[$k])){
-                        $css = User::$status_css [$k];
-                    }else{
-                        $css=isset(StatusCode::$cssCode[$k])?StatusCode::$cssCode[$k]:$css;
-                    }
-                ?>               
-                <?=Html::input('radio','value',$k)?>
-                <?=Html::tag('span',\Yii::t('app',$v),['class'=>'btn btn-'.$css])?>
-            </label>          
-        <?php endforeach;?>
-        <?=Html::endForm()?>
     </div>
 </div>
