@@ -10,6 +10,9 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use yii\helpers\Url;
+use common\models\startdata\UserMessage;
+use yii\widgets\ActiveForm;
+
 AppAsset::register($this);
 ?>
 <?=$this->registerCss(<<<STYLE
@@ -48,14 +51,16 @@ STYLE
     $menuItems = [
         ['label' =>  \yii::t('app','Home'), 'url' => ['/article/index']],
     ];
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' =>  \yii::t('app','Signup'), 'url' => ['/site/signup']];
         $menuItems[] = ['label' =>  \yii::t('app','Login'), 'url' => ['/site/login']];
     } else {
+        $message=UserMessage::countUserMessage();
         $menuItems[] =[
             'label'=>Html::tag(
                 'span',
-                Html::tag('span',isset($message)?$message:'13',['class'=>'badge bg-danger','id'=>'msg-count']),
+                Html::tag('span',isset($message)?$message:'',['class'=>'badge bg-danger','id'=>'msg-count']),
                 ['class'=>'glyphicon glyphicon-bell']
             ),
             'encode'=>false,
@@ -85,10 +90,32 @@ STYLE
             ]
         ];
     }
+
+    $searchButton=Html::tag('span',
+        Html::submitButton(Html::tag('span','',['class'=>'glyphicon glyphicon-search']),['class'=>'btn btn-default']),
+        ['class'=>'input-group-btn']
+    );
+    $searchModel=new \frontend\models\SearchForm();
+    $searchForm=ActiveForm::begin([
+        'options'=>[
+            'class'=>'navbar-form navbar-left','role'=>'search',
+        ],
+        'action'=>['/article/search'],
+    ]);
+    echo $searchForm->field($searchModel,'search',['template'=>"<div class='input-group'>{label}\n{input}{$searchButton}\n{hint}\n{error}</div>"])->textInput([])->label(false);
+    ActiveForm::end();
+//
+//
+//    $searchInput=Html::input('text','sw',Html::encode(\yii::$app->request->get('sw')),['placeholder'=>'搜索','class'=>'form-control']);
+
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
+
+
+
     NavBar::end();
     ?>
 

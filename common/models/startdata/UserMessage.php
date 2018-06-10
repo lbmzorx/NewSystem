@@ -271,4 +271,21 @@ class UserMessage extends BaseModelUserMessage
         return isset($template[$message])?$template[$message]:'';
     }
 
+    public static function countUserMessage(){
+        $cache=\yii::$app->cache;
+        $key=serialize(['type'=>'user_info',__METHOD__,'userId'=>\yii::$app->user->id]);
+        if($count=$cache->get($key)){
+            return $count;
+        }else{
+            $count=static::find()->where([
+                'to_id'=>\yii::$app->user->id,
+                'read'=>self::READ_UNREAD,
+            ])->count();
+            $cache->set($key,$count,(3600*24+rand(1,600)),new TagDependency([
+                'tags'=>self::CACHE_TAG,
+            ]));
+            return $count;
+        }
+
+    }
 }

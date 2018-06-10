@@ -365,10 +365,10 @@ class Article extends BaseModelArticle
                 'class' => \lbmzorx\components\behavior\StatusCode::className(),
                 'category' =>'statuscode',
             ],
-            'withOneUser'=>[
-                'class' => \lbmzorx\components\behavior\WithOneUser::className(),
-                'userClass'=> User::ClassName(),
-            ],
+//            'withOneUser'=>[
+//                'class' => \lbmzorx\components\behavior\WithOneUser::className(),
+//                'userClass'=> User::ClassName(),
+//            ],
         ];
     }
 
