@@ -1,6 +1,6 @@
 <?php
-
 namespace frontend\assets;
+
 
 use yii\web\AssetBundle;
 
@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'common\assets\FontAwesomeAsset',
+        'lbmzorx\components\assets\LayuiAsset',
         'lbmzorx\components\assets\JsencryptAsset',
     ];
 }

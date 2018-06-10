@@ -47,12 +47,12 @@ class TestController extends Controller
         if($status===false){
             var_dump($qt->getErrors());
         }
-//        $statusr=$qt->sendRabbit();
-//        var_dump($statusr);
-//        if($statusr===false){
-//            var_dump($qt->getErrors());
-//        }
-//        return $this->renderPartial('index');
+        $statusr=$qt->sendRabbit();
+        var_dump($statusr);
+        if($statusr===false){
+            var_dump($qt->getErrors());
+        }
+        return $this->renderPartial('index');
     }
 
 

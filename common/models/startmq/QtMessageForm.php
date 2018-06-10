@@ -21,7 +21,7 @@ class QtMessageForm extends Model
     public $link; 	// 链接
     public $add_time; 	// 添加时间
     public $group_type; 	// 分组类型.tran:0=个人,1=组,2=全体.code:0=Personal,1=Group,2=All.
-    public $message_type; 	// 消息类型.tran:0=评论,1=回答,2=回复,3=评价,4=收藏,5=点赞,6=访客,7=粉丝.code:0=Commit,1=Answer,2=Reply,4=Collection,5=Thumb Up,6=Visitor,7=Fans.
+    public $message_type; 	// 消息类型.tran:0=评论,1=回答,2=回复,3=评价,4=收藏,5=点赞,6=访客,7=粉丝,8=关注.code:0=Commit,1=Answer,2=Reply,4=Collection,5=Thumb Up,6=Visitor,7=Fans,8=Following.
     public $user_message_group_content_id; 	// 组内容
 
 
@@ -38,7 +38,7 @@ class QtMessageForm extends Model
             [['send_type','is_link'], 'in', 'range' => [0,1,]],
             ['group_type', 'in', 'range' => [0,1,2,]],
             [['priority'], 'in', 'range' => [0,1,2,3,]],
-            [['message_type'], 'in', 'range' => [0,1,2,4,5,6,7,]],
+            [['message_type'], 'in', 'range' => [0,1,2,4,5,6,7,8]],
             [['send_id','add_time'], 'default', 'value' =>'0',],
             [['priority','send_type','is_link','group_type','message_type'], 'default', 'value' =>0,],
         ];

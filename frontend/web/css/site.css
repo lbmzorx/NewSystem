@@ -144,3 +144,7 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.user-status .userInfo{display: inline-block;margin:10px 20px;}
+.card{margin-bottom: 20px;padding:5px 5px;border-bottom: 1px solid #eee;}
+.user-footer .btn-group{margin-right: 10px;}

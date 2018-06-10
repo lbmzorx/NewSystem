@@ -25,15 +25,14 @@ class UserActionJob extends Model implements \yii\queue\JobInterface
     public $message_type; 	// 消息类型.tran:0=评论,1=回答,2=回复,3=评价,4=收藏,5=点赞,6=访客,7=粉丝.code:0=Commit,1=Answer,2=Reply,4=Collection,5=Thumb Up,6=Visitor,7=Fans.
     public $user_message_group_content_id; 	// 组内容
 
-
     public function execute($queue){
+
         $qtMessage=new UserMessage();
         $qtMessage->setScenario('create');
         $qtMessage->loadDefaultValues();
         $qtMessage->load($this->getAttributes(),'');
-        if($qtMessage->save()){
+        $qtMessage->save();
 
-        }
     }
 
 
