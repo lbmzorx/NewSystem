@@ -8,6 +8,7 @@
 namespace backend\controllers;
 
 
+use common\models\startmq\QtMessageForm;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\Response;
@@ -16,10 +17,44 @@ class TestController extends Controller
 {
     public function actionIndex(){
 
+//        send_id; 	// 发送者ID
+//        to_id; 	// 接收者ID
+//        priority; 	// 优先级.tran:0=成功,1=信息,2=警告,3=危险.code:0=Success,1=Info,2=Wairning,3=Danger.
+//        send_type; 	// 来源类型.tran:0=用户,1=系统.code:0=User,1=System.
+//        is_link; 	// 是否链接.tran:0=否,1=是.code:0=No,1=Yes.
+//        content; 	// 消息内容
+//        link; 	// 链接
+//        add_time; 	// 添加时间
+//        group_type; 	// 分组类型.tran:0=个人,1=组,2=全体.code:0=Personal,1=Group,2=All.
+//        message_type; 	// 消息类型.tran:0=评论,1=回答,2=回复,3=评价,4=收藏,5=点赞,6=访客,7=粉丝.code:0=Commit,1=Answer,2=Reply,4=Collection,5=Thumb Up,6=Visitor,7=Fans.
+//        user_message_group_content_id; 	// 组内容
 
+        $qt=new QtMessageForm();
+        $qt->send_id=1;
+        $qt->to_id=11;
+        $qt->priority=1;
+        $qt->send_type=1;
+        $qt->is_link=1;
+        $qt->content="asdfaahahah，啊恢复冷静看待".date("Y-m-d H:i:s").'-'.\yii::$app->security->generateRandomString();
+        $qt->add_time=time();
+        $qt->group_type=0;
+        $qt->message_type=0;
+        $qt->user_message_group_content_id=0;
 
-        return $this->renderPartial('index');
+//        $qt->sendRabbit();
+        $status=$qt->sendRedis();
+        var_dump($status);
+        if($status===false){
+            var_dump($qt->getErrors());
+        }
+//        $statusr=$qt->sendRabbit();
+//        var_dump($statusr);
+//        if($statusr===false){
+//            var_dump($qt->getErrors());
+//        }
+//        return $this->renderPartial('index');
     }
+
 
 
 

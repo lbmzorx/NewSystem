@@ -124,6 +124,8 @@ class ArticleCommitWidget extends PanelWidget
         $csrfTocken=\yii::$app->request->csrfToken;
         $action=Url::to(['commit']);
         $errormsg=\yii::t('app','Request Error!');
+        $loginMsg=\yii::t('app','Please Login!');
+        $loginUrl=\yii\helpers\Url::to(['/site/login']);
         $view->registerJs(<<<SCRITP
         var layer;
         layui.use(['layer'],function(){
@@ -152,7 +154,7 @@ $('.reply-box').click(function(){
                 form.append('ArticleCommitForm[article_id]',article_id);
                 form.append('ArticleCommitForm[parent_id]',id);
                 form.append('{$csrfParam}','{$csrfTocken}');
-                console.log(form);
+              
                 $.ajax({
                     'url':'{$action}',
                     type:'post',                   
@@ -168,8 +170,14 @@ $('.reply-box').click(function(){
                             layer.alert(res.msg);
                         }
                     },
-                    error:function(){
-                        layer.alert('');
+                    error:function(res){
+                        if(res.status==403){
+                            layer.alert('{$loginMsg}',function () {
+                                location.href='{$loginUrl}';
+                            });
+                        }else{
+                            layer.alert('{$errormsg}');
+                        }                        
                     }                    
                 });
                 

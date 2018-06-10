@@ -5,6 +5,7 @@ use common\components\behavior\LimitEmail;
 use common\components\event\EmailEvent;
 use common\components\helper\SignHelper;
 use common\models\startdata\UrlCheck;
+use common\models\startdata\UserInfo;
 use lbmzorx\components\behavior\LimitLogin;
 use lbmzorx\components\behavior\RsaAttribute;
 use yii\base\Exception;
@@ -83,6 +84,8 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
+        $db=User::getDb();
+        $t=$db->beginTransaction();
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
@@ -91,10 +94,15 @@ class SignupForm extends Model
         $user->generateSecretKey();
         $user->status=User::STATUS_WAITING_ACTIVE;
 
-        if( $user->save()&&$this->sendEmail($user)){
+        $userinfo=new UserInfo();
+        $userinfo->setScenario('create');
+        $userinfo->loadDefaultValues();
+        if( $user->save()&& $userinfo->save() &&$this->sendEmail($user)){
             \yii::$app->session->setFlash('success',\yii::t('app','Success signup, the activation email has been sent to you email {email},checkout and click it.',['email'=>$user->email]));
+            $t->commit();
             return $user;
         }
+        $t->rollBack();
         return null;
     }
 

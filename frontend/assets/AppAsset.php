@@ -20,5 +20,6 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'common\assets\FontAwesomeAsset',
+        'lbmzorx\components\assets\JsencryptAsset',
     ];
 }

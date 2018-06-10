@@ -1,12 +1,23 @@
 <?php
+/**
+ * Created by Administrator.
+ * Date: 2018/6/9 22:02
+ * github: https://github.com/lbmzorx
+ */
 use yii\helpers\Html;
-/* @var $this yii\web\View */
 
-$this->title = Html::encode(isset(\yii::$app->params[''])?\yii::$app->params['website_title']:\yii::t('app','Article'));
+$user=\yii::$app->request->get('id')?:\yii::$app->user->id;
 ?>
 <div class="site-index">
     <div class="row">
         <div class="col-sm-9 col-md-9 col-lg-9 ">
+            <?=\frontend\widget\UserCardWidget::widget([
+                'userId'=>$user,
+                'options'=>[
+                    'class'=>'panel panel-default',
+                    'id'=>'user-info-box'
+                ],
+            ])?>
             <?=yii\widgets\ListView::widget([
                 'dataProvider'=>$provider,
                 'itemOptions' => ['class' => 'item list-group-item','tag'=>'li'],

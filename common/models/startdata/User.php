@@ -153,6 +153,9 @@ class User extends BaseModelUser
         return false;
     }
 
+    public function getUserInfo(){
+        return $this->hasOne(UserInfo::className(),['user_id'=>'id']);
+    }
 
     public function afterSave($insert , $changedAttributes)
     {

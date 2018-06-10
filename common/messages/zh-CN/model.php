@@ -153,4 +153,10 @@ return [
 	'Attention ID'=>'被关注者',
 	'Fans ID'=>'粉丝',
 	/*end*UserFans*/
+
+	/*start*UserInfo*/
+	'Fans'=>'粉丝数量',
+	'Attention'=>'关注',
+	'Article'=>'文章',
+	/*end*UserInfo*/
 ];

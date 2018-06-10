@@ -34,7 +34,7 @@ STYLE
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body id="my-site">
 <?php $this->beginBody() ?>
 <div class="wrap">
     <?php
@@ -46,14 +46,12 @@ STYLE
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/article/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
+        ['label' =>  \yii::t('app','Home'), 'url' => ['/article/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' =>  \yii::t('app','Signup'), 'url' => ['/site/signup']];
+        $menuItems[] = ['label' =>  \yii::t('app','Login'), 'url' => ['/site/login']];
     } else {
-
         $menuItems[] =[
             'label'=>Html::tag(
                 'span',
@@ -95,9 +93,11 @@ STYLE
     ?>
 
     <div class="container">
+        <?php  if (! Yii::$app->user->isGuest) :?>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
+        <?php endif;?>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
@@ -106,8 +106,8 @@ STYLE
 <footer class="footer bg-info" id="footer">
     <div class="container">
         <div class="clearfix">
-            <span class="pull-left">Copyright © 2009-2017 by 重楼空间.</span>
-            <span class="pull-left" style="margin-left: 10px;"><a href="<?=Url::to(['site/contact'])?>"><?=\yii::t('app','Contact Us')?></a></span>
+            <span class="pull-left">Copyright © 2009-2017 by <a href="<?=Url::to(['/site/about'])?>">重楼空间</a>.</span>
+            <span class="pull-left" style="margin-left: 10px;"><a href="<?=Url::to(['/site/contact'])?>"><?=\yii::t('app','Contact Us')?></a></span>
             <span class="pull-right hidden-xs hidden-sm">
                 <a href="http://www.miibeian.gov.cn" target="_blank"><?=\yii::$app->params['website_icp']?></a>
             </span>

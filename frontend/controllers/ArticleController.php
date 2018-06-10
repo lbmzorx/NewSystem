@@ -35,7 +35,7 @@ class ArticleController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only'=>['create','update','thumbup','collection'],
+                'only'=>['create','update','thumbup','collection','commit'],
                 'rules' => [
                     [
                         'actions' => ['create','update','thumbup','collection','commit'],
@@ -105,6 +105,8 @@ class ArticleController extends Controller
             'query' => $query,
             'pagination' => [
                 'pageSize' => 20,
+                'pageParam'=>'page',
+                'pageSizeParam'=>'per-page',
             ],
             'sort' => [
                 'defaultOrder' => [

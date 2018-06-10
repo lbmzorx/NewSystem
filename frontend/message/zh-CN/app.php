@@ -423,4 +423,11 @@ return [
     'Sorry, we are unable to reset password for the provided email address.'=>'抱歉，您的的邮箱无法发送邮件。',
     'New password saved.'=>'新的密码已经保存。',
     'Congratulations! We have send an email to you account, please click it and activate you account'=>'恭喜！我们已经发送了邮件到您的邮箱，请点击邮箱链接激活您的账号',
+    'Follow'=>'关注',
+    'Chat'=>'私信',
+    'Followings'=>'关注',
+    'Followers'=>'粉丝',
+    'Please Login!'=>'请登录！',
+    'Home'=>'首页',
+    'About'=>'关于',
 ];

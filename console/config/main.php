@@ -65,7 +65,6 @@ return [
         ],
         'swoole-queue-frontend' =>[
             'class'=>'console\controllers\UserMessageController',
-
         ],
     ],
     'components' => [

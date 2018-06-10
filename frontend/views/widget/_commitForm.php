@@ -19,7 +19,7 @@ if(isset($article_id)){
 <?= $form->field($model, 'article_id')->hiddenInput($options)->label(false) ?>
 <?= $form->field($model, 'parent_id')->hiddenInput()->label(false) ?>
 <div class="row">
-    <div class="col-lg-12 col-sm-12">
+    <div class="col-lg-12 col-sm-12" disabled="disabled">
         <?= $form->field($model, 'content',[
             'class'=>\lbmzorx\components\widget\EditorMdField::className(),
             'mdJsOptions'=>[
@@ -27,6 +27,7 @@ if(isset($article_id)){
                 'width'=>'100%',
                 'height'=>'300',
                 'syncScrolling'=>"single",
+                'autofocus'=>false,
                 'watch'=> false,
                 'toolbarIcons'=>[
                     "bold", "del", "italic", "quote","|",
@@ -45,3 +46,8 @@ if(isset($article_id)){
         </div>
     </div>
 <?php $form = ActiveForm::end(); ?>
+<?php \lbmzorx\components\widget\JsBlock::begin()?>
+<script type="text/javascript">
+    $("#<?=$form->id?>");
+</script>
+<?php \lbmzorx\components\widget\JsBlock::end()?>

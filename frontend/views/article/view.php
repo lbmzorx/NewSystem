@@ -51,6 +51,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <a class="btn btn-success btn-all" href="<?=\yii\helpers\Url::to(['article/create'])?>"><i class="fa fa-plus"></i>&nbsp; <?=\yii::t('app','Create New Article')?></a>
                 </div>
             </div>
+            <?=\frontend\widget\UserCardWidget::widget([
+                    'userId'=>$model->user_id,
+                    'options'=>[
+                        'class'=>'panel panel-default',
+                        'id'=>'user-info-box'
+                    ],
+            ])?>
             <?=\frontend\widget\ArticleCateWidget::widget([
                 'options'=>[
                     'class'=>'panel panel-default',
@@ -99,7 +106,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             },
             error:function (res) {
-                layer.alert('<?=\yii::t('app','Thumbup Failed!')?>');
+                if(res.status==403){
+                    layer.alert('<?=\yii::t('app','Please Login!')?>',function () {
+                        location.href='<?=\yii\helpers\Url::to(['/site/login'])?>';
+                    });
+                }else{
+                    layer.alert('<?=\yii::t('app','Collection Failed!')?>');
+                }
             }
         });
     });
@@ -128,7 +141,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             },
             error:function (res) {
-                layer.alert('<?=\yii::t('app','Collection Failed!')?>');
+                if(res.status==403){
+                    layer.alert('<?=\yii::t('app','Please Login!')?>',function () {
+                        location.href='<?=\yii\helpers\Url::to(['/site/login'])?>';
+                    });
+                }else{
+                    layer.alert('<?=\yii::t('app','Collection Failed!')?>');
+                }
             }
         });
     });
