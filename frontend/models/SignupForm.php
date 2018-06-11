@@ -96,14 +96,16 @@ class SignupForm extends Model
 
         $userinfo=new UserInfo();
         $userinfo->setScenario('create');
-        $userinfo->loadDefaultValues();
-        if( $user->save()&& $userinfo->save() &&$this->sendEmail($user)){
+        if( $user->save()&& $this->sendEmail($user)){
+            $userinfo->user_id=$user->id;
+            $userinfo->save();
             \yii::$app->session->setFlash('success',\yii::t('app','Success signup, the activation email has been sent to you email {email},checkout and click it.',['email'=>$user->email]));
             $t->commit();
             return $user;
+        }else{
+            $t->rollBack();
+            return null;
         }
-        $t->rollBack();
-        return null;
     }
 
     public function attributeLabels()

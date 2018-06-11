@@ -31,8 +31,8 @@ return [
             'debug' => false,//默认开启debug，上线应置为false
             'env' => 'prod',//默认为dev，上线应置为prod
             'swooleConfig' => [//标准的swoole配置项都可以再此加入
-                'reactor_num' => 2,
-                'worker_num' => 4,
+                'reactor_num' => 1,
+                'worker_num' => 2,
                 'daemonize' => true,
                 'log_file' =>__DIR__ . '/../../frontend/runtime/swoole/swoole.log',
                 'log_level' => 4,   //4 warning
