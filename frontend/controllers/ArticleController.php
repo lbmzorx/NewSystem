@@ -141,7 +141,6 @@ class ArticleController extends Controller
             }
         }
 
-
         return $this->render('create',[
             'model'=>$articleForm,
         ]);

@@ -55,7 +55,4 @@ class TestController extends Controller
         return $this->renderPartial('index');
     }
 
-
-
-
 }

@@ -29,12 +29,12 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index','attention','chat',],
+                        'actions' => ['index','attention','chat','message'],
                         'allow' => false,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' =>  ['index','attention','chat',],
+                        'actions' =>  ['index','attention','chat','message'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -47,7 +47,7 @@ class UserController extends Controller
                     'chat' => ['GET', 'PUT', 'POST'],
                     'attention' => ['GET','PUT', 'POST'],
                     'collection' => ['PUT', 'POST'],
-                    'commit'=>['POST'],
+                    'message'=>['GET'],
                 ],
             ],
         ];
@@ -102,4 +102,12 @@ class UserController extends Controller
         return $this->render('index',['provider'=>$provider]);
     }
 
+
+    public function actionMessage(){
+        return $this->render('message');
+    }
+
+    public function actionMessageDetail(){
+        return $this->render('message-detail');
+    }
 }
