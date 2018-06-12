@@ -3,6 +3,7 @@
 namespace backend\modules\log\controllers;
 
 use backend\models\Truncate;
+use common\components\helper\RuntimeHelper;
 use lbmzorx\components\helper\ModelHelper;
 use Yii;
 use backend\controllers\BaseCommon;
@@ -18,18 +19,30 @@ class SystemLogController extends BaseCommon
 {
 
     public function actionPhp(){
-        return $this->render('php');
+        $path=\yii::getAlias('@runtime/php');
+        $request=\yii::$app->request;
+        $filename=$request->get('filename');
+        return $this->render('rows',RuntimeHelper::getFileList($path,$filename));
     }
 
     public function actionNginx(){
-        return $this->render('nginx');
+        $path=\yii::getAlias('@runtime/nginx');
+        $request=\yii::$app->request;
+        $filename=$request->get('filename');
+        return $this->render('rows',RuntimeHelper::getFileList($path,$filename));
     }
 
     public function actionMysql(){
-        return $this->render('mysql');
+        $path=\yii::getAlias('@runtime/mysql');
+        $request=\yii::$app->request;
+        $filename=$request->get('filename');
+        return $this->render('rows',RuntimeHelper::getFileList($path,$filename));
     }
 
     public function actionRedis(){
-        return $this->render('redis');
+        $path=\yii::getAlias('@runtime/redis');
+        $request=\yii::$app->request;
+        $filename=$request->get('filename');
+        return $this->render('rows',RuntimeHelper::getFileList($path,$filename));
     }
 }
