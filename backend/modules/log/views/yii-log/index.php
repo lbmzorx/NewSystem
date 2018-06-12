@@ -89,7 +89,7 @@ str
                'format'=>'raw',
             ],
             'category',
-            'log_time:datatime',
+            'log_time:datetime',
             'prefix:ntext',
 //            'message:ntext',
             [

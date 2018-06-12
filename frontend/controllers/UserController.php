@@ -10,12 +10,15 @@ namespace frontend\controllers;
 
 use backend\models\Article;
 use common\models\startdata\UserInfo;
+use common\models\startdata\UserMessage;
 use frontend\models\FansForm;
 use lbmzorx\components\action\AjaxFormAction;
+use lbmzorx\components\helper\ModelHelper;
 use yii\base\Controller;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 class UserController extends Controller
 {
@@ -29,12 +32,12 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index','attention','chat','message'],
+                        'actions' => ['index','attention','chat','message','message-status'],
                         'allow' => false,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' =>  ['index','attention','chat','message'],
+                        'actions' =>  ['index','attention','chat','message','message-status'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -48,6 +51,7 @@ class UserController extends Controller
                     'attention' => ['GET','PUT', 'POST'],
                     'collection' => ['PUT', 'POST'],
                     'message'=>['GET'],
+                    'message-status'=>['PUT','POST'],
                 ],
             ],
         ];
@@ -104,7 +108,46 @@ class UserController extends Controller
 
 
     public function actionMessage(){
-        return $this->render('message');
+        $query=UserMessage::find()->where([
+            'status'=>UserMessage::STATUS_AUDIT_PASS,
+            'to_id'=>\yii::$app->user->id,
+        ])->andFilterWhere([
+            'message_type'=>\yii::$app->request->get('type'),
+        ]);
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 20,
+                'pageParam'=>'page',
+                'pageSizeParam'=>'per-page',
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+        ]);
+        return $this->render('message',['provider'=>$provider]);
+    }
+
+    public function actionMessageStatus(){
+        \yii::$app->response->format=Response::FORMAT_JSON;
+        $id=\yii::$app->request->post('id');
+        if(is_numeric($id)){
+            $message=UserMessage::findOne([
+                'id'=>$id,
+                'to_id'=>\yii::$app->user->id,
+                'status'=>UserMessage::STATUS_AUDIT_PASS,
+            ]);
+            $message->read=UserMessage::READ_READ;
+            if($message->save()){
+                return ['status'=>true,'msg'=>''];
+            }else{
+                return ['status'=>false,'msg'=>ModelHelper::getErrorAsString($message,$message->getErrors())];
+            }
+        }else{
+            return ['status'=>false,'msg'=>\yii::t('app','Parameter Error')];
+        }
     }
 
     public function actionMessageDetail(){

@@ -4,6 +4,7 @@
 *
 */
 return [
+    'View'=>'查看',
     'Category'=>'分类',
     'backend'=>'后台',
 	'frontend'=>'前台',//0左，1上',
