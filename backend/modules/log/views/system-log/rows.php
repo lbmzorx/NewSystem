@@ -6,18 +6,14 @@
  * Email: @foxdou.com
  */
 use yii\helpers\Html;
-
+$this->title=$filepath;
+$this->params['breadcrumbs'][] = $this->title;
 $request=\yii::$app->request;
 ?>
 <?= \yii\widgets\Breadcrumbs::widget([
     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 ]) ?>
 <div class="panel">
-    <div class="panel-head">
-        <h5>日志-<?=$this->title?>
-            <small>全部</small>
-        </h5>
-    </div>
     <div class="panel-body">
         <div class="tabs-container">
             <ul class="nav nav-tabs">
