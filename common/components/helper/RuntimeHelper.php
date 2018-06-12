@@ -18,7 +18,7 @@ class RuntimeHelper
         $filenames=[];
         $fileinfo=[];
         if(is_dir($path)){
-            $filelist=FileHelper::findFiles($path);
+            $filelist=FileHelper::findFiles($path,['except'=>['*.pid']]);
             if($filelist){
                 foreach ($filelist as $k=>$v){
                     $filenames[$k]=str_replace($path,'',$v);
