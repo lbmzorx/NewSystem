@@ -21,8 +21,8 @@ $request=\yii::$app->request;
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
                         <?php foreach ($filelist as $k=>$v):?>
-                            <li class="<?=($request->get('filename')==$v)||($request->get('filename')=='' && $k==0)?'active':''?>">
-                                <a href="<?=\yii\helpers\Url::to(['','filename'=>$v])?>"><?=$v?></a></li>
+                            <li class="<?=($request->get('filename')==$k)||($request->get('filename')=='' && $k==0)?'active':''?>">
+                                <a href="<?=\yii\helpers\Url::to(['','filename'=>$k])?>"><?=$v?></a></li>
                         <?php endforeach;?>
                     </ul>
                     <div class="tab-content m-b">
