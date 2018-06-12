@@ -22,7 +22,7 @@ $request=\yii::$app->request;
                     <ul class="nav nav-tabs">
                         <?php foreach ($filelist as $k=>$v):?>
                             <li class="<?=($request->get('filename')==$k)||($request->get('filename')=='' && $k==0)?'active':''?>">
-                                <a href="<?=\yii\helpers\Url::to(['','filename'=>$k])?>"><?=$v?></a></li>
+                                <a href="<?=\yii\helpers\Url::to(['','filename'=>$k])?>"><?=$k?></a></li>
                         <?php endforeach;?>
                     </ul>
                     <div class="tab-content m-b">
