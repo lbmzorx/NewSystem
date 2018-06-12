@@ -37,7 +37,7 @@ $request=\yii::$app->request;
                             </div>
                         </div>
                     </div>
-                    <?= Html::submitButton('查询', ['class' => 'btn btn-primary', 'style' => 'position:relative;top:-60px;margin-right:100px;float: right;']) ?>
+                    <?= Html::submitButton('查询', ['class' => 'btn btn-primary']) ?>
                     <?= Html::endForm() ?>
                 </div>
                 <div >
