@@ -72,7 +72,7 @@ use common\widgets\Alert;
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<?=\yii::$app->getUser()->identity->head_img?>" class="img-circle" alt="<?=\yii::$app->getUser()->identity->username?>"> <span><?=\yii::$app->getUser()->identity->username?></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?=\yii\helpers\Url::to(['/admin/admin-info/index'])?>"><i class="lnr lnr-user"></i><span><?=\yii::t('app','My Profile')?></span></a></li>
+                            <li><a href="<?=\yii\helpers\Url::to(['/admin/admin-info/card'])?>"><i class="lnr lnr-user"></i><span><?=\yii::t('app','My Profile')?></span></a></li>
                             <li><a href="<?=\yii\helpers\Url::to(['/admin/admin-message/index'])?>"><i class="lnr lnr-envelope"></i> <span><?=\yii::t('app','Message')?></span></a></li>
                             <li><a href="<?=\yii\helpers\Url::to(['/admin/message/index'])?>"><i class="lnr lnr-cog"></i> <span><?=\yii::t('app','Settings')?></span></a></li>
                             <li><a href="<?=\yii\helpers\Url::to(['/site/logout'])?>"><i class="lnr lnr-exit"></i> <span><?=\yii::t('app','Logout')?></span></a></li>
