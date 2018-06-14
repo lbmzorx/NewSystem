@@ -12,7 +12,7 @@ use yii\web\Response;
 /**
  * Default controller for the `upload` module
  */
-class UploadController extends CommonController
+class UploadController extends BaseCommon
 {
 
     /**
@@ -38,4 +38,31 @@ class UploadController extends CommonController
         }
         throw new NotFoundHttpException();
     }
+
+    public function actionAdminUpload(){
+
+
+        $request=\yii::$app->request;
+        $path=$request->get('path');
+        $extension=$request->get('extension');
+        if($path && in_array($extension,['png','jpg','jpeg'])){
+            try{
+                $file=\Yii::getAlias('@runtime/adminupload/'.$path.'.'.$extension);
+
+                if( file_exists($file )){
+
+                    $response=\yii::$app->getResponse();
+                    $response->getHeaders()->set('Content-Type','image/'.($extension));
+                    $response->format=Response::FORMAT_RAW;
+                    $response->content=file_get_contents($file);
+                    $response->send();
+                    return $response;
+                }
+            }catch (Exception $e){
+
+            }
+        }
+        throw new NotFoundHttpException();
+    }
+
 }

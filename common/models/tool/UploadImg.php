@@ -120,9 +120,9 @@ class UploadImg extends Model
         if($this->name==''){
             $key=$this->generateNameKey();
             if($this->nameIsUnit==false){  //生成唯一名
-                $key.=microtime().rand();//随便写的加密KEY
+                $key.=$this->imageFile->baseName.microtime().rand(1,99999);//随便写的加密KEY
             }
-            $this->name = md5($this->imageFile->baseName . $key );
+            $this->name = md5($key);
         }
         return $this->name;
     }
@@ -131,9 +131,11 @@ class UploadImg extends Model
         $key='s29vbFKjkdsJfj';
         if(is_object($this->nameModel)){
             $key.=get_class($this->nameModel);
-            foreach ($this->attributes as $v){
+            foreach ($this->nameAttributs as $v){
                 $key.=$v.$this->nameModel->{$v};
             }
+        }else{
+            $key.=$this->nameModel;
         }
         $key.=serialize($this->nameParam);
         return $key;

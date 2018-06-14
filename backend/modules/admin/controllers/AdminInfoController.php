@@ -2,6 +2,10 @@
 
 namespace backend\modules\admin\controllers;
 
+use common\models\admin\Admin;
+use common\models\tool\UploadImg;
+use lbmzorx\components\action\UploadAction;
+use lbmzorx\components\helper\ModelHelper;
 use Yii;
 use backend\controllers\BaseCommon;
 use common\models\admindata\AdminInfo;
@@ -30,7 +34,58 @@ class AdminInfoController extends BaseCommon
      */
     public function actions()
     {
-        return parent::actions();
+        return array_merge(parent::actions(),[
+            'upload'=>[
+                'class' => UploadAction::className(),
+                'imgClass'=>UploadImg::className(),
+                'imgAttribute'=>'imageFile',
+                'imgConfig'=>[
+                    'imgServerPath'=>'@backend/runtime/adminupload/',
+                    'imgServer'=>'/adminupload/',
+                    'nameIsUnit'=>true,
+                    'nameModel'=>Admin::className(),
+                    'nameAttributs'=>['admin'=>\yii::$app->user->id],
+                ],
+            ],
+        ]);
     }
 
+
+    public function actionCard(){
+
+        $request=\yii::$app->request;
+        $info=AdminInfo::findOne(['admin_id'=>\yii::$app->user->id]);
+        $admin=Admin::findOne(['id'=>\yii::$app->user->id]);
+        if($request->isPost ){
+
+            $t=\yii::$app->db->beginTransaction();
+            if( !($admin->load($request->post()) && $admin->save())){
+                $err=ModelHelper::getErrorAsString($admin,$admin->getErrors());
+                $t->rollBack();
+            }
+            $info->admin_id=$admin->id;
+            if( !($info->load($request->post()) && $info->save()) ){
+                $err=ModelHelper::getErrorAsString($info,$info->getErrors());
+                $t->rollBack();
+            }
+            if($request->isAjax){
+                if(isset($err)){
+                    return ['status'=>false,'msg'=>$err];
+                }else{
+                    $t->commit();
+                    return ['status'=>true,'msg'=>\yii::t('app','Success')];
+                }
+            }else{
+                if(isset($err)){
+                    \yii::$app->getSession()->addFlash('error',$err);
+                }else{
+                    $t->commit();
+                    \yii::$app->getSession()->setFlash('success',\yii::t('app','Success'));
+                }
+            }
+        }
+
+
+        return $this->render('card',['model'=>$info,'admin'=>$admin]);
+    }
 }

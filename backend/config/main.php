@@ -84,6 +84,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'adminupload/<path:[\w\d]+(/[\w\d]+)*>.<extension:(png|jpg|jpeg)>'=>'upload/admin-upload',
                 'upload/<index:[\w\d]+(/[\w\d]+)*\.(png|jpg|jpeg)>'=>'upload/index',
             ],
         ],
