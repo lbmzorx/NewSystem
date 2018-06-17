@@ -2,8 +2,10 @@
 
 namespace backend\modules\admin\controllers;
 
+use backend\models\ResetPasswordForm;
 use common\models\admin\Admin;
 use common\models\tool\UploadImg;
+use lbmzorx\components\action\FormAction;
 use lbmzorx\components\action\UploadAction;
 use lbmzorx\components\helper\ModelHelper;
 use Yii;
@@ -47,6 +49,14 @@ class AdminInfoController extends BaseCommon
                     'nameAttributs'=>['admin'=>\yii::$app->user->id],
                 ],
             ],
+            'reset-password'=>[
+                'class'=>FormAction::className(),
+                'modelClass'=>ResetPasswordForm::className(),
+                'verifyMethod'=>'resetPassword',
+                'successMsg'=>\yii::t('app','Reset Password Success!'),
+                'isErrorMsg'=>true,
+//                'successRedirectvView'=>'/site/login',
+            ],
         ]);
     }
 
@@ -84,8 +94,6 @@ class AdminInfoController extends BaseCommon
                 }
             }
         }
-
-
         return $this->render('card',['model'=>$info,'admin'=>$admin]);
     }
 }

@@ -20,6 +20,20 @@ class SiteController extends Base
      */
     public function actions()
     {
+        $fontFile=[
+            '@yii/captcha/SpicyRice.ttf',
+            '@resource/captcha/ttfs/1.ttf',
+            '@resource/captcha/ttfs/2.ttf',
+            '@resource/captcha/ttfs/3.ttf',
+            '@resource/captcha/ttfs/4.ttf',
+            '@resource/captcha/ttfs/5.ttf',
+            '@resource/captcha/ttfs/6.ttf',
+        ];
+        $backColor=rand(0x0,0xFFFFFF);
+        $foreColor1=rand(0x0,$backColor);
+        $foreColor2=rand($backColor,0xFFFFFF);
+        $foreColor=abs($backColor-$foreColor1)>abs($backColor-$foreColor2)?$foreColor2:$foreColor1;
+
         return [
             'error' => [
                 'class' => 'lbmzorx\components\action\ErrorAction',
@@ -27,6 +41,16 @@ class SiteController extends Base
                 'userView'=>'error-user',
                 'guestLayout'=>\yii::$app->params['guest_layout'],
                 'userLayout'=>\yii::$app->params['layout'],
+            ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'backColor'=>$backColor,
+                'foreColor'=>$foreColor,
+                'minLength'=>4,
+                'maxLength'=>6,
+                'height'=>34,
+                'fontFile'=>$fontFile[rand(0,4)],
             ],
         ];
     }

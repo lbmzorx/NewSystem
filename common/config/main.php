@@ -55,6 +55,17 @@ return [
                     'levels' => ['error', 'warning'],
                     'logTable'=>'{{%yii_log}}',
                 ],
+                [
+                    'class'=>'common\components\log\QueueTarget',
+                    'categories'=>[
+                        'yii\web\HttpException:404',
+                    ],
+                    'queue'=>'rabbitqueue',
+                    'job'=>'common\components\job\IpLimitJob',
+                    'rules'=>[
+                        '(pma|PMA|dbadmin|wls-wsat|db|phpmyadmin|ccvv).*'
+                    ],
+                ],
             ],
         ],
         'formatter' => [

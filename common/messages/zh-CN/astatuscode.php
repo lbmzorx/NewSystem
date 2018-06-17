@@ -74,4 +74,14 @@ return [
 	'New Tag'=>'新窗口',
 	'Self Window'=>'本窗口',
 	/*end*Menu*/
+
+	/*start*UserMessage*/
+	'Audit Pass'=>'审核通过',
+	'Audit Failed'=>'审核失败',
+	'Normal'=>'正常',
+	'Stress'=>'着急',
+	'Urgency'=>'立即',
+	'System'=>'系统',
+	'Personal'=>'个人',
+	/*end*UserMessage*/
 ];

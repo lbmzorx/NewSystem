@@ -19,6 +19,7 @@ return [
     'Update'=>'更新',
     'Delete'=>'删除',
 
+    'Reset Password'=>'重置密码',
     'Edit success'=>'修改成功',
     'Invalid id'=>'无效',
 
@@ -403,4 +404,9 @@ return [
     'Do you want to Delete all yii logs?'=>'您想删除所有的Yii日志吗?',
     'Request Error !'=>'请求错误！',
     'Request Error Type!'=>'错误请求方式',
+    'Old Password'=>'旧密码',
+    'New Password'=>'新密码',
+    'Confirm Password'=>'确认密码',
+    'Reset Password Success!'=>'重置密码成功!',
+    'Verify Code'=>'验证码',
 ];

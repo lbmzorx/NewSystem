@@ -95,4 +95,24 @@ return [
 	'Controller'=>'控制器',
 	'Action'=>'方法',
 	/*end*Menu*/
+
+	/*start*AttackIp*/
+	'Ip'=>'Ip地址',
+	'Is Limit'=>'是否限制',
+	/*end*AttackIp*/
+
+	/*start*UserMessage*/
+	'Send ID'=>'发送者ID',
+	'To ID'=>'接收者ID',
+	'Priority'=>'优先级',
+	'Send Type'=>'来源类型',
+	'Is Link'=>'是否链接',
+	'Link'=>'链接',
+	'Group Type'=>'分组类型',
+	'User Message Group Content ID'=>'组内容',
+	/*end*UserMessage*/
+
+	/*start*YiiLog*/
+	'Level'=>'级别',
+	/*end*YiiLog*/
 ];

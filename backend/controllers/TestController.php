@@ -55,4 +55,17 @@ class TestController extends Controller
         return $this->renderPartial('index');
     }
 
+    public $secretKey='mGnCQSJk6LQ9i9PUO6d0CD2c7QabUCj4';
+    public function actionTc(){
+       var_dump(strlen('aQCmTIaplrJ5zzaTk5r4QaCdSsA='));
+
+        $str='asdfdasfsafdasfdsa=aklsdjflkadsjkl;fjakl;dsfjkl;adsfjkl;askljfdsa';
+       var_dump(strlen(base64_encode(hash_hmac('sha256',$str, $this->secretKey, true))));
+        var_dump(strlen(base64_encode(hash_hmac('sha1',$str, $this->secretKey, true))));
+        $str='q6whJ4Nb2hncglJQRf2risj8QuqetguCP7b01OjQqJg=';
+        var_dump(strlen(base64_encode(hash_hmac('sha256',$str, $this->secretKey, true))));
+        var_dump(strlen(base64_encode(hash_hmac('sha1',$str, $this->secretKey, true))));
+
+    }
+
 }
