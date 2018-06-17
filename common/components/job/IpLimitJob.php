@@ -8,6 +8,7 @@ namespace common\components\job;
 use common\components\security\TencenApi;
 use common\models\admindata\AttackIp;
 use common\models\startdata\UserMessage;
+use yii\base\InvalidParamException;
 use yii\base\Model;
 
 class IpLimitJob extends Model implements \yii\queue\JobInterface
@@ -18,14 +19,18 @@ class IpLimitJob extends Model implements \yii\queue\JobInterface
     public $msg;
 
     public function execute($queue){
-        var_dump('haha');
         if(! AttackIp::find()->where(['ip'=>$this->ip])->exists()){
-//            $attackip=new AttackIp();
-//            $attackip->ip=$this->ip;
-//            $attackip->save();
-            $tencent=new TencenApi();
+            $attackip=new AttackIp();
+            $attackip->ip=$this->ip;
+            $attackip->save();
+            try{
+                $tencent=new TencenApi();
 
-            $tencent->send($this->ip,$this->msg);
+                $tencent->send($this->ip,$this->msg);
+            }catch (InvalidParamException $e){
+
+            }
+
         }
     }
 }
