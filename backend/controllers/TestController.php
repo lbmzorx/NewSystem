@@ -8,6 +8,7 @@
 namespace backend\controllers;
 
 
+use common\components\job\IpLimitJob;
 use common\models\startmq\QtMessageForm;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -65,6 +66,19 @@ class TestController extends Controller
         $str='q6whJ4Nb2hncglJQRf2risj8QuqetguCP7b01OjQqJg=';
         var_dump(strlen(base64_encode(hash_hmac('sha256',$str, $this->secretKey, true))));
         var_dump(strlen(base64_encode(hash_hmac('sha1',$str, $this->secretKey, true))));
+
+    }
+
+    public function actionQu(){
+        $str='s:32:"common\components\job\IpLimitJob";';
+        $limitIp=new IpLimitJob();
+        $limitIp->ip="82.223.36.139";
+        $limitIp->msg="limit lua";
+
+        $ser=serialize($limitIp);
+//        var_dump(strlen('O:32:"common\components\job\IpLimitJob":1:{s:2:"ip";s:9:"127.0.0.1";}'));
+        $a=unserialize($ser);
+        var_dump($ser);
 
     }
 
