@@ -7,7 +7,6 @@
 namespace common\components\job;
 use common\components\security\TencenApi;
 use common\models\admindata\AttackIp;
-use common\models\startdata\UserMessage;
 use yii\base\InvalidParamException;
 use yii\base\Model;
 

@@ -27,9 +27,6 @@ use yii\helpers\Url;
                     <div class="ibox-tools">
                         <a class="collapse-link ui-sortable" title="详情.." href="<?=Url::to(['/system','right_url'=>Url::to(['/system/web-admin/pointer'])])?>">
                         </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="index.html#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
                     </div>
                     <div class="ibox-content">
                         <?=\common\widgets\SystemDfInfo::widget([
