@@ -84,12 +84,13 @@ class UserMessage extends BaseModelUserMessage
     const MESSAGE_TYPE_VISITOR=6;
     const MESSAGE_TYPE_FANS=7;
     const MESSAGE_TYPE_FOLLOWING=8;
+    const MESSAGE_TYPE_PUBLISH = 9;
     /**
     * 消息类型
     * 消息类型.tran:0=评论,1=回答,2=回复,3=评价,4=收藏,5=点赞,6=访客,7=粉丝,8=关注.code:0=Commit,1=Answer,2=Reply,4=Collection,5=Thumb Up,6=Visitor,7=Fans,8=Following.
     * @var array $message_type_code
     */
-    public static $message_type_code = [0=>'Commit',1=>'Answer',2=>'Reply',4=>'Collection',5=>'Thumb Up',6=>'Visitor',7=>'Fans',8=>'Following'];
+    public static $message_type_code = [0=>'Commit',1=>'Answer',2=>'Reply',4=>'Collection',5=>'Thumb Up',6=>'Visitor',7=>'Fans',8=>'Following',9=>'Publish'];
 
     /**
      * get status code attribute list
@@ -109,7 +110,7 @@ class UserMessage extends BaseModelUserMessage
             [['read','send_type','is_link'], 'in', 'range' => [0,1,]],
             [['status','group_type'], 'in', 'range' => [0,1,2,]],
             [['priority'], 'in', 'range' => [0,1,2,3,]],
-            [['message_type'], 'in', 'range' => [0,1,2,4,5,6,7,8,]],
+            [['message_type'], 'in', 'range' => [0,1,2,4,5,6,7,8,9]],
             [['send_id','add_time'], 'default', 'value' =>'0',],
             [['read','priority','send_type','is_link','group_type','message_type'], 'default', 'value' =>0,],
             [['status'], 'default', 'value' =>1,],
@@ -267,6 +268,7 @@ class UserMessage extends BaseModelUserMessage
             self::MESSAGE_TYPE_VISITOR=>\yii::t('app','visited'),
             self::MESSAGE_TYPE_FANS=>\yii::t('app','has following '),
             self::MESSAGE_TYPE_FOLLOWING=>\yii::t('app','Followed'),
+            self::MESSAGE_TYPE_PUBLISH=>\yii::t('app','Publish'),
         ];
         return isset($template[$message])?$template[$message]:'';
     }
