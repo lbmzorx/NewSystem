@@ -18,6 +18,8 @@ end
 
 local filepath=ngx.var.luapath.."/system/iplog.log"
 local ip = get_client_ip()
-writefile(filepath,ip.."\n","a")
 
+--ngx.say("hello world!")
+
+writefile(filepath,ip.."\n","a")
 ngx.exit(403)
