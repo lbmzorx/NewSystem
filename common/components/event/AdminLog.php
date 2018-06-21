@@ -11,6 +11,9 @@ namespace common\components\event;
 use Yii;
 use Yii\base\Event;
 use common\models\admindata\AdminLog as AdminLogModel;
+use yii\base\Exception;
+use yii\helpers\VarDumper;
+
 class AdminLog extends Event
 {
     /**
@@ -34,7 +37,7 @@ class AdminLog extends Event
             }
             $model->description = '{{%ADMIN_USER%}} [ ' . Yii::$app->getUser()->getIdentity()->username . ' ] {{%BY%}} ' . $class . ' [ ' . $class::tableName() . ' ] ' . " {{%CREATED%}} {$id_des} {{%RECORD%}}: " . $desc;
             $model->route = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
-            $model->user_id = Yii::$app->getUser()->getId();
+            $model->admin_id = Yii::$app->getUser()->getId();
             $model->save();
         }
     }
@@ -62,8 +65,11 @@ class AdminLog extends Event
             }
             $model->description = '{{%ADMIN_USER%}} [ ' . Yii::$app->getUser()->getIdentity()->username . ' ] {{%BY%}} ' . $class . ' [ ' . $class::tableName() . ' ] ' . " {{%UPDATED%}} {$id_des} {{%RECORD%}}: " . $desc;
             $model->route = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
-            $model->user_id = Yii::$app->getUser()->id;
-            $model->save();
+            $model->admin_id = Yii::$app->getUser()->id;
+//            $model->save();
+            if(!$model->save()){
+                throw new Exception(VarDumper::dumpAsString($model->getErrors()));
+            }
         }
     }
 
@@ -87,7 +93,7 @@ class AdminLog extends Event
         }
         $model->description = '{{%ADMIN_USER%}} [ ' . Yii::$app->getUser()->getIdentity()->username . ' ] {{%BY%}} ' . $class . ' [ ' . $class::tableName() . ' ] ' . " {{%DELETED%}} {$id_des} {{%RECORD%}}: " . $desc;
         $model->route = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
-        $model->user_id = Yii::$app->getUser()->id;
+        $model->admin_id = Yii::$app->getUser()->id;
         $model->save();
     }
 }

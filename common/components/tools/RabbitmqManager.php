@@ -18,7 +18,7 @@ class RabbitmqManager extends BaseObject
 
 
     public function render($route){
-        $content=file_get_contents($this->host.':'.$this->port);
+        $content=file_get_contents('http://'.$this->host.':'.$this->port);
 
         return $content;
     }

@@ -38,7 +38,7 @@ class AdminLog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['admin_id', 'add_time'], 'required'],
+            [['admin_id',], 'required'],
             [['admin_id', 'add_time', 'edit_time'], 'integer'],
             [['description'], 'string'],
             [['route'], 'string', 'max' => 255],
