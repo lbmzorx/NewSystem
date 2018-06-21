@@ -32,7 +32,7 @@ class AdminLog extends Event
             if (isset($event->sender->id)) {
                 $id_des = '{{%ID%}} ' . $event->sender->id;
             }
-            $model->description = '{{%ADMIN_USER%}} [ ' . Yii::$app->getUser()->getIdentity()->name . ' ] {{%BY%}} ' . $class . ' [ ' . $class::tableName() . ' ] ' . " {{%CREATED%}} {$id_des} {{%RECORD%}}: " . $desc;
+            $model->description = '{{%ADMIN_USER%}} [ ' . Yii::$app->getUser()->getIdentity()->username . ' ] {{%BY%}} ' . $class . ' [ ' . $class::tableName() . ' ] ' . " {{%CREATED%}} {$id_des} {{%RECORD%}}: " . $desc;
             $model->route = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
             $model->user_id = Yii::$app->getUser()->getId();
             $model->save();
@@ -60,7 +60,7 @@ class AdminLog extends Event
             if (isset($event->sender->id)) {
                 $id_des = '{{%ID%}} ' . $event->sender->id;
             }
-            $model->description = '{{%ADMIN_USER%}} [ ' . Yii::$app->getUser()->getIdentity()->name . ' ] {{%BY%}} ' . $class . ' [ ' . $class::tableName() . ' ] ' . " {{%UPDATED%}} {$id_des} {{%RECORD%}}: " . $desc;
+            $model->description = '{{%ADMIN_USER%}} [ ' . Yii::$app->getUser()->getIdentity()->username . ' ] {{%BY%}} ' . $class . ' [ ' . $class::tableName() . ' ] ' . " {{%UPDATED%}} {$id_des} {{%RECORD%}}: " . $desc;
             $model->route = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
             $model->user_id = Yii::$app->getUser()->id;
             $model->save();
@@ -85,7 +85,7 @@ class AdminLog extends Event
         if (isset($event->sender->id)) {
             $id_des = '{{%ID%}} ' . $event->sender->id;
         }
-        $model->description = '{{%ADMIN_USER%}} [ ' . Yii::$app->getUser()->getIdentity()->name . ' ] {{%BY%}} ' . $class . ' [ ' . $class::tableName() . ' ] ' . " {{%DELETED%}} {$id_des} {{%RECORD%}}: " . $desc;
+        $model->description = '{{%ADMIN_USER%}} [ ' . Yii::$app->getUser()->getIdentity()->username . ' ] {{%BY%}} ' . $class . ' [ ' . $class::tableName() . ' ] ' . " {{%DELETED%}} {$id_des} {{%RECORD%}}: " . $desc;
         $model->route = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
         $model->user_id = Yii::$app->getUser()->id;
         $model->save();
