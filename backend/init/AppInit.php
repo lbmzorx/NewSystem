@@ -5,7 +5,11 @@ namespace backend\init;
  * Date: 2018/5/18 23:17
  * github: https://github.com/lbmzorx
  */
+
+use common\components\event\AdminLog;
 use Yii;
+use yii\base\Event;
+use yii\db\BaseActiveRecord;
 use yii\db\Exception;
 use yii\helpers\VarDumper;
 use yii\web\JqueryAsset;
@@ -16,9 +20,24 @@ class AppInit extends \yii\base\Component
         static::setAppParams();
     }
 
-
     public static function setAppParams(){
+        static::logDatabase();
         static::setLayoutKlorofil();
+    }
+
+    public static function logDatabase(){
+        Event::on(BaseActiveRecord::className(), BaseActiveRecord::EVENT_AFTER_INSERT, [
+            AdminLog::className(),
+            'create'
+        ]);
+        Event::on(BaseActiveRecord::className(), BaseActiveRecord::EVENT_AFTER_UPDATE, [
+            AdminLog::className(),
+            'update'
+        ]);
+        Event::on(BaseActiveRecord::className(), BaseActiveRecord::EVENT_AFTER_DELETE, [
+            AdminLog::className(),
+            'delete'
+        ]);
     }
 
     public static function setLayoutKlorofil()

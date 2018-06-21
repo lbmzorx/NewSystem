@@ -77,9 +77,12 @@ str
             'id',
             'admin_id',
             'route',
-            'description:ntext',
-            'add_time',
-            //'edit_time',
+            [
+                'attribute'=>'description',
+                'format'=>'raw',
+            ],
+            'add_time:datetime',
+            //'edit_time:datetime',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

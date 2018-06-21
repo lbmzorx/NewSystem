@@ -37,6 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'admin_id',
             'route',
             'description:ntext',
+            [
+                'attribute'=>'description',
+                'format'=>'raw',
+            ],
             'add_time:datetime',
             'edit_time:datetime',
         ],
