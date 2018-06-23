@@ -91,21 +91,61 @@ class ArticleForm extends Model
     }
 
     public function updateArticle($id){
+        $db=Article::getDb();
+        $t=$db->beginTransaction();
 
+        $article=Article::findOne([
+            'id'=>$id,
+            'user_id'=>\yii::$app->user->id,
+        ]);
+        if(! $article){
+            $this->addError('id',\yii::t('app','This Article is not Exist!'));
+            return false;
+        }
+
+        $articleContent=ArticleContent::findOne(['id'=>$article->article_content_id]);
+        if($articleContent){
+            $article->setScenario('update');
+        }else{
+            $articleContent=new ArticleContent();
+            $articleContent->setScenario('create');
+            $articleContent->loadDefaultValues();
+        }
+
+        $articleContent->setScenario('update');
+        $articleContent->load($this->getAttributes(),'');
+        if($articleContent->save()){
+            $article->load($this->getAttributes(),'');
+            $article->author=\Yii::$app->user->identity->username;
+            $article->user_id=\yii::$app->user->id;
+            $article->article_content_id=$articleContent->id;
+            if($article->save()){
+                $t->commit();
+                return true;
+            }else{
+                $this->addError('content',VarDumper::dumpAsString($articleContent->getErrors()));
+                $t->rollBack();
+                return false;
+            }
+        }else{
+            $this->addError('content',VarDumper::dumpAsString($articleContent->getErrors()));
+            $t->rollBack();
+            return false;
+        }
     }
 
     public function findArticle($id){
         $article=Article::findOne([
             'id'=>$id,
             'user_id'=>\yii::$app->user->id,
-            'recycle'=>Article::RECYCLE_NO,
-            'status'=>Article::STATUS_AUDIT_PASSED,
         ]);
         if($article){
             $this->_article=$article;
             $this->_article_content=ArticleContent::findOne($article->article_content_id);
             $this->load($article->getAttributes(),'');
             $this->content=$this->_article_content?$this->_article_content->content:'';
+        }else{
+            return false;
         }
         return $this;
     }

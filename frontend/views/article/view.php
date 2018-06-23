@@ -7,6 +7,18 @@ use yii\helpers\Html;
 
 $this->title = Html::encode( $model->title);
 $this->params['breadcrumbs'][] = $this->title;
+
+$edit='';
+if(\yii::$app->user->id==$model->user_id) {
+    $edit=Html::tag('div',
+        Html::tag('div',
+            Html::a(Html::tag('i','',['class'=>'fa fa-pencil']).'  '.\yii::t('app','Update'),
+                ['update','id'=>$model->id],['class'=>'btn btn-info btn-all']),
+            ['class'=>'panel-body']
+        ),
+    ['class'=>'panel panel-default']
+    );
+}
 ?>
 <div class="site-index">
     <div class="row">
@@ -51,6 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <a class="btn btn-success btn-all" href="<?=\yii\helpers\Url::to(['article/create'])?>"><i class="fa fa-plus"></i>&nbsp; <?=\yii::t('app','Create New Article')?></a>
                 </div>
             </div>
+            <?=$edit?>
             <?=\frontend\widget\UserCardWidget::widget([
                     'userId'=>$model->user_id,
                     'options'=>[

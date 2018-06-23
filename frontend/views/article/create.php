@@ -6,7 +6,7 @@ use \lbmzorx\components\helper\TreeHelper;
 use common\models\startdata\ArticleCate;
 
 \lbmzorx\components\assets\LayuiAsset::register($this);
-$this->title = \yii::t('app','Create Article');
+$this->title = $title;
 ?>
 <div class="site-index">
     <div class="row">

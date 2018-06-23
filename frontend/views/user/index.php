@@ -6,7 +6,6 @@
  */
 use yii\helpers\Html;
 $user=\yii::$app->request->get('id')?:\yii::$app->user->id;
-$user=\yii::$app->request->get('id')?:\yii::$app->user->id;
 ?>
 <div class="site-index">
     <div class="row">
@@ -47,7 +46,7 @@ $user=\yii::$app->request->get('id')?:\yii::$app->user->id;
                             ['class' => 'pull-right label label-' . $model->getStatusCss('status', 'status_css', $model->status)]);
                         if((time()-$model->add_time)<86400*3){
                             $edit=Html::a(Html::tag('i','',['class'=>'fa fa-pencil-square-o']).\yii::t('app','Update'),
-                                ['update','id'=>$model->id],
+                                ['/article/update','id'=>$model->id],
                                 ['title'=>\yii::t('app','Update')]
                             );
                         }

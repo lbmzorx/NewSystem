@@ -452,4 +452,7 @@ return [
     'I'=>'我',
     'has canceled to'=>'取消',
     'Unfollow  Success!'=>'取消关注成功',
+    'This Article is not Exist!'=>'这篇文章不存在',
+    'Success update Article'=>'文章更新成功!',
+    'Create New Article'=>'写文章',
 ];

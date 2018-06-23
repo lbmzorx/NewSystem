@@ -136,13 +136,46 @@ class ArticleController extends Controller
                 return $return;
             }else{
                 if($return['status']){
-                    return $this->redirect(['article/index']);
+                    return $this->redirect(['/user/index']);
                 }
             }
         }
 
         return $this->render('create',[
             'model'=>$articleForm,
+            'title'=>\yii::t('app','Create Article'),
+        ]);
+    }
+
+    public function actionUpdate($id){
+        $articleForm=new ArticleForm();
+        $request=\yii::$app->request;
+        if($request->isPost){
+            if( $articleForm->load($request->post()) && $articleForm->updateArticle($id) ){
+                $msg=\yii::t('app','Success update Article');
+                \yii::$app->session->setFlash('success',$msg);
+                $return=['status'=>true,'msg'=>$msg];
+            }else{
+                $msg=ModelHelper::getErrorAsString($articleForm,$articleForm->getErrors());
+                \yii::$app->session->setFlash('error',$msg);
+                $return=['status'=>false,'msg'=>$msg];
+            }
+
+            if($request->isAjax){
+                return $return;
+            }else{
+                if($return['status']){
+                    return $this->redirect(['/user/index']);
+                }
+            }
+        }
+        if($articleForm->findArticle($id)==false){
+            \yii::$app->session->addFlash('error',\yii::t('app','This Article is not Exist!'));
+            return $this->redirect('/user/index');
+        }
+        return $this->render('create',[
+            'model'=>$articleForm,
+            'title'=>\yii::t('app','Update Article'),
         ]);
     }
 
