@@ -5,7 +5,7 @@
  * github: https://github.com/lbmzorx
  */
 use yii\helpers\Html;
-
+$user=\yii::$app->request->get('id')?:\yii::$app->user->id;
 $user=\yii::$app->request->get('id')?:\yii::$app->user->id;
 ?>
 <div class="site-index">
@@ -22,7 +22,7 @@ $user=\yii::$app->request->get('id')?:\yii::$app->user->id;
                 'dataProvider'=>$provider,
                 'itemOptions' => ['class' => 'item list-group-item','tag'=>'li'],
                 'layout'=>"<ul class='list-group'>{items}</ul>\n{summary}\n{pager}",
-                'itemView' => function ($model, $key, $index, $widget) {
+                'itemView' => function ($model, $key, $index, $widget) use ($user)  {
                     /**
                      * @var $model \yii\base\Model;
                      */
@@ -40,7 +40,18 @@ $user=\yii::$app->request->get('id')?:\yii::$app->user->id;
                     if($model->cover){
                         $right=Html::tag('div',Html::a(Html::img($model->cover,['style'=>'max-width:100px;max-height:100px;']),['article/view','id'=>$model->id]),['class'=>'media-right']);
                     }
-
+                    $edit='';
+                    $status='';
+                    if(\yii::$app->user->id==$user) {
+                        $status = Html::tag('span', $model->getStatusCode('status', 'status_code'),
+                            ['class' => 'pull-right label label-' . $model->getStatusCss('status', 'status_css', $model->status)]);
+                        if((time()-$model->add_time)<86400*3){
+                            $edit=Html::a(Html::tag('i','',['class'=>'fa fa-pencil-square-o']).\yii::t('app','Update'),
+                                ['update','id'=>$model->id],
+                                ['title'=>\yii::t('app','Update')]
+                            );
+                        }
+                    }
                     $str=<<<DOM
 <div class="media-left"> 
 <a href="{$userUrl}" rel="author"> 
@@ -52,7 +63,10 @@ $user=\yii::$app->request->get('id')?:\yii::$app->user->id;
     <a href="{$url}">{$model->title}</a>
     </h1>
     <div class="media-action">
+    {$status}
+    {$edit}
     <span class="info-article" title=""><a href="$userUrl" rel="author">{$model->user['username']}</a></span>
+    <span class="info-article" title="{$model->tag}"><i class="fa fa-tag "></i> {$model->tag}</span>
     <span class="info-article" title=""><i class="fa fa-calendar"></i> {$date}</span>
     <span class="info-article" title="{$view}"><i class="fa fa-eye"></i> {$model->view}</span>
     <span class="info-article" title="{$thumbup}"><i class="fa fa-thumbs-o-up"></i> {$model->thumbup}</span>

@@ -409,4 +409,5 @@ return [
     'Confirm Password'=>'确认密码',
     'Reset Password Success!'=>'重置密码成功!',
     'Verify Code'=>'验证码',
+    'You article of {title} cannot be publish for its content ,please check it!'=>'你的文章{title}内容不符合本站要求，请检查',
 ];

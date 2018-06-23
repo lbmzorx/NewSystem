@@ -82,9 +82,7 @@ class UserController extends Controller
 
     public function actionIndex(){
         $user=\yii::$app->request->get('id')?:\yii::$app->user->id;
-
         $query=Article::find()->where([
-            'status'=>Article::STATUS_AUDIT_PASSED,
             'publish'=>Article::PUBLISH_PUBLISHED,
             'auth'=>Article::AUTH_ALL_USERS,
             'user_id'=>$user,
@@ -92,6 +90,17 @@ class UserController extends Controller
             'tag'=>\yii::$app->request->get('tag'),
             'article_cate_id'=>\yii::$app->request->get('cate_id'),
         ])->with('user');
+
+        if(\yii::$app->user->id==$user){
+            $query->andWhere(['status'=>[
+                Article::STATUS_AUDIT_PASSED,
+                Article::STATUS_AUDIT_FAILED,
+                Article::STATUS_WAITING_AUDIT,
+            ]]);
+        }else{
+            $query->andWhere(['status'=>Article::STATUS_AUDIT_PASSED,]);
+        }
+
         $provider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [

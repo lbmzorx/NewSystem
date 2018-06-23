@@ -16,7 +16,7 @@ use yii\base\InvalidParamException;
 use yii\db\ActiveRecord;
 use yii\queue\closure\Job;
 
-class BroadCastMessageToFans extends Behavior
+class MessageToUser extends Behavior
 {
     public $user_id;
     public $job;
@@ -45,8 +45,6 @@ class BroadCastMessageToFans extends Behavior
          */
         $model=$event->sender;
 
-        $fans=UserFans::find()->select('fans_id')->where(['attention_id'=>$this->user_id])->column();
-
         $this->jobParams=$this->getJobParams($model);
         if($this->job instanceof \Closure){
             $job=call_user_func($this->job,$this->jobParams);
@@ -59,19 +57,8 @@ class BroadCastMessageToFans extends Behavior
             throw new InvalidParamException("Invalid job parameters!");
         }
 
-        /**
-         * not need publish all content for group content
-         */
-        $content=new UserMessageGroupContent();
-        $content->content=$job->content;
-        $content->save();
-        $job->user_message_group_content_id=$content->id;
-        $job->content='';
+        \yii::$app->rabbitqueue->push($job);
 
-        foreach ($fans as $fan){
-            $job->to_id=$fan;
-            \yii::$app->rabbitqueue->push($job);
-        }
     }
 
     protected function getJobParams($model){
