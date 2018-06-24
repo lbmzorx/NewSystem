@@ -6,13 +6,12 @@ namespace backend\init;
  * github: https://github.com/lbmzorx
  */
 
-use common\components\event\AdminLog;
+use backend\components\event\AdminLog;
+use backend\components\event\CustomLog;
 use Yii;
 use yii\base\Event;
 use yii\db\BaseActiveRecord;
-use yii\db\Exception;
-use yii\helpers\VarDumper;
-use yii\web\JqueryAsset;
+
 
 class AppInit extends \yii\base\Component
 {
@@ -38,6 +37,24 @@ class AppInit extends \yii\base\Component
             AdminLog::className(),
             'delete'
         ]);
+
+        Event::on(CustomLog::className(), CustomLog::EVENT_AFTER_CREATE, [
+            AdminLog::className(),
+            'custom'
+        ]);
+        Event::on(CustomLog::className(), CustomLog::EVENT_AFTER_DELETE, [
+            AdminLog::className(),
+            'custom'
+        ]);
+        Event::on(CustomLog::className(), CustomLog::EVENT_CUSTOM, [
+            AdminLog::className(),
+            'custom'
+        ]);
+        Event::on(BaseActiveRecord::className(), BaseActiveRecord::EVENT_AFTER_FIND, function ($event) {
+            if (isset($event->sender->updated_at) && $event->sender->updated_at == 0) {
+                $event->sender->updated_at = null;
+            }
+        });
     }
 
     public static function setLayoutKlorofil()

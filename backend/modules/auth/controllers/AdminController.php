@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\modules\admin\controllers;
+namespace backend\modules\auth\controllers;
 
 use Yii;
 use backend\controllers\BaseCommon;

@@ -60,6 +60,10 @@ return [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
         ],
+        'authManager' => [
+            'class' => yii\rbac\DbManager::className(),
+            'db'=>'dbadmin',
+        ],
         'i18n' => [
             'translations' => [//多语言包设置
                 'app*' => [

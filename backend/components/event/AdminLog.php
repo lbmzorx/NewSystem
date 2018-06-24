@@ -6,7 +6,7 @@
  * Time: 0:51
  */
 
-namespace common\components\event;
+namespace backend\components\event;
 
 use Yii;
 use Yii\base\Event;
@@ -94,6 +94,15 @@ class AdminLog extends Event
         $model->description = '{{%ADMIN_USER%}} [ ' . Yii::$app->getUser()->getIdentity()->username . ' ] {{%BY%}} ' . $class . ' [ ' . $class::tableName() . ' ] ' . " {{%DELETED%}} {$id_des} {{%RECORD%}}: " . $desc;
         $model->route = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
         $model->admin_id = Yii::$app->getUser()->id;
+        $model->save();
+    }
+
+    public static function custom(CustomLog $event)
+    {
+        $model = new AdminLogModel();
+        $model->description = $event->getDescription();
+        $model->route = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
+        $model->user_id = yii::$app->getUser()->getId();
         $model->save();
     }
 }

@@ -485,7 +485,7 @@ class Article extends BaseModelArticle
                     if($this->status==self::STATUS_AUDIT_FAILED){
                         $this->trigger(AduitEvent::EVENT_ADUIT_FAILED,new AduitEvent());
                     }elseif($this->status==self::STATUS_AUDIT_PASSED){
-                        $this->trigger(AduitEvent::EVENT_ADUIT_FAILED,new AduitEvent());
+                        $this->trigger(AduitEvent::EVENT_ADUIT_SUCCESS,new AduitEvent());
                     }
                 }
             }

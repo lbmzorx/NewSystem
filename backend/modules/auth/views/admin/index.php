@@ -15,7 +15,8 @@ use lbmzorx\components\widget\BatchDelete;
 $this->title = Yii::t('app', 'Admins');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCss(<<<STYLE
-        p .btn{margin-top:5px;}
+  p .btn{margin-top:5px;}
+  tbody img{width:50px;height:50px}
 STYLE
 );
 ?>
@@ -74,8 +75,8 @@ str
 
             'id',
             'username',
+            'head_img:image',
             'auth_key',
-            'password_hash',
             'password_reset_token',
             //'email:email',
             [
