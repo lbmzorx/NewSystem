@@ -75,9 +75,9 @@ str
             'id',
             'username',
             'auth_key',
-            'password_hash',
+            'secret_key',
             'password_reset_token',
-            //'email:email',
+            'email:email',
             [
                'class'=>\lbmzorx\components\grid\StatusCodeColumn::className(),
                'attribute'=>'status',
