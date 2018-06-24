@@ -12,7 +12,6 @@ use common\models\startdata\Tag;
 use common\models\startdata\Article;
 use yii\base\Behavior;
 use yii\base\Exception;
-use yii\helpers\VarDumper;
 
 class ArticleTag extends Behavior
 {

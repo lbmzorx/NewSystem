@@ -14,11 +14,12 @@ use common\components\tools\RabbitmqManager;
 class RabbitmqController extends BaseCommon
 {
     public function actionIndex(){
-        $route=\yii::$app->request->url;
+        $request=\yii::$app->request;
+        $innerRoute=$request->get('innerRoute');
         $rabbitmqManager=new RabbitmqManager([
             'user_id'=>\yii::$app->user->id,
+            'tranRoute'=>'/'.$this->action->uniqueId.'/',
         ]);
-
-        return $rabbitmqManager->render($route);
+        return $rabbitmqManager->render($innerRoute);
     }
 }

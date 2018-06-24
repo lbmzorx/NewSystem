@@ -86,6 +86,8 @@ return [
             'rules' => [
                 'adminupload/<path:[\w\d]+(/[\w\d]+)*>.<extension:(png|jpg|jpeg)>'=>'upload/admin-upload',
                 'upload/<index:[\w\d]+(/[\w\d]+)*\.(png|jpg|jpeg)>'=>'upload/index',
+                'system/rabbitmq/index/<innerRoute:.*>'=>'system/rabbitmq/index',
+                'system/rabbitmq/<innerRoute:(js|api|img).*>'=>'system/rabbitmq/index',
             ],
         ],
     ],
