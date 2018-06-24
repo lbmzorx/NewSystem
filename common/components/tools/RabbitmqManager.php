@@ -37,7 +37,7 @@ class RabbitmqManager extends BaseObject
         $header=[];
         $cookie=null;
         if(!preg_match('/\.(css|js|png|jpg)/',$route)){
-            if($_COOKIE['m']){
+            if(!empty($_COOKIE['m'])){
                 $cookie=new Cookie([
                     'name'=>'m',
                     'value'=>'Z3Vlc3Q6Z3Vlc3Q=',
