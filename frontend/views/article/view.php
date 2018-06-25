@@ -54,7 +54,7 @@ if(\yii::$app->user->id==$model->user_id) {
                     'id'=>'article-box'
                 ],
             ])?>
-
+            <?=$this->render('/widget/_xinlang-share')?>
             <?=$this->render('/widget/_commitForm',['model'=>$commitForm,'article_id'=>$model->id])?>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3 " id="side-box">
