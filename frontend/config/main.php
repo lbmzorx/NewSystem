@@ -50,6 +50,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'article/view/<id:\d+>'=>'article/view',
             ],
         ],
         'i18n' => [
