@@ -19,10 +19,7 @@ class SerialNumberHelper
              */
             $redis=\yii::$app->redis;
             $lua=<<<LUA
-
-
-    if( redis.call("EXISTS",KEYS[1])) then
-        
+    if( redis.call("EXISTS",KEYS[1])) then        
         return redis.call("INCR",KEYS[1])
     else 
         return redis.call("SET",KEYS[1],1,'NX')
