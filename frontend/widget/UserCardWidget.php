@@ -40,7 +40,7 @@ class UserCardWidget extends Widget
     {
         $data=$this->getUserInfo($this->condition);
 
-        $head_img= Html::tag('div',Html::a( Html::tag('div',Html::img( $data['head_img']?:'/img/logo-50.png',['alt'=>$data['username'],'onerror'=>"this.src='/img/logo-50.png'"])),['/user','id'=>$this->userId]),['class'=>'media-left mr-2']);
+        $head_img= Html::tag('div',Html::a( Html::tag('div',Html::img( $data['head_img']?:'/img/default-user-50.png',['alt'=>$data['username'],'onerror'=>"this.src='/img/default-user-50.png'"])),['/user','id'=>$this->userId]),['class'=>'media-left mr-2']);
 
 
         $username=Html::tag('div',Html::a(Html::tag('h3',$data['username'],['class'=>'user-name-info']),['/user','id'=>$this->userId]),['class'=>'media-body']);
