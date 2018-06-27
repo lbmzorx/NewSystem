@@ -132,11 +132,13 @@ str
                 'buttons'=>[
                     'delete' => function ($url, $model, $key) {
                         $title = Yii::t('yii', 'Delete');
-                        $options = array_merge([
+                        $options = [
                             'title' => $title,
                             'aria-label' => $title,
                             'data-pjax' => '0',
-                        ], [],[]);
+                            'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                            'data-method' => 'post',
+                        ];
                         $icon = Html::tag('span', '', ['class' => "glyphicon glyphicon-trash"]);
                         return ($model->id > 20)?Html::a($icon, $url, $options) : '';
                     }

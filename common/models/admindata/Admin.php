@@ -52,7 +52,6 @@ class Admin extends BaseModelAdmin
             [['status'], 'in', 'range' => [0,1,2,3,4,5,6,9,10,]],
             [['secret_key'], 'default', 'value' =>'',],
             [['status'], 'default', 'value' =>9,],
-            [['role_id'], 'default', 'value' =>10,],
         ]);
     }
 
@@ -71,7 +70,6 @@ class Admin extends BaseModelAdmin
                 'password_reset_token',
                 'email',
                 'status',
-                'role_id',
                 'created_at',
                 'updated_at',
                 'head_img',
@@ -85,7 +83,6 @@ class Admin extends BaseModelAdmin
                 'password_reset_token',
                 'email',
                 'status',
-                'role_id',
                 'created_at',
                 'updated_at',
                 'head_img',
@@ -99,7 +96,6 @@ class Admin extends BaseModelAdmin
                 'password_reset_token',
                 'email',
                 'status',
-                'role_id',
                 'created_at',
                 'updated_at',
                 'head_img',
@@ -112,7 +108,6 @@ class Admin extends BaseModelAdmin
                 'password_reset_token',
                 'email',
                 'status',
-                'role_id',
                 'head_img',
             ],
             'create' => [
@@ -123,7 +118,6 @@ class Admin extends BaseModelAdmin
                 'password_reset_token',
                 'email',
                 'status',
-                'role_id',
                 'head_img',
             ],
         ];

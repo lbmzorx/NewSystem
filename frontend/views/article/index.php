@@ -1,8 +1,15 @@
 <?php
 use yii\helpers\Html;
 /* @var $this yii\web\View */
-
-$this->title = Html::encode(isset(\yii::$app->params[''])?\yii::$app->params['website_title']:\yii::t('app','Article'));
+$this->title = Html::encode(isset(\yii::$app->params['website_title'])?\yii::$app->params['website_title']:\yii::t('app','Article'));
+$this->registerMetaTag([
+    'name' => 'keywords',
+    'content' => isset(\yii::$app->params['seo_keywords'])?\yii::$app->params['seo_keywords']:'',
+]);
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => isset(\yii::$app->params['seo_description'])?\yii::$app->params['seo_description']:'',
+]);
 ?>
 <div class="site-index">
     <div class="row">
