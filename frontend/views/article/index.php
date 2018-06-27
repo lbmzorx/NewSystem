@@ -40,7 +40,7 @@ $this->registerMetaTag([
                     $str=<<<DOM
 <div class="media-left"> 
 <a href="{$userUrl}" rel="author"> 
-<img class="media-object" src="{$model->user['head_img']}" alt="{$model->user['username']}" onerror="this.src='/img/default-user-50.png'">
+<img class="media-object" src="{$model->user['head_img']}" alt="{$model->user['username']}" onerror="this.src='/img/default-user-40.png'">
 </a>
 </div>
 <div class="media-body">

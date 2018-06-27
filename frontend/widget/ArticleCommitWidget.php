@@ -55,7 +55,7 @@ class ArticleCommitWidget extends PanelWidget
         $data = [];
         foreach ($input as $k => $v){
             if(isset($v['sub'])){
-                $userInfo=Html::a(Html::img(Html::encode($v['user']['head_img']),['alt'=>Html::encode($v['user']['username'])]),['user/index','id'=>$v['user']['id']]);
+                $userInfo=Html::a(Html::img(Html::encode($v['user']['head_img']),['alt'=>Html::encode($v['user']['username']),'onerror'=>'this.src=\'/img/default-user-40.png\'']),['user/index','id'=>$v['user']['id']]);
                 $left=Html::tag('div',$userInfo,['class'=>'media-left']);
 
                 $userName=Html::a($v['user']['username']).'    '.date('Y-m-d',$v['add_time']);
@@ -74,7 +74,7 @@ class ArticleCommitWidget extends PanelWidget
 
             }else{
 
-                $userInfo=Html::a(Html::img(Html::encode($v['user']['head_img']),['alt'=>Html::encode($v['user']['username'])]),['user/index','id'=>$v['user']['id']]);
+                $userInfo=Html::a(Html::img(Html::encode($v['user']['head_img']),['alt'=>Html::encode($v['user']['username']),'onerror'=>'this.src=\'/img/default-user-40.png\'']),['user/index','id'=>$v['user']['id']]);
                 $left=Html::tag('div',$userInfo,['class'=>'media-left']);
 
                 $userName=Html::a($v['user']['username']).'    '.date('Y-m-d',$v['add_time']);
