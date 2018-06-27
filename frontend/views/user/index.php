@@ -54,13 +54,13 @@ $user=\yii::$app->request->get('id')?:\yii::$app->user->id;
                     $str=<<<DOM
 <div class="media-left"> 
 <a href="{$userUrl}" rel="author"> 
-<img class="media-object" src="{$model->user['head_img']}" alt="{$model->user['username']}">
+<img class="media-object" src="{$model->user['head_img']}" alt="{$model->user['username']}" onerror="this.src='/img/logo-50.png'">
 </a>
 </div>
 <div class="media-body">
-    <h1 class="media-heading">
+    <h3 class="media-heading">
     <a href="{$url}">{$model->title}</a>
-    </h1>
+    </h3>
     <div class="media-action">
     {$status}
     {$edit}
@@ -90,7 +90,6 @@ DOM;
                     'class'=>'panel panel-default',
                     'id'=>'article-box'
                 ],
-
             ])?>
             <?=\frontend\widget\TagWidget::widget([
                 'options'=>[

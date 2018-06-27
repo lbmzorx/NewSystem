@@ -42,6 +42,7 @@ STYLE
 <div class="wrap">
     <?php
     NavBar::begin([
+        'brandImage'=>'/img/logo-45.png',
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [

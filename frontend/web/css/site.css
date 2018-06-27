@@ -2,7 +2,7 @@ html,
 body {
     height: 100%;
 }
-
+a:hover{text-decoration:none}
 .wrap {
     min-height: 100%;
     height: auto;
@@ -140,11 +140,12 @@ a.desc:after {
 .nav > li > form > button.logout:hover {
     text-decoration: none;
 }
+.navbar-brand{padding: 5px;}
 
 .nav > li > form > button.logout:focus {
     outline: none;
 }
-
+.list-group li:hover{background-color:#f8f8f8}
 .user-status .userInfo{display: inline-block;margin:10px 20px;}
 .card{margin-bottom: 20px;padding:5px 5px;border-bottom: 1px solid #eee;}
 .user-footer .btn-group{margin-right: 10px;}

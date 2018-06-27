@@ -40,13 +40,13 @@ $this->registerMetaTag([
                     $str=<<<DOM
 <div class="media-left"> 
 <a href="{$userUrl}" rel="author"> 
-<img class="media-object" src="{$model->user['head_img']}" alt="{$model->user['username']}">
+<img class="media-object" src="{$model->user['head_img']}" alt="{$model->user['username']}" onerror="this.src='/img/logo-50.png'">
 </a>
 </div>
 <div class="media-body">
-    <h1 class="media-heading">
+    <h3 class="media-heading">
     <a href="{$url}">{$model->title}</a>
-    </h1>
+    </h3>
     <div class="media-action">
     <span class="info-article" title=""><a href="$userUrl" rel="author">{$model->user['username']}</a></span>
     <span class="info-article" title=""><i class="fa fa-calendar"></i> {$date}</span>
