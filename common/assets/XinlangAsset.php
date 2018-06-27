@@ -17,6 +17,7 @@ class XinlangAsset extends AssetBundle
     ];
 
     public $jsOptions=[
-        'position'=>View::POS_END,
+        'position'=>View::POS_HEAD,
+        'charset'=>'utf-8',
     ];
 }
