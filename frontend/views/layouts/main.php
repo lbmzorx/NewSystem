@@ -28,7 +28,7 @@ STYLE
 )?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" xmlns:wb="http://open.weibo.com/wb">
+<html lang="<?= Yii::$app->language ?>" <?=isset(\yii::$app->params['html_namespace'])?\yii::$app->params['html_namespace']:''?>>
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -61,6 +61,7 @@ DOM;
                     return $str;//Html::a( Html::encode($model->title), ['view', 'id' => $model->id]);
                 },
             ])?>
+            <?=$this->render('/widget/_xinlang-share')?>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3 " id="side-box">
             <div class="panel panel-default">
