@@ -5,7 +5,7 @@
  * github: https://github.com/lbmzorx
  */
 \common\assets\XinlangAsset::register($this);
-$actionid=$this->id;
+$actionid=\yii::$app->controller->action->id;
 if($actionid=='index'){
     $link=\yii::$app->urlManager->createAbsoluteUrl(['/article/index']);
     $share='我发现了一个阅读的好去处，大家一起来围观吧！'.$link;
