@@ -66,6 +66,27 @@ return [
         'swoole-queue-frontend' =>[
             'class'=>'console\controllers\UserMessageController',
         ],
+        'swoole-websocket'=>[
+            'class'=>'console\controllers\SwooleWebsocketController',
+            'rootDir' => str_replace('console/config', '', __DIR__ ),//yii2项目根路径
+            'app' => 'chat',
+            'host' => '192.168.110.11',
+            'port' => 9540,
+            'web' => 'web',//默认为web。rootDir app web目的是拼接yii2的根目录，如果你的应用为basic，那么app为空即可。
+            'debug' => false,//默认开启debug，上线应置为false
+            'env' => 'prod',//默认为dev，上线应置为prod
+            'swooleConfig' => [
+                'reactor_num' => 1,
+                'worker_num' => 2,
+                'daemonize' => false,
+                'log_file' => __DIR__ . '/../../console/runtime/swoole/swoole.websocket.log',
+                'log_level' => 4,   //4 warning
+                'pid_file' => __DIR__ . '/../../console/runtime/swoole/swoole.websocket.pid',
+                'user'=>'www',
+                'group'=>'www',
+                'max_request'=>100,     //防止内存溢出，如果应用比较消耗内存，则应减小,
+            ],
+        ]
     ],
     'components' => [
         'log' => [

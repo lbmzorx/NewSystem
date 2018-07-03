@@ -1,4 +1,6 @@
 <?php
+namespace console\swoole;
+use yii\helpers\VarDumper;
 
 /**
  * Created by Administrator.
@@ -8,15 +10,18 @@
 
 class WebsocketServer
 {
+    /**
+     * @var \swoole_websocket_server
+     */
     public $swoole;
 
     public $config = ['gcSessionInterval' => 60000];
 
     public $runApp;
 
-    public function __construct($host, $port, $mode, $socketType, $swooleConfig=[], $config=[])
+    public function __construct($host, $port, $swooleConfig=[], $config=[])
     {
-        $this->swoole = new swoole_websocket_server($host, $port, $mode, $socketType);
+        $this->swoole = new \swoole_websocket_server($host, $port);
 
         if( !empty($this->config) ) $this->config = array_merge($this->config, $config);
         $this->swoole->set($swooleConfig);
@@ -40,19 +45,33 @@ class WebsocketServer
 
     /**
      * handshake 握手
+     * 也就是第一次连接成功
+     *
      * @param \swoole_websocket_server $server
      * @param $request
      */
-    public function onOpen(swoole_websocket_server $server,$request){
+    public function onOpen(\swoole_websocket_server $server,$request){
         echo "server: handshake success with fd{$request->fd}\n";
     }
 
-    public function onMessage(swoole_websocket_server $server, $frame){
+    /**
+     * @param \swoole_websocket_server $server
+     * @param $frame
+     */
+    public function onMessage(\swoole_websocket_server $server, $frame){
         echo "receive from {$frame->fd}:{$frame->data},opcode:{$frame->opcode},fin:{$frame->finish}\n";
+        echo VarDumper::dumpAsString($frame);
+
+
         $server->push($frame->fd, "this is server");
     }
 
-    public function onClose(swoole_websocket_server $server, $frame){
+    /**
+     * 关闭websocket 链接
+     * @param \swoole_websocket_server $server
+     * @param $frame
+     */
+    public function onClose(\swoole_websocket_server $server, $frame){
         echo "receive from {$frame->fd}:{$frame->data},opcode:{$frame->opcode},fin:{$frame->finish}\n";
         $server->push($frame->fd, "this is server");
     }
@@ -71,8 +90,8 @@ class WebsocketServer
 
         //转换$_FILE超全局变量
         $this->mountGlobalFilesVar($request);
-
-        call_user_func_array($this->runApp, [$request, $response]);
+        echo "receive from onRequest\n";
+//        call_user_func_array($this->runApp, [$request, $response]);
     }
 
     /**

@@ -7,11 +7,9 @@
 \common\assets\XinlangAsset::register($this);
 $actionid=\yii::$app->controller->action->id;
 if($actionid=='index'){
-    $link=\yii::$app->urlManager->createAbsoluteUrl(['/article/index']);
-    $share='我发现了一个阅读的好去处，大家一起来围观吧！'.$link;
+    $share='我发现了一个阅读的好去处，大家一起来围观吧！';
 }else{
-    $link=\yii::$app->urlManager->createAbsoluteUrl(['/article/view','id'=>\yii::$app->request->get('id')]);
-    $share='我在'.(isset(\yii::$app->params['website_title'])?\yii::$app->params['website_title']:'重楼空间').'发现好文'.$this->title.$link;
+    $share='我在'.(isset(\yii::$app->params['website_title'])?\yii::$app->params['website_title']:'重楼空间').'发现好文'.$this->title;
 }
 ?>
 
