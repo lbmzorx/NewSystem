@@ -178,6 +178,7 @@ class User extends UserData implements IdentityInterface
     public function generateAuthKey()
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
+        return $this->auth_key;
     }
 
     /**

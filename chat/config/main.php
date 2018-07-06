@@ -11,18 +11,27 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'chat\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'apidoc' => [
+            'class' => 'daodao97\apidoc\Module',
+        ],
+        'v1' => [
+            'class' => 'chat\modules\v1\Module',
+        ],
+    ],
     'components' => [
         'request' => [
+            // \yii\web\Request
             'csrfParam' => '_csrf-chat',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\models\user\User',
             'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-chat', 'httpOnly' => true],
-        ],
-        'session' => [
-            // this is the name of the session cookie used for login on the chat            'name' => 'advanced-chat',
+            'enableSession'=>false,
+            'loginUrl'=>null,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -36,14 +45,16 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
-        'urlManager' => [
+        'urlManager' => [//\yii\web\UrlManager
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'POST login'=>'site/login'
             ],
         ],
-        */
+        'response'=>[
+            'format'=>\yii\web\Response::FORMAT_JSON,
+        ],
     ],
     'params' => $params,
 ];

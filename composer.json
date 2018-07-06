@@ -23,7 +23,8 @@
         "yiisoft/yii2-httpclient": "^2.0",
         "feehi/yii2-swoole": "^0.1.2",
         "yiisoft/yii2-queue": "^2.1",
-        "php-amqplib/php-amqplib": "^2.7"
+        "php-amqplib/php-amqplib": "^2.7",
+        "hightman/xunsearch": "*@beta"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -31,7 +32,8 @@
         "yiisoft/yii2-faker": "~2.0.0",
         "codeception/base": "^2.2.3",
         "codeception/verify": "~0.3.1",
-        "lbmzorx/yii2-components": "0.0.5"
+        "lbmzorx/yii2-components": "0.0.5",
+        "daodao97/apidoc": "dev-master"
     },
     "config": {
         "process-timeout": 1800,

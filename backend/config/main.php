@@ -45,6 +45,9 @@ return [
         'tempadmin' => [
             'class' => 'backend\modules\tempadmin\Module',
         ],
+        'apidoc' => [
+            'class' => 'backend\modules\apidoc\Module',
+        ],
     ],
     'defaultRoute'=>'home',
     'components' => [

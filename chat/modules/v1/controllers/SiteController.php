@@ -1,16 +1,15 @@
 <?php
-namespace chat\controllers;
 
-use Yii;
-use yii\rest\Controller;
-use chat\models\user\LoginForm;
+namespace chat\modules\v1\controllers;
+
+use chat\models\v1\user\LoginForm;
+use yii\web\Controller;
+
 /**
- * Site controller
+ * Default controller for the `v1` module
  */
 class SiteController extends Controller
 {
-
-
     const status_codes=[
         '400040'=>'Can\'t generate public key',
     ];
@@ -33,6 +32,7 @@ class SiteController extends Controller
     {
         return [
             'index' => ['GET', 'HEAD'],
+            'date' =>['GET'],
             'public-key' => ['GET'],
             'login' => ['POST'],
             'register' => ['POST'],
@@ -45,6 +45,31 @@ class SiteController extends Controller
     public function actionIndex(){
         return [
             'Hello world!'
+        ];
+    }
+
+    /**
+     * @SWG\Get(path="/date",
+     *     tags={"date"},
+     *     summary="显示系统时间",
+     *     description="返回系统时间",
+     *     produces={"application/json"},
+     *
+     *     @SWG\Response(
+     *         response = 200,
+     *         description = "success"
+     *     )
+     * *   @SWG\Response(
+     *     response="datetime",
+     *     description="A list with products"
+     *   ),
+
+     * )
+     *
+     */
+    public function actionDate(){
+        return [
+            'datetime'=>date('Y-m-d H:i:s')
         ];
     }
 
