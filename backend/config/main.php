@@ -48,6 +48,9 @@ return [
         'apidoc' => [
             'class' => 'backend\modules\apidoc\Module',
         ],
+        'apidocswagger' => [
+            'class' => 'daodao97\apidoc\Module',
+        ],
     ],
     'defaultRoute'=>'home',
     'components' => [

@@ -52,9 +52,6 @@ return [
                 'POST login'=>'site/login'
             ],
         ],
-        'response'=>[
-            'format'=>\yii\web\Response::FORMAT_JSON,
-        ],
     ],
     'params' => $params,
 ];
