@@ -144,23 +144,9 @@ class SiteController extends Controller
      *          @SWG\Schema(
      *             type="object",
      *             description="返回对象",
-     *             @SWG\Schema(ref="#/definitions/Common-response"),
-     *             @SWG\Property(
-     *                  title="public key",
-     *                  property="public-key",
-     *                  type="string",
-     *                  description="rsa 使用的加密公钥",
-     *                  example="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtNXhF/ttSQ4srTk++M9bPTqxVxb3oM2ma8mq1srEOYzTdkTchLJwZGO6h8X7SCYr5rRy2e9DCL08R5JODPJ5HICjjJQ1laeHTEfgckk1oWWjtNINn+3tPPSpE/piTMiQM6l27AZp9O5rvrikceyGFIPR/H2TErwzbBWm2Oew5CE4T2rK4Xdg2dl7bcy6HxoCZtLYO/kuBCXEFl86apZJUTnUcMQtR4ekAI9QXpPnN0dVR7X3FDzysdX0s9RMpQS7HNdYMsRAaOErxc1qMsbaWKY9UizbYOSJ9H1uqRptJwh/uJqxt9xp/9Tl9ocHKpFfeMAxEu05+wW+L6xqCL9I8wIDAQAB",
-     *             ),
-     *             @SWG\Property(
-     *                  title="公钥长度",
-     *                  property="length",
-     *                  type="int",
-     *                  description="公钥长度，有512，1024等长度",
-     *                  example=2048,
-     *             ),
+     *             additionalProperties= {"#/definitions/Common-response"},
+     *          ),
      *
-     *         ),
      *     )
      * )
      */

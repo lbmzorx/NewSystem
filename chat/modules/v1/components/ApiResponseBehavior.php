@@ -46,17 +46,6 @@ class ApiResponseBehavior extends Behavior
      *     type="string",
      *     description="响应信息",
      *     example="例如success",
-     * ),
-     *@SWG\Property(
-     *     title="响应结果",
-     *     property="result",
-     *     type="string",
-     *     description="响应结果",
-     *     example={"title":"test"},
-     *     @SWG\Property(
-     *          example="Alan Jones",
-     *          property="data",
-     *     )
      * )
      */
 
