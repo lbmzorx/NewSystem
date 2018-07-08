@@ -9,6 +9,14 @@ use yii\bootstrap\NavBar;
 use common\widgets\Alert;
 use yii\helpers\Url;
 \frontend\assets\LoginAsset::register($this);
+
+if(isset(\yii::$app->params['meta_name_baidu']) && isset(\yii::$app->params['meta_content_baidu']) ){
+    $this->registerMetaTag([
+        'name' => \yii::$app->params['meta_name_baidu'],
+        'content' => \yii::$app->params['meta_content_baidu'],
+    ]);
+}
+
 ?>
 <?=$this->registerCss(<<<STYLE
         #msg-count{

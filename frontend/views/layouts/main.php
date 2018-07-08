@@ -14,6 +14,13 @@ use common\models\startdata\UserMessage;
 use yii\widgets\ActiveForm;
 
 AppAsset::register($this);
+
+if(isset(\yii::$app->params['meta_name_baidu']) && isset(\yii::$app->params['meta_content_baidu']) ){
+    $this->registerMetaTag([
+        'name' => \yii::$app->params['meta_name_baidu'],
+        'content' => \yii::$app->params['meta_content_baidu'],
+    ]);
+}
 ?>
 <?=$this->registerCss(<<<STYLE
         #msg-count{
