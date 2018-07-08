@@ -38,6 +38,9 @@ class ArticleTag extends Behavior
             $oldTag=$event->changedAttributes['tag'];
             if($newTag!=$oldTag){
                 $this->subTagFrequence($oldTag);
+                if($model->status==Article::STATUS_AUDIT_PASSED){
+                    $this->increTagFrequence($newTag);
+                }
             }
         }
     }
@@ -59,24 +62,32 @@ class ArticleTag extends Behavior
     }
 
     protected function increTagFrequence($tag){
-        $tag=Tag::findOne(['name'=>$tag]);
-        if($tag){
-            $tag->updateCounters(['frequence'=>1]);
-        }else{
+
+        $tag=str_replace([' ','，'],',',$tag);
+        $tags=explode(',',$tag);
+        $tagModels=Tag::find()->where(['name'=>$tags])->indexBy('name')->all();
+        $newTags=array_diff($tags,array_keys($tagModels));
+        foreach ($tagModels as $v){
+            $v->updateCounters(['frequence'=>1]);
+        }
+        foreach ($newTags as $v){
             $tag=new Tag();
-            $tag->name=$tag;
+            $tag->name=$v;
             $tag->frequence=1;
             $tag->save();
         }
     }
 
     protected function subTagFrequence($tag){
-        $tag=Tag::findOne(['name'=>$tag]);
-        if($tag){
-            if($tag->frequence==1){
-                $tag->delete();
+
+        $tag=str_replace([' ','，'],',',$tag);
+        $tags=explode(',',$tag);
+        $tagModels=Tag::find()->where(['name'=>$tags])->all();
+        foreach ($tagModels as $model){
+            if($model->frequence==1){
+                $model->delete();
             }else{
-                $tag->updateCounters(['frequence'=>-1]);
+                $model->updateCounters(['frequence'=>-1]);
             }
         }
     }

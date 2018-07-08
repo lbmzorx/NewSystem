@@ -395,7 +395,7 @@ class Article extends BaseModelArticle
                 'eventItems'=>[
                     AduitEvent::EVENT_ADUIT_FAILED,
                 ],
-                'job'=>'',
+                'job'=>'common\components\job\UserActionJob',
                 'user_id'=>function($model){
                     return $model->user_id;
                 },
@@ -481,12 +481,10 @@ class Article extends BaseModelArticle
     {
         if($insert==false){
             if(\yii::$app->id=='app-backend'){
-                if($this->status !=$this->getOldAttribute('status')){
-                    if($this->status==self::STATUS_AUDIT_FAILED){
-                        $this->trigger(AduitEvent::EVENT_ADUIT_FAILED,new AduitEvent());
-                    }elseif($this->status==self::STATUS_AUDIT_PASSED){
-                        $this->trigger(AduitEvent::EVENT_ADUIT_SUCCESS,new AduitEvent());
-                    }
+                if($this->status==self::STATUS_AUDIT_PASSED){
+                    $this->trigger(AduitEvent::EVENT_ADUIT_SUCCESS,new AduitEvent());
+                }else{
+                    $this->trigger(AduitEvent::EVENT_ADUIT_FAILED,new AduitEvent());
                 }
             }
         }

@@ -4,13 +4,8 @@
  * Date: 2018/6/20 20:42
  * github: https://github.com/lbmzorx
  */
-
 namespace common\components\behavior;
 
-
-use common\components\job\UserActionJob;
-use common\models\startdata\UserFans;
-use common\models\startdata\UserMessageGroupContent;
 use yii\base\Behavior;
 use yii\base\InvalidParamException;
 use yii\db\ActiveRecord;
@@ -44,8 +39,8 @@ class MessageToUser extends Behavior
          * @var $model ActiveRecord
          */
         $model=$event->sender;
-
         $this->jobParams=$this->getJobParams($model);
+
         if($this->job instanceof \Closure){
             $job=call_user_func($this->job,$this->jobParams);
         }elseif(is_string($this->job) && class_exists($this->job)){
@@ -66,7 +61,7 @@ class MessageToUser extends Behavior
             $jobParams=[];
             foreach ($this->jobParams as $key=>$params){
                 if($params instanceof \Closure){
-                    $jobParams[$key]=call_user_func($params,[$model]);
+                    $jobParams[$key]=call_user_func($params,$model);
                 }else{
                     $jobParams[$key]=$params;
                 }
