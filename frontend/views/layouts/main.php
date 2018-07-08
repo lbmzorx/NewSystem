@@ -23,14 +23,18 @@ if(isset(\yii::$app->params['meta_name_baidu']) && isset(\yii::$app->params['met
 }
 ?>
 <?=$this->registerCss(<<<STYLE
-        #msg-count{
-            position:absolute;
-            top:-7px;
-            left:9px;
-            border:2px solid;
-            padding:2px 3px;
-            background-color:#F9354C;
-        }
+#msg-count{
+    position:absolute;
+    top:-7px;
+    left:9px;
+    border:2px solid;
+    padding:2px 3px;
+    background-color:#F9354C;
+}
+li.L1, li.L3, li.L5, li.L7, li.L9{
+    background:#f6f6f6
+}
+#tag-box .panel-body .list-group span{margin:3px 3px;}
 STYLE
 )?>
 <?php $this->beginPage() ?>

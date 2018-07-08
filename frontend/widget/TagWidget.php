@@ -37,15 +37,16 @@ class TagWidget extends PanelWidget
         $str='';
 
         $labelClass=[
-            'label label-info',
-            'label label-primary',
-            'label label-info',
-            'label label-success',
-            'label label-warning',
-            'label label-danger',
+            'btn btn-default',
+//            'label label-primary',
+//            'label label-info',
+//            'label label-success',
+//            'label label-warning',
+//            'label label-danger',
         ];
         foreach ($data as $v){
-            $this->liOption['class']=$labelClass[rand(0,5)].' size-'.rand(1,5);
+//            $this->liOption['class']=$labelClass[rand(0,5)].' size-'.rand(1,5);
+            $this->liOption['class']=$labelClass[0].' size-'.rand(1,5);
             $str.=Html::a(Html::tag('span',Html::encode($v['name']),$this->liOption),['article/index','tag'=>$v['name']]);
         }
 
