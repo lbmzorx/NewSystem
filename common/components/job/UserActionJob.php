@@ -7,8 +7,10 @@
 namespace common\components\job;
 use common\models\startdata\UserMessage;
 use common\models\startmq\QtMessageForm;
+use lbmzorx\components\helper\ModelHelper;
 use yii\base\BaseObject;
 use yii\base\Model;
+use yii\log\Logger;
 
 class UserActionJob extends Model implements \yii\queue\JobInterface
 {
@@ -31,7 +33,9 @@ class UserActionJob extends Model implements \yii\queue\JobInterface
         $qtMessage->setScenario('create');
         $qtMessage->loadDefaultValues();
         $qtMessage->load($this->getAttributes(),'');
-        $qtMessage->save();
+        if(!$qtMessage->save()){
+            \yii::$app->log->logger->log(ModelHelper::getErrorToString($qtMessage),Logger::LEVEL_INFO,"user_message_failed");
+        }
 
     }
 

@@ -10,8 +10,11 @@ namespace common\components\behavior;
 use common\components\event\AduitEvent;
 use common\models\startdata\Tag;
 use common\models\startdata\Article;
+use lbmzorx\components\helper\ModelHelper;
 use yii\base\Behavior;
 use yii\base\Exception;
+use yii\helpers\VarDumper;
+use yii\log\Logger;
 
 class ArticleTag extends Behavior
 {
@@ -64,9 +67,10 @@ class ArticleTag extends Behavior
     protected function increTagFrequence($tag){
 
         $tag=str_replace([' ','，'],',',$tag);
-        $tags=explode(',',$tag);
+        $tags=array_filter(explode(',',$tag));
         $tagModels=Tag::find()->where(['name'=>$tags])->indexBy('name')->all();
         $newTags=array_diff($tags,array_keys($tagModels));
+
         foreach ($tagModels as $v){
             $v->updateCounters(['frequence'=>1]);
         }
@@ -74,7 +78,9 @@ class ArticleTag extends Behavior
             $tag=new Tag();
             $tag->name=$v;
             $tag->frequence=1;
-            $tag->save();
+            if(!$tag->save()){
+                \yii::$app->log->logger->log(ModelHelper::getErrorToString($tag),Logger::LEVEL_INFO,"tag_save_failed");
+            }
         }
     }
 
