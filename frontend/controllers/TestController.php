@@ -13,7 +13,13 @@ use yii\web\Controller;
 class TestController extends Controller
 {
     public function actionIndex(){
+        $c=null;
+        $e='';
+        $f=false;
+        $b=[];
 
-        return $this->render('index');
+        var_dump(($b??111),($c??222),($e??333),($f??444));
+
+//        return $this->render('index');
     }
 }

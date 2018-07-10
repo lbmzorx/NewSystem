@@ -14,6 +14,7 @@ use common\models\startdata\UserMessageGroupContent;
 use yii\base\Behavior;
 use yii\base\InvalidParamException;
 use yii\db\ActiveRecord;
+use yii\helpers\VarDumper;
 use yii\queue\closure\Job;
 
 class BroadCastMessageToFans extends Behavior
@@ -56,7 +57,7 @@ class BroadCastMessageToFans extends Behavior
         }elseif($this->job instanceof Job){
             $job=$this->job;
         }else{
-            throw new InvalidParamException("Invalid job parameters!");
+            throw new InvalidParamException("Invalid job parameters!".VarDumper::dumpAsString($this->job));
         }
 
         /**
@@ -79,7 +80,7 @@ class BroadCastMessageToFans extends Behavior
             $jobParams=[];
             foreach ($this->jobParams as $key=>$params){
                 if($params instanceof \Closure){
-                    $jobParams[$key]=call_user_func($params,[$model]);
+                    $jobParams[$key]=call_user_func($params,$model);
                 }else{
                     $jobParams[$key]=$params;
                 }

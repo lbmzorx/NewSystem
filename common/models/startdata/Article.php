@@ -2,6 +2,7 @@
 namespace common\models\startdata;
 
 use common\components\event\AduitEvent;
+use common\components\job\UserActionJob;
 use Yii;
 use common\models\startdatabase\Article as BaseModelArticle;
 use yii\caching\TagDependency;
@@ -375,7 +376,7 @@ class Article extends BaseModelArticle
                 'eventItems'=>[
                     AduitEvent::EVENT_ADUIT_SUCCESS,
                 ],
-                'job'=>'',
+                'job'=>UserActionJob::className(),
                 'user_id'=>\yii::$app->user->id,
                 'jobParams'=>[
                     'send_type'=>UserMessage::SEND_TYPE_SYSTEM,
