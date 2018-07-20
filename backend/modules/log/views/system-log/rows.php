@@ -52,7 +52,7 @@ $request=\yii::$app->request;
         <div >
             <?php if($content):?>
                 <?php foreach ($content as $k=>$v):?>
-                    <pre><?=$k?>: <?=$v?></pre>
+                    <pre><?=$k?>: <?=Html::encode($v);?></pre>
                 <?php endforeach;?>
             <?php endif;?>
         </div>
